@@ -347,19 +347,109 @@ tr:hover td { background: rgba(245,166,35,0.04); }
 
 <div class="header">
   <div class="header-top">
-    <div>
-      <h1>🐔 Hy Line Brown</h1>
-      <div class="header-sub">Control de Levante</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <!-- Logo SVG Granja Avicola Caler -->
+      <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <!-- Fondo circular verde -->
+        <circle cx="24" cy="24" r="23" fill="#1a4a1a" stroke="#4a9a4a" stroke-width="1.5"/>
+        <!-- Sol/amanecer -->
+        <path d="M24 8 L25.5 13 L24 12 L22.5 13 Z" fill="#f5a623"/>
+        <line x1="24" y1="8" x2="24" y2="11" stroke="#f5a623" stroke-width="1"/>
+        <line x1="18" y1="10" x2="20" y2="13" stroke="#f5a623" stroke-width="1"/>
+        <line x1="30" y1="10" x2="28" y2="13" stroke="#f5a623" stroke-width="1"/>
+        <!-- Cuerpo gallina -->
+        <ellipse cx="26" cy="30" rx="9" ry="7" fill="#e8e0d0"/>
+        <!-- Cabeza -->
+        <circle cx="35" cy="24" r="5" fill="#e8e0d0"/>
+        <!-- Cresta -->
+        <path d="M33 19 Q34 16 35 19 Q36 16 37 19 Q38 17 38 20" fill="#e74c3c" stroke="none"/>
+        <!-- Pico -->
+        <path d="M39 24 L42 23 L39 25 Z" fill="#f5a623"/>
+        <!-- Ojo -->
+        <circle cx="36" cy="23" r="1" fill="#1a1a1a"/>
+        <circle cx="36.3" cy="22.7" r="0.3" fill="white"/>
+        <!-- Barbilla -->
+        <ellipse cx="39" cy="26" rx="1.5" ry="2" fill="#e74c3c"/>
+        <!-- Ala -->
+        <path d="M20 26 Q24 22 30 26 Q26 28 20 26Z" fill="#c8b89a"/>
+        <!-- Cola -->
+        <path d="M17 28 Q13 24 15 30 Q12 27 14 32 Q11 30 15 34" fill="#a09080" stroke="#a09080" stroke-width="0.5"/>
+        <!-- Patas -->
+        <line x1="23" y1="37" x2="21" y2="42" stroke="#f5a623" stroke-width="1.5"/>
+        <line x1="27" y1="37" x2="25" y2="42" stroke="#f5a623" stroke-width="1.5"/>
+        <line x1="21" y1="42" x2="19" y2="44" stroke="#f5a623" stroke-width="1.5"/>
+        <line x1="21" y1="42" x2="22" y2="44" stroke="#f5a623" stroke-width="1.5"/>
+        <line x1="25" y1="42" x2="23" y2="44" stroke="#f5a623" stroke-width="1.5"/>
+        <line x1="25" y1="42" x2="26" y2="44" stroke="#f5a623" stroke-width="1.5"/>
+        <!-- Pasto -->
+        <path d="M8 40 Q10 36 12 40 Q14 36 16 40 Q18 36 20 40 Q22 36 24 40 Q26 36 28 40 Q30 36 32 40 Q34 36 36 40 Q38 36 40 40" fill="none" stroke="#2d8a2d" stroke-width="2"/>
+      </svg>
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:#4a9a4a;letter-spacing:3px;text-transform:uppercase;">Granja Avícola</div>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#f5a623;letter-spacing:1px;text-transform:uppercase;line-height:1;">KALER</h1>
+        <div class="header-sub">Control de Levante · Hy Line Brown</div>
+      </div>
     </div>
-    <div class="lote-badge" id="lote-badge">Lote 1</div>
+    <div class="lote-badge" id="lote-badge" onclick="togglePerfilMenu()" style="cursor:pointer;">👷 Trabajador ▾</div>
   </div>
 </div>
 
-<div class="nav">
+<!-- PIN MODAL -->
+<div id="pin-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;display:none;align-items:center;justify-content:center;">
+  <div style="background:var(--card);border:2px solid var(--accent);border-radius:14px;padding:28px 24px;width:90%;max-width:320px;text-align:center;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--accent);margin-bottom:4px;">🔐 Acceso Dueño</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">Ingrese su PIN</div>
+    <div id="pin-dots" style="display:flex;justify-content:center;gap:10px;margin-bottom:16px;">
+      <div style="width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:transparent;" id="dot-1"></div>
+      <div style="width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:transparent;" id="dot-2"></div>
+      <div style="width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:transparent;" id="dot-3"></div>
+      <div style="width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:transparent;" id="dot-4"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;">
+      <button onclick="pinInput('1')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">1</button>
+      <button onclick="pinInput('2')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">2</button>
+      <button onclick="pinInput('3')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">3</button>
+      <button onclick="pinInput('4')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">4</button>
+      <button onclick="pinInput('5')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">5</button>
+      <button onclick="pinInput('6')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">6</button>
+      <button onclick="pinInput('7')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">7</button>
+      <button onclick="pinInput('8')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">8</button>
+      <button onclick="pinInput('9')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">9</button>
+      <button onclick="pinInput('B')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--red);cursor:pointer;">⌫</button>
+      <button onclick="pinInput('0')" style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);cursor:pointer;">0</button>
+      <button style="background:transparent;border:none;cursor:default;"></button>
+    </div>
+    <button onclick="cerrarPinModal()" style="background:transparent;border:1px solid var(--muted);border-radius:6px;padding:8px 20px;color:var(--muted);font-size:13px;cursor:pointer;">Cancelar</button>
+    <div id="pin-error" style="color:var(--red);font-size:12px;margin-top:8px;display:none;">PIN incorrecto</div>
+  </div>
+</div>
+
+<!-- PERFIL MENU -->
+<div id="perfil-menu" style="display:none;position:fixed;top:70px;right:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;z-index:500;min-width:180px;">
+  <div style="font-size:11px;color:var(--muted);padding:4px 8px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Cambiar perfil</div>
+  <button onclick="setPerfil('trabajador')" style="width:100%;text-align:left;background:none;border:none;color:var(--text);padding:8px;border-radius:6px;font-size:14px;cursor:pointer;">👷 Trabajador</button>
+  <button onclick="abrirPinModal()" style="width:100%;text-align:left;background:none;border:none;color:var(--accent);padding:8px;border-radius:6px;font-size:14px;cursor:pointer;">👑 Dueño (PIN)</button>
+</div>
+
+<div class="nav" id="nav-trabajador">
   <button class="nav-btn active" onclick="showPage('resumen')">📊 Resumen</button>
   <button class="nav-btn" onclick="showPage('registro')">✏️ Registro</button>
   <button class="nav-btn" onclick="showPage('historial')">📋 Historial</button>
+  <button class="nav-btn" onclick="showPage('vacunas')">💉 Vacunas</button>
+  <button class="nav-btn" onclick="showPage('comparacion')">📉 Alimento</button>
+  <button class="nav-btn" onclick="showPage('referencia')">📖 Referencia</button>
+</div>
+
+<div class="nav" id="nav-dueno" style="display:none;">
+  <button class="nav-btn active" onclick="showPage('resumen')">📊 Resumen</button>
+  <button class="nav-btn" onclick="showPage('registro')">✏️ Registro</button>
+  <button class="nav-btn" onclick="showPage('historial')">📋 Historial</button>
+  <button class="nav-btn" onclick="showPage('vacunas')">💉 Vacunas</button>
+  <button class="nav-btn" onclick="showPage('ventas')">🛒 Ventas</button>
+  <button class="nav-btn" onclick="showPage('finanzas')">💵 Finanzas</button>
+  <button class="nav-btn" onclick="showPage('nomina')">👷 Nómina</button>
   <button class="nav-btn" onclick="showPage('inversion')">💰 Inversión</button>
+  <button class="nav-btn" onclick="showPage('comparacion')">📉 Alimento</button>
   <button class="nav-btn" onclick="showPage('referencia')">📖 Referencia</button>
 </div>
 
@@ -384,6 +474,14 @@ tr:hover td { background: rgba(245,166,35,0.04); }
     <div class="stat-box">
       <div class="stat-val green" id="s-edad">0 días</div>
       <div class="stat-lbl">Edad</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val" style="color:#f39c12;" id="s-vendidas">0</div>
+      <div class="stat-lbl">Aves vendidas</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val" style="color:#9b59b6;" id="s-disponibles">0</div>
+      <div class="stat-lbl">Disponibles venta</div>
     </div>
   </div>
 
@@ -492,33 +590,6 @@ tr:hover td { background: rgba(245,166,35,0.04); }
 
     <button class="btn btn-primary" onclick="guardarSemana()">💾 GUARDAR SEMANA</button>
   </div>
-
-  <div class="card">
-    <div class="card-title">⚙️ Configuración del lote</div>
-    <div class="form-group">
-      <label class="form-label">Fecha de nacimiento</label>
-      <input type="date" class="form-input" id="cfg-fecha" value="2026-02-27">
-    </div>
-    <div class="form-group">
-      <label class="form-label">N° aves inicial</label>
-      <input type="number" class="form-input" id="cfg-aves" value="9180">
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Costo por ave ($)</label>
-        <input type="number" class="form-input" id="cfg-costo-ave" value="6000">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Costo mantenimiento/sem ($)</label>
-        <input type="number" class="form-input" id="cfg-mant" value="1500">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Costo kg alimento ($)</label>
-      <input type="number" class="form-input" id="cfg-kg" value="0">
-    </div>
-    <button class="btn btn-primary" onclick="guardarConfig()">💾 GUARDAR CONFIG</button>
-  </div>
 </div>
 
 <!-- HISTORIAL -->
@@ -551,6 +622,297 @@ tr:hover td { background: rgba(245,166,35,0.04); }
   </div>
 </div>
 
+<!-- VENTAS -->
+<div id="page-ventas" class="page">
+  <div class="card">
+    <div class="card-title">🛒 Registrar venta</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Semana #</label>
+        <input type="number" class="form-input" id="v-semana" placeholder="Auto" oninput="calcularPrecioVenta()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">N° aves vendidas</label>
+        <input type="number" class="form-input" id="v-aves" placeholder="Ej: 100" oninput="calcularPrecioVenta()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Días adicionales</label>
+        <input type="number" class="form-input" id="v-dias-extra" placeholder="Auto" min="0" max="6" oninput="calcularPrecioVenta()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">📅 Fecha de venta</label>
+        <input type="date" class="form-input" id="v-fecha" oninput="autoCalcularSemanaVenta()">
+      </div>
+    </div>
+
+    <!-- Calculador precio automatico -->
+    <div style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:12px;">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">💡 Precio calculado automáticamente</div>
+      <div id="v-calculo-detalle" style="font-size:12px;color:var(--muted);">Ingrese semana y días para calcular</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+        <div style="font-size:12px;color:var(--muted);">Precio por ave:</div>
+        <div id="v-precio-calculado" style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--accent);">$0</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">% ganancia sobre costo polla ($4.692): <strong id="v-pct-ganancia" style="color:var(--green);">0%</strong></div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Precio por ave ($) — puede ajustar</label>
+      <input type="number" class="form-input" id="v-precio" placeholder="0" oninput="actualizarTotalVenta()">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Observaciones</label>
+      <input type="text" class="form-input" id="v-obs" placeholder="Ej: cliente Juan...">
+    </div>
+    <div style="background:var(--card2);border-radius:8px;padding:12px;margin-bottom:12px;text-align:center;">
+      <div style="font-size:12px;color:var(--muted);">Total venta</div>
+      <div id="v-total-preview" style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--green);">$0</div>
+    </div>
+    <button class="btn btn-primary" onclick="guardarVenta()">💾 GUARDAR VENTA</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Costo real por semana</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Lo que le ha costado cada semana en total</div>
+    <div id="costo-semanal-real"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Historial de ventas</div>
+    <div id="ventas-list"><div style="color:var(--muted);font-size:13px;">Sin ventas registradas</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💰 Resumen ventas</div>
+    <div id="ventas-resumen"></div>
+  </div>
+</div>
+
+<!-- VACUNAS -->
+<div id="page-vacunas" class="page">
+
+  <div class="card">
+    <div class="card-title">💉 Registrar vacuna</div>
+    <div class="form-group">
+      <label class="form-label">Nombre de la vacuna</label>
+      <input type="text" class="form-input" id="vac-nombre" placeholder="Ej: Newcastle, Gumboro...">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Fecha aplicación</label>
+        <input type="date" class="form-input" id="vac-fecha">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Semana #</label>
+        <input type="number" class="form-input" id="vac-semana" placeholder="Ej: 2">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Dosis / cantidad</label>
+        <input type="text" class="form-input" id="vac-dosis" placeholder="Ej: 1 dosis por ave">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Vía de aplicación</label>
+        <select class="form-input" id="vac-via">
+          <option value="Agua de bebida">Agua de bebida</option>
+          <option value="Ocular">Ocular</option>
+          <option value="Subcutánea">Subcutánea</option>
+          <option value="Intramuscular">Intramuscular</option>
+          <option value="Spray">Spray</option>
+          <option value="Otra">Otra</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Laboratorio / marca</label>
+        <input type="text" class="form-input" id="vac-lab" placeholder="Ej: Intervet...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Próxima dosis</label>
+        <input type="date" class="form-input" id="vac-proxima">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Observaciones</label>
+      <input type="text" class="form-input" id="vac-obs" placeholder="Ej: sin reacciones adversas...">
+    </div>
+    <button class="btn btn-primary" onclick="guardarVacuna()">💾 GUARDAR VACUNA</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⏰ Próximas vacunas</div>
+    <div id="vac-proximas"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Historial de vacunación</div>
+    <div id="vac-historial"><div style="color:var(--muted);font-size:13px;">Sin vacunas registradas</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📖 Programa recomendado Hy Line</div>
+    <div class="ref-row"><div class="ref-sem">Sem 1</div><div><div class="ref-val">Marek + Newcastle</div><div class="ref-lbl">Al nacer / primera semana</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 2</div><div><div class="ref-val">Gumboro</div><div class="ref-lbl">Bolsa de Fabricio</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 4</div><div><div class="ref-val">Newcastle + Bronquitis</div><div class="ref-lbl">Refuerzo</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 8</div><div><div class="ref-val">Newcastle</div><div class="ref-lbl">Refuerzo</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 12</div><div><div class="ref-val">Encefalomielitis (EAV)</div><div class="ref-lbl">Aplicación única</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 15</div><div><div class="ref-val">Newcastle + Bronquitis</div><div class="ref-lbl">Pre-postura</div></div></div>
+  </div>
+
+</div>
+
+<!-- FINANZAS -->
+<div id="page-finanzas" class="page">
+
+  <!-- Registrar movimiento -->
+  <div class="card">
+    <div class="card-title">➕ Registrar movimiento</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Tipo</label>
+        <select class="form-input" id="fin-tipo" onchange="finTipoChange()">
+          <option value="egreso">💸 Egreso (gasto)</option>
+          <option value="ingreso">💰 Ingreso</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Categoría</label>
+        <select class="form-input" id="fin-categoria">
+          <option value="alimento">🌾 Compra alimento</option>
+          <option value="nomina">👷 Nómina trabajador</option>
+          <option value="drogas">💊 Drogas / vacunas</option>
+          <option value="insumos">🔧 Otros insumos</option>
+          <option value="otro_egreso">📦 Otro egreso</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Valor ($)</label>
+        <input type="number" class="form-input" id="fin-valor" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Fecha</label>
+        <input type="date" class="form-input" id="fin-fecha">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Descripción</label>
+      <input type="text" class="form-input" id="fin-desc" placeholder="Ej: 10 bultos alimento iniciación...">
+    </div>
+
+    <button class="btn btn-primary" onclick="guardarMovimiento()">💾 GUARDAR</button>
+  </div>
+
+  <!-- Resumen financiero -->
+  <div class="card">
+    <div class="card-title">📊 Resumen financiero</div>
+    <div id="fin-resumen"></div>
+  </div>
+
+  <!-- Posibles ganancias -->
+  <div class="card">
+    <div class="card-title">🎯 Proyección de ganancias</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Precio venta por ave ($)</label>
+        <input type="number" class="form-input" id="fin-precio-proyeccion" placeholder="Ej: 30000" oninput="calcularProyeccion()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">% aves a vender</label>
+        <input type="number" class="form-input" id="fin-pct-venta" placeholder="100" value="100" oninput="calcularProyeccion()">
+      </div>
+    </div>
+    <div id="fin-proyeccion" style="color:var(--muted);font-size:13px;">Ingrese precio para proyectar</div>
+  </div>
+
+  <!-- Historial movimientos -->
+  <div class="card">
+    <div class="card-title">📋 Historial de movimientos</div>
+    <div id="fin-historial"><div style="color:var(--muted);font-size:13px;">Sin movimientos</div></div>
+  </div>
+
+</div>
+
+<!-- NOMINA -->
+<div id="page-nomina" class="page">
+
+  <div class="card">
+    <div class="card-title">👷 Nómina trabajador</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Sueldo mensual ($)</label>
+        <input type="number" class="form-input" id="nom-sueldo" value="1800000" oninput="actualizarNomina()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Fecha inicio trabajo</label>
+        <input type="date" class="form-input" id="nom-inicio" value="2026-02-27" oninput="actualizarNomina()">
+      </div>
+    </div>
+    <div id="nom-resumen"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏠 Gastos vivienda / familia</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Gastos mensuales estimados de la familia del trabajador en la granja</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Mercado / alimentación ($)</label>
+        <input type="number" class="form-input" id="nom-mercado" placeholder="0" oninput="actualizarNomina()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Servicios públicos ($)</label>
+        <input type="number" class="form-input" id="nom-servicios" placeholder="0" oninput="actualizarNomina()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Gas / combustible ($)</label>
+        <input type="number" class="form-input" id="nom-gas" placeholder="0" oninput="actualizarNomina()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Otros gastos familia ($)</label>
+        <input type="number" class="form-input" id="nom-otros" placeholder="0" oninput="actualizarNomina()">
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="guardarNomina()">💾 GUARDAR</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Resumen costos personal</div>
+    <div id="nom-total-resumen"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Historial de pagos</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Monto pagado ($)</label>
+        <input type="number" class="form-input" id="nom-pago-monto" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Fecha pago</label>
+        <input type="date" class="form-input" id="nom-pago-fecha">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Concepto</label>
+      <input type="text" class="form-input" id="nom-pago-concepto" placeholder="Ej: Quincena marzo...">
+    </div>
+    <button class="btn btn-primary" onclick="registrarPago()">💾 REGISTRAR PAGO</button>
+    <div id="nom-pagos-lista" style="margin-top:12px;"></div>
+  </div>
+
+</div>
+
 <!-- INVERSION -->
 <div id="page-inversion" class="page">
   <div class="card">
@@ -561,6 +923,56 @@ tr:hover td { background: rgba(245,166,35,0.04); }
   <div class="card">
     <div class="card-title">📅 Costo por semana</div>
     <div id="costo-sem-content" style="color:var(--muted);font-size:13px;">Configure el lote primero</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚙️ Modificar valores</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Valor por ave ($)</label>
+        <input type="number" class="form-input" id="inv-costo-ave" placeholder="6000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mant. semanal/ave ($)</label>
+        <input type="number" class="form-input" id="inv-mant" placeholder="1500">
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="actualizarValores()">💾 ACTUALIZAR VALORES</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Tabla costo acumulado por semana</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Sem</th>
+            <th>Aves</th>
+            <th>Costo Ave</th>
+            <th>Mant sem</th>
+            <th>Total sem</th>
+            <th>Acumulado</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-costos-body">
+          <tr><td colspan="6" style="color:var(--muted);">Sin datos</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARACION ALIMENTO -->
+<div id="page-comparacion" class="page">
+  <div class="card">
+    <div class="card-title">📉 Comparación de alimento</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Real vs Referencia Hy Line Brown (kg totales por semana para 9.180 aves)</div>
+    <div id="comparacion-content"><div style="color:var(--muted);font-size:13px;">Sin registros aún</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Resumen alimento</div>
+    <div id="comparacion-resumen"></div>
   </div>
 </div>
 
@@ -624,29 +1036,21 @@ tr:hover td { background: rgba(245,166,35,0.04); }
 // ====== DATA ======
 let config = {
   fecha: '2026-02-27',
-  avesInicial: 9180,
-  costoAve: 6000,
-  mantenimiento: 1500,
+  avesInicial: 9160,
+  costoAve: 4692,
+  mantenimiento: 0,
   costoKgAli: 0
 };
 
 let semanas = [];
 
-// Load from localStorage
+// NO usar localStorage - datos siempre fijos del libro
 function cargarDatos() {
-  try {
-    const c = localStorage.getItem('hl_config');
-    if (c) config = JSON.parse(c);
-    const s = localStorage.getItem('hl_semanas');
-    if (s) semanas = JSON.parse(s);
-  } catch(e) {}
+  // No carga nada del localStorage
 }
 
 function guardarDatos() {
-  try {
-    localStorage.setItem('hl_config', JSON.stringify(config));
-    localStorage.setItem('hl_semanas', JSON.stringify(semanas));
-  } catch(e) {}
+  try { localStorage.setItem('hl_semanas', JSON.stringify(semanas)); } catch(e) {}
 }
 
 // ====== CONFIG ======
@@ -726,10 +1130,16 @@ function recalcularSemanas() {
 }
 
 // ====== CALCULOS ======
+// Forzar siempre la fecha y valores correctos
+config.fecha = '2026-02-27';
+config.avesInicial = 9180;
+config.costoAve = 4692;
+config.mantenimiento = 0;
+
 function getEdadDias() {
-  const nacimiento = new Date(config.fecha);
+  const nacimiento = new Date(2026, 1, 27); // 27 feb 2026 (mes 1 = febrero)
   const hoy = new Date();
-  return Math.floor((hoy - nacimiento) / (1000*60*60*24));
+  return Math.max(0, Math.floor((hoy - nacimiento) / (1000*60*60*24)));
 }
 
 function getSemanaActual() {
@@ -744,190 +1154,507 @@ function getAliTotal() {
   return semanas.reduce((a,s) => a + s.aliTotal, 0);
 }
 
+function getAvesVendidas() {
+  return ventas.reduce((a,v) => a + v.aves, 0);
+}
+
 function getAvesActuales() {
-  return config.avesInicial - getMortTotal();
+  return config.avesInicial - getMortTotal() - getAvesVendidas();
 }
 
 // ====== UI ======
-function actualizarTodo() {
-  actualizarResumen();
-  actualizarHistorial();
-  actualizarInversion();
+// Precio bulto por tipo de alimento
+const precioBulto = {
+  iniciacion: 83500,  // Sem 1-7
+  levante: 77420      // Sem 8 en adelante
+};
+
+function getPrecioBulto(semNum) {
+  return semNum <= 7 ? precioBulto.iniciacion : precioBulto.levante;
 }
 
-function actualizarResumen() {
-  const edad = getEdadDias();
-  const semAct = getSemanaActual();
-  const mortTotal = getMortTotal();
-  const avesVivas = getAvesActuales();
-  const aliTotal = getAliTotal();
-  const pctMort = ((mortTotal / config.avesInicial) * 100).toFixed(2);
-
-  document.getElementById('s-aves').textContent = avesVivas.toLocaleString();
-  document.getElementById('s-mort-total').textContent = mortTotal.toLocaleString();
-  document.getElementById('s-semana').textContent = semAct;
-  document.getElementById('s-edad').textContent = edad + ' días';
-
-  // Progress bars
-  const progSem = Math.min((semAct / 17) * 100, 100);
-  document.getElementById('prog-sem').style.width = progSem + '%';
-  document.getElementById('prog-sem-label').textContent = Math.min(semAct, 17) + ' / 17';
-
-  document.getElementById('prog-mort').style.width = Math.min(parseFloat(pctMort) * 25, 100) + '%';
-  document.getElementById('prog-mort-label').textContent = pctMort + '%';
-
-  document.getElementById('prog-ali').style.width = Math.min((aliTotal / 50000) * 100, 100) + '%';
-  document.getElementById('prog-ali-label').textContent = aliTotal.toLocaleString() + ' kg';
-
-  // Ultima semana
-  const ultima = semanas[semanas.length - 1];
-  const uDiv = document.getElementById('ultima-semana-info');
-  if (ultima) {
-    uDiv.innerHTML = `
-      <div class="week-stats">
-        <div class="week-stat">Semana <span>${ultima.num}</span></div>
-        <div class="week-stat">Alimento <span>${ultima.aliTotal} kg</span></div>
-        <div class="week-stat">Muertes <span style="color:var(--red)">${ultima.mort}</span></div>
-        <div class="week-stat">Saldo <span>${ultima.saldo.toLocaleString()}</span></div>
-        ${ultima.peso ? <div class="week-stat">Peso <span>${ultima.peso}g</span></div> : ''}
-        ${ultima.obs ? <div class="week-stat">📝 <span>${ultima.obs}</span></div> : ''}
-      </div>`;
-  } else {
-    uDiv.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin registros aún</div>';
-  }
-
-  // Alertas
-  const alerts = [];
-  if (parseFloat(pctMort) > 4) {
-    alerts.push(<div class="alert alert-danger">⚠️ Mortalidad acumulada alta: ${pctMort}% — Revisar condiciones</div>);
-  } else if (parseFloat(pctMort) > 2) {
-    alerts.push(<div class="alert alert-warn">⚠️ Mortalidad: ${pctMort}% — Monitorear de cerca</div>);
-  } else if (semanas.length > 0) {
-    alerts.push(<div class="alert alert-ok">✅ Mortalidad normal: ${pctMort}%</div>);
-  }
-  document.getElementById('alerts-container').innerHTML = alerts.join('');
-
-  // Fechas clave
-  const nacimiento = new Date(config.fecha);
-  const sem17 = new Date(nacimiento); sem17.setDate(sem17.getDate() + 17*7);
-  const sem18 = new Date(nacimiento); sem18.setDate(sem18.getDate() + 18*7);
-  const fmtDate = d => d.toLocaleDateString('es-CO', {day:'2-digit', month:'short', year:'numeric'});
-
-  document.getElementById('fechas-clave').innerHTML = `
-    <div class="inversion-row">
-      <div class="inversion-label">🥚 Inicio postura estimado</div>
-      <div class="inversion-val accent" style="font-size:14px;">${fmtDate(sem17)}</div>
-    </div>
-    <div class="inversion-row">
-      <div class="inversion-label">📅 Semana 18</div>
-      <div class="inversion-val" style="font-size:14px;">${fmtDate(sem18)}</div>
-    </div>
-    <div class="inversion-row">
-      <div class="inversion-label">⏳ Días para postura</div>
-      <div class="inversion-val green" style="font-size:14px;">${Math.max(0, Math.ceil((sem17-new Date())/(1000*60*60*24)))} días</div>
-    </div>
-  `;
+function getTipoAlimento(semNum) {
+  return semNum <= 7 ? 'Iniciación' : 'Levante';
 }
 
-function actualizarHistorial() {
-  const list = document.getElementById('historial-list');
-  const tbody = document.getElementById('tabla-body');
+// Referencia alimento Hy Line Brown g/ave/dia (promedio min-max) x 7 dias x aves / 1000 = kg semana
+const refAliSemana = {
+  1:  { min: 12, max: 14 },
+  2:  { min: 17, max: 21 },
+  3:  { min: 20, max: 25 },
+  4:  { min: 25, max: 30 },
+  5:  { min: 29, max: 36 },
+  6:  { min: 35, max: 44 },
+  7:  { min: 41, max: 49 },
+  8:  { min: 47, max: 56 },
+  9:  { min: 52, max: 61 },
+  10: { min: 56, max: 64 },
+  11: { min: 60, max: 69 },
+  12: { min: 62, max: 72 },
+  13: { min: 64, max: 74 },
+  14: { min: 66, max: 76 },
+  15: { min: 68, max: 78 },
+  16: { min: 70, max: 80 },
+  17: { min: 72, max: 82 },
+};
+
+function getRefKgSemana(semNum, aves) {
+  const ref = refAliSemana[semNum];
+  if (!ref) return null;
+  const minKg = Math.round((ref.min * 7 * aves) / 1000);
+  const maxKg = Math.round((ref.max * 7 * aves) / 1000);
+  const promedioKg = Math.round((minKg + maxKg) / 2);
+  const precio = getPrecioBulto(semNum);
+  const minBultos = (minKg / 40).toFixed(1);
+  const maxBultos = (maxKg / 40).toFixed(1);
+  const promedioBultos = (promedioKg / 40).toFixed(1);
+  const costoRefMin = Math.round((minKg / 40) * precio);
+  const costoRefMax = Math.round((maxKg / 40) * precio);
+  const costoRefPromedio = Math.round((promedioKg / 40) * precio);
+  return { minKg, maxKg, promedioKg, minBultos, maxBultos, promedioBultos, costoRefMin, costoRefMax, costoRefPromedio, precio };
+}
+
+function actualizarComparacion() {
+  const content = document.getElementById('comparacion-content');
+  const resumen = document.getElementById('comparacion-resumen');
 
   if (semanas.length === 0) {
-    list.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin registros aún</div>';
-    tbody.innerHTML = '<tr><td colspan="7" style="color:var(--muted);">Sin datos</td></tr>';
+    content.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin registros aún</div>';
+    resumen.innerHTML = '';
     return;
   }
 
-  list.innerHTML = semanas.map(s => `
-    <div class="week-item">
-      <div class="week-item-header">
-        <div class="week-num">Semana ${s.num}</div>
-        <button class="btn btn-danger btn-sm" onclick="eliminarSemana(${s.num})">🗑</button>
+  let totalReal = 0;
+  let totalRefMin = 0;
+  let totalRefMax = 0;
+
+  content.innerHTML = semanas.map(s => {
+    const aves = s.saldo + s.mort; // aves al inicio de la semana
+    const ref = getRefKgSemana(s.num, aves);
+    if (!ref) return '';
+
+    totalReal += s.aliTotal;
+    totalRefMin += ref.minKg;
+    totalRefMax += ref.maxKg;
+
+    const diff = s.aliTotal - ref.promedioKg;
+    const diffBultos = (Math.abs(diff) / 40).toFixed(1);
+    const pct = ref.promedioKg > 0 ? ((s.aliTotal / ref.promedioKg) * 100).toFixed(0) : 0;
+    const barW = Math.min(parseInt(pct), 150);
+
+    // Costos en plata
+    const bultosReal = (s.aliTotal / 40).toFixed(1);
+    const costoReal = Math.round((s.aliTotal / 40) * ref.precio);
+    const diffCosto = Math.round((Math.abs(diff) / 40) * ref.precio);
+
+    let estado, estadoColor, estadoCosto;
+    if (s.aliTotal < ref.minKg) {
+      estado = ⬇ Faltó ${Math.abs(diff).toLocaleString()} kg (${diffBultos} bultos);
+      estadoCosto = ⬇ Ahorro/falta: $${diffCosto.toLocaleString()};
+      estadoColor = 'var(--red)';
+    } else if (s.aliTotal > ref.maxKg) {
+      estado = ⬆ Exceso ${Math.abs(diff).toLocaleString()} kg (${diffBultos} bultos);
+      estadoCosto = ⬆ Gasto extra: $${diffCosto.toLocaleString()};
+      estadoColor = 'var(--accent)';
+    } else {
+      estado = '✅ Dentro del rango';
+      estadoCosto = '';
+      estadoColor = 'var(--green)';
+    }
+
+    return `
+      <div style="background:var(--card2);border-radius:8px;padding:12px;margin-bottom:10px;border-left:3px solid ${estadoColor}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:var(--accent)">Semana ${s.num} — ${getTipoAlimento(s.num)}</div>
+          <div style="font-size:11px;color:${estadoColor};font-weight:600">${estado}</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">
+          🌾 Real: <strong style="color:var(--text)">${s.aliTotal.toLocaleString()} kg (${bultosReal} bultos)</strong>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">
+          📖 Ref promedio: <strong style="color:var(--text)">${ref.promedioKg.toLocaleString()} kg (${ref.promedioBultos} bultos)</strong>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">
+          💵 Costo real: <strong style="color:var(--text)">$${costoReal.toLocaleString()}</strong>
+          &nbsp;|&nbsp; Ref: <strong style="color:var(--text)">$${ref.costoRefPromedio.toLocaleString()}</strong>
+          &nbsp;|&nbsp; Bulto: <strong style="color:var(--text)">$${ref.precio.toLocaleString()}</strong>
+        </div>
+        ${estadoCosto ? <div style="font-size:11px;color:${estadoColor};font-weight:600;">${estadoCosto}</div> : ''}
+        <div style="margin-top:6px;">
+          <div style="height:7px;background:var(--bg);border-radius:4px;overflow:hidden;position:relative;">
+            <div style="position:absolute;left:0;top:0;height:100%;width:${Math.min(refBarW, 100)}%;background:rgba(245,166,35,0.2);border-radius:4px;"></div>
+            <div style="position:absolute;left:0;top:0;height:100%;width:${Math.min(barW, 100)}%;background:${estadoColor};border-radius:4px;"></div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  const diffTotal = totalReal - Math.round((totalRefMin + totalRefMax) / 2);
+  const diffColor = diffTotal < 0 ? 'var(--red)' : diffTotal > 0 ? 'var(--accent)' : 'var(--green)';
+
+  // Costo total real
+  let costoTotalReal = 0;
+  let costoTotalRef = 0;
+  semanas.forEach(s => {
+    const ref = getRefKgSemana(s.num, s.saldo + s.mort);
+    if (!ref) return;
+    costoTotalReal += Math.round((s.aliTotal / 40) * ref.precio);
+    costoTotalRef += ref.costoRefPromedio;
+  });
+  const diffCostoTotal = costoTotalReal - costoTotalRef;
+
+  resumen.innerHTML = `
+    <div class="inversion-row">
+      <div class="inversion-label">Total alimento real</div>
+      <div class="inversion-val">${totalReal.toLocaleString()} kg (${(totalReal/40).toFixed(1)} bultos)</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Costo total real en plata</div>
+      <div class="inversion-val accent">$${costoTotalReal.toLocaleString()}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Costo total referencia</div>
+      <div class="inversion-val" style="font-size:14px;">$${costoTotalRef.toLocaleString()}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Diferencia en kg vs referencia</div>
+      <div class="inversion-val" style="color:${diffColor};">${diffTotal > 0 ? '+' : ''}${diffTotal.toLocaleString()} kg</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Diferencia en plata</div>
+      <div class="inversion-val" style="color:${diffCostoTotal > 0 ? 'var(--accent)' : 'var(--red)'};">${diffCostoTotal > 0 ? '+' : ''}$${diffCostoTotal.toLocaleString()}</div>
+    </div>
+    <div style="margin-top:10px;" class="alert ${diffTotal < -500 ? 'alert-danger' : diffTotal < 0 ? 'alert-warn' : 'alert-ok'}">
+      ${diffTotal < -500 ? '⚠️ Las aves han comido significativamente menos de lo recomendado' :
+        diffTotal < 0 ? '⚠️ Consumo ligeramente por debajo de la referencia' :
+        '✅ Consumo dentro o sobre el rango recomendado'}
+    </div>
+  `;
+}
+
+// Precio de venta = $6000 + ($1500 x semanas) + ($214 x dias extra)
+const COSTO_POLLA_VENTA = 6000;
+const MANT_SEMANAL_VENTA = 1500;
+const MANT_DIARIO_VENTA = Math.round(1500 / 7);
+
+function autoCalcularSemanaVenta() {
+  const fechaVenta = document.getElementById('v-fecha').value;
+  if (!fechaVenta) return;
+
+  const nacimiento = new Date(config.fecha);
+  const venta = new Date(fechaVenta);
+  const diasVida = Math.floor((venta - nacimiento) / (1000*60*60*24));
+
+  if (diasVida < 0) {
+    alert('La fecha de venta no puede ser anterior al nacimiento');
+    return;
+  }
+
+  const semanasCompletas = Math.floor(diasVida / 7);
+  const diasExtra = diasVida % 7;
+
+  document.getElementById('v-semana').value = semanasCompletas;
+  document.getElementById('v-dias-extra').value = diasExtra;
+
+  calcularPrecioVenta();
+}
+
+
+function calcularPrecioVenta() {
+  const semanas_v = parseInt(document.getElementById('v-semana').value) || 0;
+  const diasExtra = parseInt(document.getElementById('v-dias-extra').value) || 0;
+  const aves_v = parseInt(document.getElementById('v-aves').value) || 0;
+
+  if (!semanas_v) {
+    document.getElementById('v-calculo-detalle').textContent = 'Ingrese semana y días para calcular';
+    document.getElementById('v-precio-calculado').textContent = '$0';
+    document.getElementById('v-pct-ganancia').textContent = '0%';
+    return;
+  }
+
+  const precioBase = COSTO_POLLA_VENTA;
+  const mantSem = MANT_SEMANAL_VENTA * semanas_v;
+  const mantDias = MANT_DIARIO_VENTA * diasExtra;
+  const precioTotal = precioBase + mantSem + mantDias;
+  const pctGanancia = (((precioTotal - 4692) / 4692) * 100).toFixed(1);
+
+  document.getElementById('v-calculo-detalle').innerHTML = `
+    <span style="color:var(--text);">$${precioBase.toLocaleString()}</span> polla
+    + <span style="color:var(--text);">$${mantSem.toLocaleString()}</span> (${semanas_v} sem × $1.500)
+    ${diasExtra > 0 ? + <span style="color:var(--text);">$${mantDias.toLocaleString()}</span> (${diasExtra} días × $${MANT_DIARIO_VENTA}) : ''}
+  `;
+  document.getElementById('v-precio-calculado').textContent = '$' + precioTotal.toLocaleString();
+  document.getElementById('v-pct-ganancia').textContent = pctGanancia + '%';
+
+  // Auto-fill precio
+  document.getElementById('v-precio').value = precioTotal;
+  actualizarTotalVenta();
+}
+
+function actualizarTotalVenta() {
+  const aves_v = parseInt(document.getElementById('v-aves').value) || 0;
+  const precio_v = parseInt(document.getElementById('v-precio').value) || 0;
+  const total = aves_v * precio_v;
+  document.getElementById('v-total-preview').textContent = '$' + total.toLocaleString();
+
+  // Recalcular % ganancia si precio fue ajustado
+  const pct = precio_v > 0 ? (((precio_v - 4692) / 4692) * 100).toFixed(1) : 0;
+  const pctEl = document.getElementById('v-pct-ganancia');
+  if (pctEl) pctEl.textContent = pct + '%';
+}
+
+function actualizarCostoSemanalReal() {
+  const div = document.getElementById('costo-semanal-real');
+  if (!div || semanas.length === 0) return;
+
+  // Nómina por semana = $1.800.000 / 4.33 semanas/mes
+  const nominaSem = Math.round(1800000 / 4.33);
+  // Otros gastos por semana = $2.000.000 / total semanas
+  const otrosSem = Math.round(2000000 / semanas.length);
+
+  let html = '';
+  semanas.forEach(s => {
+    const precio = s.num <= 7 ? 83500 : 77420;
+    const costoAli = Math.round((s.aliTotal / 40) * precio);
+    const totalSem = costoAli + nominaSem + otrosSem;
+    const costoPorAve = Math.round(totalSem / s.saldo);
+
+    html += `
+      <div style="background:var(--card2);border-radius:8px;padding:10px 12px;margin-bottom:8px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;color:var(--accent);margin-bottom:6px;">Semana ${s.num}</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:2px;">
+          <span>🌾 Alimento</span><strong style="color:var(--text);">$${costoAli.toLocaleString()}</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:2px;">
+          <span>👷 Nómina</span><strong style="color:var(--text);">$${nominaSem.toLocaleString()}</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:2px;">
+          <span>💊 Drogas/gastos</span><strong style="color:var(--text);">$${otrosSem.toLocaleString()}</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);margin-top:5px;padding-top:5px;">
+          <span style="color:var(--text);font-weight:600;">Total semana</span><strong style="color:var(--accent);">$${totalSem.toLocaleString()}</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:2px;">
+          <span>Costo por ave</span><strong style="color:var(--text);">$${costoPorAve.toLocaleString()}</strong>
+        </div>
+      </div>`;
+  });
+  div.innerHTML = html;
+}
+
+
+let ventas = [];
+
+function cargarVentas() {
+  try {
+    const v = localStorage.getItem('hl_ventas');
+    if (v) ventas = JSON.parse(v);
+  } catch(e) {}
+}
+
+function guardarVentas() {
+  try { localStorage.setItem('hl_ventas', JSON.stringify(ventas)); } catch(e) {}
+}
+
+function guardarVenta() {
+  const semana = parseInt(document.getElementById('v-semana').value) || 0;
+  const aves = parseInt(document.getElementById('v-aves').value) || 0;
+  const precio = parseInt(document.getElementById('v-precio').value) || 0;
+  const fecha = document.getElementById('v-fecha').value;
+  const obs = document.getElementById('v-obs').value;
+
+  if (!aves || !precio) { alert('Ingrese aves y precio'); return; }
+
+  ventas.push({ id: Date.now(), semana, aves, precio, total: aves * precio, fecha, obs });
+  guardarVentas();
+  actualizarVentas();
+  actualizarInversion();
+
+  document.getElementById('v-semana').value = '';
+  document.getElementById('v-aves').value = '';
+  document.getElementById('v-precio').value = '';
+  document.getElementById('v-obs').value = '';
+  document.getElementById('v-total-preview').textContent = '$0';
+  alert('✅ Venta guardada');
+}
+
+function eliminarVenta(id) {
+  if (!confirm('¿Eliminar esta venta?')) return;
+  ventas = ventas.filter(v => v.id !== id);
+  guardarVentas();
+  actualizarVentas();
+  actualizarInversion();
+}
+
+function actualizarVentas() {
+  const list = document.getElementById('ventas-list');
+  const resumen = document.getElementById('ventas-resumen');
+
+  if (ventas.length === 0) {
+    list.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin ventas registradas</div>';
+    resumen.innerHTML = '';
+    return;
+  }
+
+  list.innerHTML = ventas.map(v => `
+    <div style="background:var(--card2);border-radius:8px;padding:12px;margin-bottom:8px;border-left:3px solid var(--green);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:var(--green);">
+          ${v.aves} aves — $${v.total.toLocaleString()}
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="eliminarVenta(${v.id})">🗑</button>
       </div>
-      <div class="week-stats">
-        <div class="week-stat">🌾 Ali total: <span>${s.aliTotal} kg</span></div>
-        <div class="week-stat">💀 Muertes: <span style="color:var(--red)">${s.mort}</span></div>
-        <div class="week-stat">🐔 Saldo: <span>${s.saldo.toLocaleString()}</span></div>
-        <div class="week-stat">📊 % Mort: <span>${s.pctMort}%</span></div>
-        ${s.peso ? <div class="week-stat">⚖️ Peso: <span>${s.peso}g</span></div> : ''}
-        ${s.obs ? <div class="week-stat">📝 <span>${s.obs}</span></div> : ''}
+      <div style="font-size:11px;color:var(--muted);">
+        Sem ${v.semana} &nbsp;|&nbsp; $${v.precio.toLocaleString()}/ave
+        ${v.fecha ? ` &nbsp;|&nbsp; ${v.fecha}` : ''}
+        ${v.obs ? <br>📝 ${v.obs} : ''}
       </div>
     </div>
   `).join('');
 
-  tbody.innerHTML = semanas.map(s => `
-    <tr>
-      <td class="td-week">${s.num}</td>
-      <td>${s.aliTotal}</td>
-      <td style="color:var(--red)">${s.mort}</td>
-      <td>${s.pctMort}%</td>
-      <td>${s.saldo.toLocaleString()}</td>
-      <td>${s.peso || '—'}</td>
-      <td><button class="btn btn-danger btn-sm" onclick="eliminarSemana(${s.num})">🗑</button></td>
-    </tr>
-  `).join('');
-}
+  const totalAves = ventas.reduce((a,v) => a + v.aves, 0);
+  const totalIngresos = ventas.reduce((a,v) => a + v.total, 0);
+  const promPrecio = Math.round(totalIngresos / totalAves);
 
-function actualizarInversion() {
-  const semAct = getSemanaActual();
-  const totalCompra = config.avesInicial * config.costoAve;
-  const totalMant = config.avesInicial * config.mantenimiento * semAct;
-  const aliTotal = getAliTotal();
-  const totalAli = aliTotal * config.costoKgAli;
-  const totalInv = totalCompra + totalMant + totalAli;
-
-  document.getElementById('inversion-content').innerHTML = `
+  resumen.innerHTML = `
     <div class="inversion-row">
-      <div class="inversion-label">Compra ${config.avesInicial.toLocaleString()} pollas</div>
-      <div class="inversion-val">$${totalCompra.toLocaleString()}</div>
+      <div class="inversion-label">Total aves vendidas</div>
+      <div class="inversion-val">${totalAves.toLocaleString()}</div>
     </div>
     <div class="inversion-row">
-      <div class="inversion-label">Mantenimiento (${semAct} semanas)</div>
-      <div class="inversion-val">$${totalMant.toLocaleString()}</div>
+      <div class="inversion-label">Precio promedio/ave</div>
+      <div class="inversion-val" style="font-size:14px;">$${promPrecio.toLocaleString()}</div>
     </div>
     <div class="inversion-row">
-      <div class="inversion-label">Alimento (${aliTotal.toLocaleString()} kg)</div>
-      <div class="inversion-val">$${totalAli.toLocaleString()}</div>
-    </div>
-    <div class="inversion-row" style="border-top:2px solid var(--accent);margin-top:4px;padding-top:12px;">
-      <div class="inversion-label" style="color:var(--text);font-weight:600;">TOTAL INVERTIDO</div>
-      <div class="inversion-val accent">$${totalInv.toLocaleString()}</div>
-    </div>
-    <div class="inversion-row">
-      <div class="inversion-label">Costo por ave viva</div>
-      <div class="inversion-val" style="font-size:14px;">$${Math.round(totalInv / getAvesActuales()).toLocaleString()}</div>
-    </div>
-  `;
-
-  document.getElementById('costo-sem-content').innerHTML = `
-    <div class="inversion-row">
-      <div class="inversion-label">Costo semanal por ave</div>
-      <div class="inversion-val" style="font-size:14px;">$${config.mantenimiento.toLocaleString()}</div>
-    </div>
-    <div class="inversion-row">
-      <div class="inversion-label">Costo total por semana</div>
-      <div class="inversion-val accent" style="font-size:14px;">$${(config.avesInicial * config.mantenimiento).toLocaleString()}</div>
-    </div>
-    <div class="inversion-row">
-      <div class="inversion-label">Semanas transcurridas</div>
-      <div class="inversion-val" style="font-size:14px;">${semAct}</div>
+      <div class="inversion-label">Total ingresos</div>
+      <div class="inversion-val green">$${totalIngresos.toLocaleString()}</div>
     </div>
   `;
 }
 
-// ====== NAV ======
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  event.target.classList.add('active');
+// Preview total venta
+document.addEventListener('DOMContentLoaded', () => {
+  ['v-aves','v-precio'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      const a = parseInt(document.getElementById('v-aves').value) || 0;
+      const p = parseInt(document.getElementById('v-precio').value) || 0;
+      document.getElementById('v-total-preview').textContent = '$' + (a*p).toLocaleString();
+    });
+  });
+});
+
+function actualizarValores() {
+  const costoAve = parseInt(document.getElementById('inv-costo-ave').value);
+  const mant = parseInt(document.getElementById('inv-mant').value);
+  if (costoAve) config.costoAve = costoAve;
+  if (mant) config.mantenimiento = mant;
+  guardarDatos();
+  actualizarTodo();
+  alert('✅ Valores actualizados');
 }
 
-// ====== INIT ======
-cargarDatos();
-cargarConfigUI();
-actualizarTodo();
-</script>
-</body>
-</html>
+
+function getConsumoDia(s) {
+  const avesIni = s.saldo + s.mort;
+  const diasReales = s.aliDias.filter(d => d > 0).length || 7;
+  if (!avesIni || !s.aliTotal) return 0;
+  return ((s.aliTotal * 1000) / avesIni / diasReales).toFixed(1);
+}
+
+function getConsumoAcum(semNum) {
+  const semsHasta = semanas.filter(s => s.num <= semNum);
+  const totalKg = semsHasta.reduce((a,s) => a + s.aliTotal, 0);
+  const avesRef = config.avesInicial;
+  const diasTotales = semsHasta.reduce((a,s) => a + s.aliDias.filter(d=>d>0).length, 0);
+  if (!avesRef || !diasTotales) return 0;
+  return Math.round((totalKg * 1000) / avesRef);
+}
+
+// ====== FINANZAS ======
+let movimientos = [];
+
+const categoriasEgreso = {
+  alimento: '🌾 Compra alimento',
+  nomina: '👷 Nómina trabajador',
+  drogas: '💊 Drogas / vacunas',
+  insumos: '🔧 Otros insumos',
+  otro_egreso: '📦 Otro egreso'
+};
+
+const categoriasIngreso = {
+  aves: '🐔 Venta aves',
+  costal: '🛍 Venta costal',
+  gallinaza: '💩 Venta gallinaza',
+  alimento_venta: '🌾 Venta alimento',
+  otro_ingreso: '💵 Otro ingreso'
+};
+
+function finTipoChange() {
+  const tipo = document.getElementById('fin-tipo').value;
+  const catSelect = document.getElementById('fin-categoria');
+  const cats = tipo === 'egreso' ? categoriasEgreso : categoriasIngreso;
+  catSelect.innerHTML = Object.entries(cats).map(([k,v]) => <option value="${k}">${v}</option>).join('');
+}
+
+function cargarMovimientos() {
+  try {
+    const m = localStorage.getItem('hl_movimientos');
+    if (m) movimientos = JSON.parse(m);
+  } catch(e) {}
+}
+
+function guardarMovimientos() {
+  try { localStorage.setItem('hl_movimientos', JSON.stringify(movimientos)); } catch(e) {}
+}
+
+function guardarMovimiento() {
+  const tipo = document.getElementById('fin-tipo').value;
+  const categoria = document.getElementById('fin-categoria').value;
+  const valor = parseInt(document.getElementById('fin-valor').value) || 0;
+  const fecha = document.getElementById('fin-fecha').value;
+  const desc = document.getElementById('fin-desc').value;
+
+  if (!valor) { alert('Ingrese un valor'); return; }
+
+  movimientos.push({ id: Date.now(), tipo, categoria, valor, fecha, desc });
+  guardarMovimientos();
+  actualizarFinanzas();
+
+  document.getElementById('fin-valor').value = '';
+  document.getElementById('fin-desc').value = '';
+  alert('✅ Movimiento guardado');
+}
+
+function eliminarMovimiento(id) {
+  if (!confirm('¿Eliminar este movimiento?')) return;
+  movimientos = movimientos.filter(m => m.id !== id);
+  guardarMovimientos();
+  actualizarFinanzas();
+}
+
+function calcularProyeccion() {
+  const precio = parseInt(document.getElementById('fin-precio-proyeccion').value) || 0;
+  const pct = parseInt(document.getElementById('fin-pct-venta').value) || 100;
+  const avesVivas = getAvesActuales();
+  const avesVendidas = ventas.reduce((a,v) => a + v.aves, 0);
+  const avesDisponibles = avesVivas - avesVendidas;
+  const avesAVender = Math.round(avesDisponibles * pct / 100);
+
+  if (!precio) {
+    document.getElementById('fin-proyeccion').innerHTML = '<div style="color:var(--muted);font-size:13px;">Ingrese precio para proyectar</div>';
+    return;
+  }
+
+  const ingresoProyectado = avesAVender * precio;
+  const totalEgresos = movimientos.filter(m => m.tipo === 'egreso').reduce((a,m) => a + m.valor, 0);
+  const totalIngresos = movimientos.filter(m => m.tipo === 'ingreso').reduce((a,m) => a + m.valor, 0);
+  const ingresosVentas = ventas.reduce((a,v) => a + v.total, 0);
+  const totalIngresosActual = totalIngresos + ingresosVentas;
+
+  let costoAliReal = 0;
+  semanas.forEach(s => {
+    const p = s.num <= 7 ? 83500 : 77420;
+    costoAliReal += Math.round((s.aliTotal / 40) * p);
+  });
+
+  const inversionTotal = config.avesInicial * config.costoAve + costoAliReal + getTotalNomina() + totalE

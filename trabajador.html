@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Granja Avícola - Trabajador</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
+:root {
+  --bg: #0f1923; --card: #162030; --card2: #1c2a3a;
+  --accent: #f5a623; --green: #2ecc71; --red: #e74c3c; --blue: #3498db;
+  --text: #e8f0fe; --muted: #7a9ab5; --border: rgba(245,166,35,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body { background:var(--bg); color:var(--text); font-family:'Barlow',sans-serif; min-height:100vh; padding-bottom:40px; }
+.header { background:linear-gradient(135deg,#0f1923 0%,#1a2d42 100%); border-bottom:2px solid var(--accent); padding:14px 16px 10px; }
+.header-top { display:flex; align-items:center; justify-content:space-between; }
+.header h1 { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:800; color:var(--accent); letter-spacing:1px; text-transform:uppercase; }
+.header-sub { font-size:11px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; }
+.badge { background:#e74c3c; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; padding:4px 12px; border-radius:20px; }
+.sync-row { display:flex; align-items:center; gap:10px; margin-top:8px; }
+.sync-btn { background:var(--blue); color:#fff; border:none; border-radius:20px; padding:6px 14px; font-size:12px; font-family:'Barlow Condensed',sans-serif; font-weight:700; cursor:pointer; }
+.sync-status { font-size:11px; color:var(--muted); }
+.nav { display:flex; background:var(--card); border-bottom:1px solid var(--border); }
+.nav-btn { flex:1; padding:11px 8px; background:none; border:none; color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; border-bottom:3px solid transparent; }
+.nav-btn.active { color:var(--accent); border-bottom-color:var(--accent); }
+.page { display:none; padding:14px; }
+.page.active { display:block; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:12px; }
+.card-title { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+.info-box { background:var(--card2); border-radius:8px; padding:12px; text-align:center; }
+.info-val { font-family:'Barlow Condensed',sans-serif; font-size:24px; font-weight:800; color:var(--accent); }
+.info-val.green { color:var(--green); } .info-val.red { color:var(--red); } .info-val.blue { color:var(--blue); }
+.info-lbl { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:3px; }
+.ali-hoy { background:linear-gradient(135deg,#1a3a1a,#1c2a3a); border:2px solid var(--green); border-radius:12px; padding:16px; margin-bottom:12px; text-align:center; }
+.ali-hoy-label { font-size:12px; color:var(--green); text-transform:uppercase; letter-spacing:2px; margin-bottom:4px; }
+.ali-hoy-val { font-family:'Barlow Condensed',sans-serif; font-size:52px; font-weight:800; color:var(--green); line-height:1; }
+.ali-hoy-unit { font-size:14px; color:var(--muted); margin-top:4px; }
+.ali-hoy-rango { font-size:12px; color:var(--muted); margin-top:6px; }
+.form-group { margin-bottom:12px; }
+.form-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; display:block; }
+.form-input { width:100%; background:var(--card2); border:1px solid var(--border); border-radius:6px; padding:10px 12px; color:var(--text); font-family:'Barlow',sans-serif; font-size:15px; outline:none; }
+.form-input:focus { border-color:var(--accent); }
+.btn { width:100%; padding:13px; border:none; border-radius:8px; font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; }
+.btn-primary { background:var(--accent); color:#0f1923; }
+.alert-info { background:rgba(52,152,219,0.15); border:1px solid rgba(52,152,219,0.4); color:var(--blue); padding:10px 14px; border-radius:8px; font-size:13px; margin-bottom:12px; }
+.table-wrap { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { background:var(--card2); color:var(--accent); font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; padding:10px 8px; text-align:center; border-bottom:1px solid var(--border); }
+td { padding:10px 8px; text-align:center; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text); }
+tr.semana-actual td { background:rgba(245,166,35,0.12); font-weight:700; }
+.td-week { font-family:'Barlow Condensed',sans-serif; font-weight:800; color:var(--accent); font-size:16px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <div><h1>🐔 Hy Line Brown</h1><div class="header-sub">Control de Levante</div></div>
+    <div class="badge">Trabajador</div>
+  </div>
+  <div class="sync-row">
+    <button class="sync-btn" onclick="sincronizar()">☁️ Sincronizar</button>
+    <div class="sync-status" id="sync-status">Toca para cargar datos</div>
+  </div>
+</div>
+<div class="nav">
+  <button class="nav-btn active" onclick="showPage('inicio',this)">🏠 Inicio</button>
+  <button class="nav-btn" onclick="showPage('registro',this)">✏️ Registro</button>
+  <button class="nav-btn" onclick="showPage('referencia',this)">📖 Alimento</button>
+</div>
+<div id="page-inicio" class="page active">
+  <div class="info-grid">
+    <div class="info-box"><div class="info-val" id="t-aves">—</div><div class="info-lbl">Aves vivas</div></div>
+    <div class="info-box"><div class="info-val green" id="t-edad">—</div><div class="info-lbl">Edad</div></div>
+    <div class="info-box"><div class="info-val blue" id="t-semana">—</div><div class="info-lbl">Semana</div></div>
+    <div class="info-box"><div class="info-val red" id="t-mort">—</div><div class="info-lbl">Muertes total</div></div>
+  </div>
+  <div class="ali-hoy">
+    <div class="ali-hoy-label">🌾 Alimento total hoy</div>
+    <div class="ali-hoy-val" id="ali-total-hoy">—</div>
+    <div class="ali-hoy-unit">kg para todas las aves</div>
+    <div class="ali-hoy-rango" id="ali-rango-hoy"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🌾 Por ave</div>
+    <div class="ali-hoy" style="margin-bottom:0;border-color:var(--accent);">
+      <div class="ali-hoy-label" style="color:var(--accent);">Gramos por ave / día</div>
+      <div class="ali-hoy-val" style="color:var(--accent);" id="ali-ave-hoy">—</div>
+      <div class="ali-hoy-unit">g/ave</div>
+    </div>
+  </div>
+</div>
+<div id="page-registro" class="page">
+  <div class="card">
+    <div class="card-title">✏️ Registrar semana</div>
+    <div class="alert-info" id="semana-sugerida">Sincroniza para ver qué semana registrar</div>
+    <div class="form-group"><label class="form-label">Semana #</label><input type="number" class="form-input" id="r-semana" min="1" max="20" placeholder="Ej: 1"></div>
+    <div class="form-group"><label class="form-label">🌾 Alimento Lunes (kg)</label><input type="number" class="form-input" id="r-ali-lun" placeholder="0"></div>
+    <div class="form-group"><label class="form-label">🌾 Alimento Martes (kg)</label><input type="number" class="form-input" id="r-ali-mar" placeholder="0"></div>
+    <div class="form-group"><label class="form-label">🌾 Alimento Miércoles (kg)</label><input type="number" class="form-input" id="r-ali-mie" placeholder="0"></div>
+    <div class="form-group"><label class="form-label">🌾 Alimento Jueves (kg)</label><input type="number" class="form-input" id="r-ali-jue" placeholder="0"></div>
+    <div class="form-group"><label class="form-label">🌾 Alimento Viernes (kg)</label><input type="number" class="form-input" id="r-ali-vie" placeholder="0"></div>
+    <div class="form-group"><label class="form-label">🌾 Alimento Sábado (kg)</label><input type="number" class="form-input" id="r-ali-sab" placeholder="0"></div>
+    <div class="form-group"><label class="form-label">🌾 Alimento Domingo (kg)</label><input type="number" class="form-input" id="r-ali-dom" placeholder="0"></div>
+    <div class="form-group"><label class="form-label">💀 Muertes esta semana</label><input type="number" class="form-input" id="r-mort" placeholder="0"></div>
+    <div class="form-group"><label class="form-label">⚖️ Peso real (g)</label><input type="number" class="form-input" id="r-peso" placeholder="Ej: 142"></div>
+    <div class="form-group"><label class="form-label">📝 Observaciones</label><input type="text" class="form-input" id="r-obs" placeholder="Vacunas, novedades..."></div>
+    <button class="btn btn-primary" onclick="guardarSemana()">💾 GUARDAR SEMANA</button>
+  </div>
+</div>
+<div id="page-referencia" class="page">
+  <div class="card">
+    <div class="card-title">📖 Alimento por semana</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">La fila resaltada es la semana actual ◀</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sem</th><th>g/ave/día</th><th>kg total/día</th></tr></thead>
+        <tbody id="tabla-referencia"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyl30I25rIiVkSf1SV0nBFDHiaEuItHRLfnWgr6rp7Rw1gCIqd8WvcsB5pv4p4naM26rw/exec';
+const REF = [
+  {sem:1,min:12,max:14},{sem:2,min:17,max:21},{sem:3,min:20,max:25},
+  {sem:4,min:25,max:30},{sem:5,min:29,max:36},{sem:6,min:35,max:44},
+  {sem:7,min:41,max:49},{sem:8,min:47,max:56},{sem:9,min:52,max:61},
+  {sem:10,min:56,max:64},{sem:11,min:60,max:69},{sem:12,min:62,max:72},
+  {sem:13,min:64,max:74},{sem:14,min:66,max:76},{sem:15,min:68,max:78},
+  {sem:16,min:70,max:80},{sem:17,min:72,max:82}
+];
+let config = { fecha:'2026-02-27', avesInicial:9180 };
+let semanas = [];
+async function sincronizar() {
+  document.getElementById('sync-status').textContent = '⏳ Sincronizando...';
+  try {
+    const res = await fetch(SCRIPT_URL + '?action=getAll');
+    const data = await res.json();
+    if (data.config && Object.keys(data.config).length > 0) {
+      config = { fecha: data.config.fecha || config.fecha, avesInicial: parseInt(data.config.avesInicial) || config.avesInicial };
+    }
+    if (data.semanas) semanas = data.semanas;
+    actualizarUI();
+    document.getElementById('sync-status').textContent = '✅ ' + new Date().toLocaleTimeString('es-CO');
+  } catch(e) { document.getElementById('sync-status').textContent = '❌ Error de conexión'; }
+}
+function actualizarUI() {
+  const edad = Math.floor((new Date() - new Date(config.fecha)) / (1000*60*60*24));
+  const semAct = Math.ceil(edad / 7);
+  const mortTotal = semanas.reduce((a,s) => a + s.mort, 0);
+  const avesVivas = config.avesInicial - mortTotal;
+  document.getElementById('t-aves').textContent = avesVivas.toLocaleString();
+  document.getElementById('t-edad').textContent = edad + ' días';
+  document.getElementById('t-semana').textContent = 'Sem ' + semAct;
+  document.getElementById('t-mort').textContent = mortTotal;
+  const ref = REF.find(r => r.sem === semAct) || REF[REF.length-1];
+  const promG = Math.round((ref.min + ref.max) / 2);
+  const kgTot = ((promG * avesVivas) / 1000).toFixed(0);
+  const kgMin = ((ref.min * avesVivas) / 1000).toFixed(0);
+  const kgMax = ((ref.max * avesVivas) / 1000).toFixed(0);
+  document.getElementById('ali-total-hoy').textContent = kgTot;
+  document.getElementById('ali-rango-hoy').textContent = 'Rango: ' + kgMin + ' – ' + kgMax + ' kg/día';
+  document.getElementById('ali-ave-hoy').textContent = promG;
+  document.getElementById('semana-sugerida').textContent = '📋 Debes registrar la semana ' + semAct;
+  document.getElementById('r-semana').value = semAct;
+  const tbody = document.getElementById('tabla-referencia');
+  tbody.innerHTML = REF.map(r => {
+    const prom = Math.round((r.min + r.max) / 2);
+    const kg = ((prom * avesVivas) / 1000).toFixed(0);
+    const esAct = r.sem === semAct;
+    return '<tr class="' + (esAct ? 'semana-actual' : '') + '"><td class="td-week">' + r.sem + (esAct ? ' ◀' : '') + '</td><td>' + r.min + '–' + r.max + '</td><td><strong>' + kg + ' kg</strong></td></tr>';
+  }).join('');
+}
+async function guardarSemana() {
+  const num = parseInt(document.getElementById('r-semana').value);
+  if (!num) { alert('Ingrese el número de semana'); return; }
+  const dias = ['lun','mar','mie','jue','vie','sab','dom'];
+  const aliDias = dias.map(d => parseFloat(document.getElementById('r-ali-'+d).value) || 0);
+  const aliTotal = aliDias.reduce((a,b) => a+b, 0);
+  const mort = parseInt(document.getElementById('r-mort').value) || 0;
+  const peso = parseInt(document.getElementById('r-peso').value) || 0;
+  const obs = document.getElementById('r-obs').value;
+  semanas = semanas.filter(s => s.num !== num);
+  const mortPrev = semanas.filter(s => s.num < num).reduce((a,s) => a + s.mort, 0);
+  const saldo = config.avesInicial - mortPrev - mort;
+  const mortAcum = mortPrev + mort;
+  const pctMort = ((mortAcum / config.avesInicial) * 100).toFixed(4);
+  const nueva = { num, aliDias, aliTotal, mort, peso, obs, saldo, mortAcum, pctMort };
+  semanas.push(nueva); semanas.sort((a,b) => a.num - b.num);
+  try {
+    await fetch(SCRIPT_URL + '?action=saveSemana&data=' + encodeURIComponent(JSON.stringify(nueva)));
+    actualizarUI();
+    dias.forEach(d => document.getElementById('r-ali-'+d).value = '');
+    ['r-mort','r-peso','r-obs'].forEach(id => document.getElementById(id).value = '');
+    alert('✅ Semana ' + num + ' guardada');
+  } catch(e) { alert('❌ Error al guardar'); }
+}
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+actualizarUI();
+sincronizar();
+</script>
+</body>
+</html>

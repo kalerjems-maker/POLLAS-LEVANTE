@@ -1,0 +1,932 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Hy Line Brown - Levante</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #0f1923;
+  --card: #162030;
+  --card2: #1c2a3a;
+  --accent: #f5a623;
+  --accent2: #e8c14a;
+  --green: #2ecc71;
+  --red: #e74c3c;
+  --blue: #3498db;
+  --text: #e8f0fe;
+  --muted: #7a9ab5;
+  --border: rgba(245,166,35,0.2);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #0f1923 0%, #1a2d42 100%);
+  border-bottom: 2px solid var(--accent);
+  padding: 14px 16px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.header h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.header-sub {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.lote-badge {
+  background: var(--accent);
+  color: #0f1923;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+}
+
+/* NAV TABS */
+.nav {
+  display: flex;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex: 1;
+  min-width: 70px;
+  padding: 10px 8px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* PAGES */
+.page { display: none; padding: 14px; }
+.page.active { display: block; }
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* STATS GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.stat-box {
+  background: var(--card2);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.stat-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-val.green { color: var(--green); }
+.stat-val.red { color: var(--red); }
+.stat-val.blue { color: var(--blue); }
+.stat-lbl {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 3px;
+}
+
+/* PROGRESS BAR */
+.progress-wrap { margin-bottom: 12px; }
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.progress-bar {
+  height: 8px;
+  background: var(--card2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 0.5s ease;
+}
+.progress-fill.green { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+.progress-fill.red { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+
+/* FORM */
+.form-group { margin-bottom: 12px; }
+.form-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  display: block;
+}
+.form-input {
+  width: 100%;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--accent); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* BUTTONS */
+.btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary { background: var(--accent); color: #0f1923; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-danger { background: var(--red); color: #fff; margin-top: 8px; }
+.btn-sm {
+  width: auto;
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+/* TABLE */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  min-width: 500px;
+}
+th {
+  background: var(--card2);
+  color: var(--accent);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 6px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: 8px 6px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--text);
+}
+tr:hover td { background: rgba(245,166,35,0.04); }
+.td-week {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* ALERT */
+.alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.alert-warn { background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.4); color: var(--accent2); }
+.alert-ok { background: rgba(46,204,113,0.12); border: 1px solid rgba(46,204,113,0.3); color: var(--green); }
+.alert-danger { background: rgba(231,76,60,0.12); border: 1px solid rgba(231,76,60,0.3); color: var(--red); }
+
+/* WEEK LIST */
+.week-item {
+  background: var(--card2);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--accent);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.week-item:active { transform: scale(0.99); }
+.week-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.week-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--accent);
+}
+.week-date { font-size: 11px; color: var(--muted); }
+.week-stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.week-stat { font-size: 11px; color: var(--muted); }
+.week-stat span { color: var(--text); font-weight: 600; }
+
+/* RESUMEN INVERSION */
+.inversion-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.inversion-label { font-size: 13px; color: var(--muted); }
+.inversion-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+.inversion-val.accent { color: var(--accent); }
+.inversion-val.green { color: var(--green); }
+.inversion-val.red { color: var(--red); }
+
+/* SEMANA REFERENCIA HY LINE */
+.ref-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 12px;
+}
+.ref-sem { color: var(--accent); font-weight: 600; width: 50px; }
+.ref-val { color: var(--text); text-align: right; }
+.ref-lbl { color: var(--muted); font-size: 10px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>🐔 Hy Line Brown</h1>
+      <div class="header-sub">Control de Levante</div>
+    </div>
+    <div class="lote-badge" id="lote-badge">Lote 1</div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="showPage('resumen')">📊 Resumen</button>
+  <button class="nav-btn" onclick="showPage('registro')">✏️ Registro</button>
+  <button class="nav-btn" onclick="showPage('historial')">📋 Historial</button>
+  <button class="nav-btn" onclick="showPage('inversion')">💰 Inversión</button>
+  <button class="nav-btn" onclick="showPage('referencia')">📖 Referencia</button>
+</div>
+
+<!-- RESUMEN -->
+<div id="page-resumen" class="page active">
+
+  <div id="alerts-container"></div>
+
+  <div class="stats-grid">
+    <div class="stat-box">
+      <div class="stat-val" id="s-aves">9,180</div>
+      <div class="stat-lbl">Aves vivas</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val red" id="s-mort-total">0</div>
+      <div class="stat-lbl">Muertes total</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val blue" id="s-semana">0</div>
+      <div class="stat-lbl">Semana actual</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val green" id="s-edad">0 días</div>
+      <div class="stat-lbl">Edad</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📈 Progreso levante</div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Semanas completadas</span>
+        <span id="prog-sem-label">0 / 17</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="prog-sem" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Mortalidad acumulada</span>
+        <span id="prog-mort-label">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill red" id="prog-mort" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Alimento acumulado (kg)</span>
+        <span id="prog-ali-label">0 kg</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill green" id="prog-ali" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Última semana registrada</div>
+    <div id="ultima-semana-info" style="color:var(--muted);font-size:13px;">Sin registros aún</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⏳ Próximas fechas clave</div>
+    <div id="fechas-clave"></div>
+  </div>
+</div>
+
+<!-- REGISTRO -->
+<div id="page-registro" class="page">
+  <div class="card">
+    <div class="card-title">✏️ Registrar semana</div>
+
+    <div class="form-group">
+      <label class="form-label">Semana #</label>
+      <input type="number" class="form-input" id="r-semana" min="1" max="20" placeholder="Ej: 1">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Alimento Lun (kg)</label>
+        <input type="number" class="form-input" id="r-ali-lun" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Alimento Mar (kg)</label>
+        <input type="number" class="form-input" id="r-ali-mar" placeholder="0">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Alimento Mié (kg)</label>
+        <input type="number" class="form-input" id="r-ali-mie" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Alimento Jue (kg)</label>
+        <input type="number" class="form-input" id="r-ali-jue" placeholder="0">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Alimento Vie (kg)</label>
+        <input type="number" class="form-input" id="r-ali-vie" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Alimento Sáb (kg)</label>
+        <input type="number" class="form-input" id="r-ali-sab" placeholder="0">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Alimento Dom (kg)</label>
+      <input type="number" class="form-input" id="r-ali-dom" placeholder="0">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Mortalidad semana</label>
+        <input type="number" class="form-input" id="r-mort" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Peso real (g)</label>
+        <input type="number" class="form-input" id="r-peso" placeholder="Ej: 142">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Observaciones</label>
+      <input type="text" class="form-input" id="r-obs" placeholder="Ej: vacuna Newcastle...">
+    </div>
+
+    <button class="btn btn-primary" onclick="guardarSemana()">💾 GUARDAR SEMANA</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚙️ Configuración del lote</div>
+    <div class="form-group">
+      <label class="form-label">Fecha de nacimiento</label>
+      <input type="date" class="form-input" id="cfg-fecha" value="2026-02-27">
+    </div>
+    <div class="form-group">
+      <label class="form-label">N° aves inicial</label>
+      <input type="number" class="form-input" id="cfg-aves" value="9180">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Costo por ave ($)</label>
+        <input type="number" class="form-input" id="cfg-costo-ave" value="6000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Costo mantenimiento/sem ($)</label>
+        <input type="number" class="form-input" id="cfg-mant" value="1500">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Costo kg alimento ($)</label>
+      <input type="number" class="form-input" id="cfg-kg" value="0">
+    </div>
+    <button class="btn btn-primary" onclick="guardarConfig()">💾 GUARDAR CONFIG</button>
+  </div>
+</div>
+
+<!-- HISTORIAL -->
+<div id="page-historial" class="page">
+  <div class="card">
+    <div class="card-title">📋 Historial por semana</div>
+    <div id="historial-list"><div style="color:var(--muted);font-size:13px;">Sin registros aún</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Tabla completa</div>
+    <div class="table-wrap">
+      <table id="tabla-historial">
+        <thead>
+          <tr>
+            <th>Sem</th>
+            <th>Ali Total (kg)</th>
+            <th>Mort</th>
+            <th>% Mort</th>
+            <th>Saldo Aves</th>
+            <th>Peso (g)</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-body">
+          <tr><td colspan="7" style="color:var(--muted);">Sin datos</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- INVERSION -->
+<div id="page-inversion" class="page">
+  <div class="card">
+    <div class="card-title">💰 Resumen de inversión</div>
+    <div id="inversion-content"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Costo por semana</div>
+    <div id="costo-sem-content" style="color:var(--muted);font-size:13px;">Configure el lote primero</div>
+  </div>
+</div>
+
+<!-- REFERENCIA HY LINE -->
+<div id="page-referencia" class="page">
+  <div class="card">
+    <div class="card-title">📖 Guía Hy Line Brown - Levante</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Valores de referencia por semana</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Sem</th>
+            <th>Peso ref (g)</th>
+            <th>Ali/día (g/ave)</th>
+            <th>% Mort max</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-week">1</td><td>70-76</td><td>12-14</td><td>0.0019%</td></tr>
+          <tr><td class="td-week">2</td><td>110-136</td><td>17-21</td><td>0.0019%</td></tr>
+          <tr><td class="td-week">3</td><td>185-216</td><td>20-25</td><td>0.0019%</td></tr>
+          <tr><td class="td-week">4</td><td>260-310</td><td>25-30</td><td>0.0007%</td></tr>
+          <tr><td class="td-week">5</td><td>350-408</td><td>29-36</td><td>0.0025%</td></tr>
+          <tr><td class="td-week">6</td><td>465-315</td><td>35-44</td><td>0.0027%</td></tr>
+          <tr><td class="td-week">7</td><td>565-620</td><td>41-49</td><td>0.0029%</td></tr>
+          <tr><td class="td-week">8</td><td>670-720</td><td>47-56</td><td>0.0030%</td></tr>
+          <tr><td class="td-week">9</td><td>770-840</td><td>52-61</td><td>—</td></tr>
+          <tr><td class="td-week">10</td><td>880-940</td><td>56-64</td><td>—</td></tr>
+          <tr><td class="td-week">11</td><td>985-1050</td><td>60-69</td><td>—</td></tr>
+          <tr><td class="td-week">12</td><td>1085-1150</td><td>62-72</td><td>—</td></tr>
+          <tr><td class="td-week">13</td><td>1165-1240</td><td>64-74</td><td>—</td></tr>
+          <tr><td class="td-week">14</td><td>1269-1357</td><td>—</td><td>—</td></tr>
+          <tr><td class="td-week">15</td><td>1580-1929</td><td>—</td><td>—</td></tr>
+          <tr><td class="td-week">16</td><td>1940-2395</td><td>—</td><td>—</td></tr>
+          <tr><td class="td-week">17</td><td>2334-2806</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💉 Programa de vacunación</div>
+    <div class="ref-row"><div class="ref-sem">Sem 1</div><div><div class="ref-val">Marek, Newcastle</div><div class="ref-lbl">Al nacer / primer semana</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 2</div><div><div class="ref-val">Gumboro</div><div class="ref-lbl">Bolsa de Fabricio</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 4</div><div><div class="ref-val">Newcastle + Bronquitis</div><div class="ref-lbl">Refuerzo</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 8</div><div><div class="ref-val">Newcastle</div><div class="ref-lbl">Refuerzo</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 12</div><div><div class="ref-val">Encefalomielitis</div><div class="ref-lbl">EAV</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 15</div><div><div class="ref-val">Newcastle + Bronquitis</div><div class="ref-lbl">Pre-postura</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Datos importantes</div>
+    <div class="alert alert-ok">✅ Inicio postura: semana 17-18 aprox.</div>
+    <div class="alert alert-warn">⚠️ Mortalidad normal levante: max 3-4% total</div>
+    <div class="alert alert-warn">⚠️ Pico producción: 90-95% semana 25-30</div>
+  </div>
+</div>
+
+<script>
+// ====== DATA ======
+let config = {
+  fecha: '2026-02-27',
+  avesInicial: 9180,
+  costoAve: 6000,
+  mantenimiento: 1500,
+  costoKgAli: 0
+};
+
+let semanas = [];
+
+// Load from localStorage
+function cargarDatos() {
+  try {
+    const c = localStorage.getItem('hl_config');
+    if (c) config = JSON.parse(c);
+    const s = localStorage.getItem('hl_semanas');
+    if (s) semanas = JSON.parse(s);
+  } catch(e) {}
+}
+
+function guardarDatos() {
+  try {
+    localStorage.setItem('hl_config', JSON.stringify(config));
+    localStorage.setItem('hl_semanas', JSON.stringify(semanas));
+  } catch(e) {}
+}
+
+// ====== CONFIG ======
+function guardarConfig() {
+  config.fecha = document.getElementById('cfg-fecha').value;
+  config.avesInicial = parseInt(document.getElementById('cfg-aves').value) || 9180;
+  config.costoAve = parseInt(document.getElementById('cfg-costo-ave').value) || 6000;
+  config.mantenimiento = parseInt(document.getElementById('cfg-mant').value) || 1500;
+  config.costoKgAli = parseInt(document.getElementById('cfg-kg').value) || 0;
+  guardarDatos();
+  actualizarTodo();
+  alert('✅ Configuración guardada');
+}
+
+function cargarConfigUI() {
+  document.getElementById('cfg-fecha').value = config.fecha;
+  document.getElementById('cfg-aves').value = config.avesInicial;
+  document.getElementById('cfg-costo-ave').value = config.costoAve;
+  document.getElementById('cfg-mant').value = config.mantenimiento;
+  document.getElementById('cfg-kg').value = config.costoKgAli;
+}
+
+// ====== SEMANAS ======
+function guardarSemana() {
+  const num = parseInt(document.getElementById('r-semana').value);
+  if (!num) { alert('Ingrese el número de semana'); return; }
+
+  const dias = ['lun','mar','mie','jue','vie','sab','dom'];
+  const aliDias = dias.map(d => parseFloat(document.getElementById('r-ali-'+d).value) || 0);
+  const aliTotal = aliDias.reduce((a,b) => a+b, 0);
+  const mort = parseInt(document.getElementById('r-mort').value) || 0;
+  const peso = parseInt(document.getElementById('r-peso').value) || 0;
+  const obs = document.getElementById('r-obs').value;
+
+  // Remove existing same week
+  semanas = semanas.filter(s => s.num !== num);
+
+  // Calculate saldo aves
+  const mortPrev = semanas.filter(s => s.num < num).reduce((a,s) => a + s.mort, 0);
+  const saldo = config.avesInicial - mortPrev - mort;
+  const mortAcum = mortPrev + mort;
+  const pctMort = ((mortAcum / config.avesInicial) * 100).toFixed(4);
+
+  semanas.push({ num, aliDias, aliTotal, mort, peso, obs, saldo, mortAcum, pctMort });
+  semanas.sort((a,b) => a.num - b.num);
+
+  guardarDatos();
+  actualizarTodo();
+
+  // Clear form
+  dias.forEach(d => document.getElementById('r-ali-'+d).value = '');
+  document.getElementById('r-semana').value = '';
+  document.getElementById('r-mort').value = '';
+  document.getElementById('r-peso').value = '';
+  document.getElementById('r-obs').value = '';
+
+  alert(✅ Semana ${num} guardada);
+}
+
+function eliminarSemana(num) {
+  if (!confirm(¿Eliminar semana ${num}?)) return;
+  semanas = semanas.filter(s => s.num !== num);
+  // Recalculate all
+  recalcularSemanas();
+  guardarDatos();
+  actualizarTodo();
+}
+
+function recalcularSemanas() {
+  let mortAcum = 0;
+  semanas.forEach(s => {
+    mortAcum += s.mort;
+    s.saldo = config.avesInicial - mortAcum;
+    s.mortAcum = mortAcum;
+    s.pctMort = ((mortAcum / config.avesInicial) * 100).toFixed(4);
+  });
+}
+
+// ====== CALCULOS ======
+function getEdadDias() {
+  const nacimiento = new Date(config.fecha);
+  const hoy = new Date();
+  return Math.floor((hoy - nacimiento) / (1000*60*60*24));
+}
+
+function getSemanaActual() {
+  return Math.ceil(getEdadDias() / 7);
+}
+
+function getMortTotal() {
+  return semanas.reduce((a,s) => a + s.mort, 0);
+}
+
+function getAliTotal() {
+  return semanas.reduce((a,s) => a + s.aliTotal, 0);
+}
+
+function getAvesActuales() {
+  return config.avesInicial - getMortTotal();
+}
+
+// ====== UI ======
+function actualizarTodo() {
+  actualizarResumen();
+  actualizarHistorial();
+  actualizarInversion();
+}
+
+function actualizarResumen() {
+  const edad = getEdadDias();
+  const semAct = getSemanaActual();
+  const mortTotal = getMortTotal();
+  const avesVivas = getAvesActuales();
+  const aliTotal = getAliTotal();
+  const pctMort = ((mortTotal / config.avesInicial) * 100).toFixed(2);
+
+  document.getElementById('s-aves').textContent = avesVivas.toLocaleString();
+  document.getElementById('s-mort-total').textContent = mortTotal.toLocaleString();
+  document.getElementById('s-semana').textContent = semAct;
+  document.getElementById('s-edad').textContent = edad + ' días';
+
+  // Progress bars
+  const progSem = Math.min((semAct / 17) * 100, 100);
+  document.getElementById('prog-sem').style.width = progSem + '%';
+  document.getElementById('prog-sem-label').textContent = Math.min(semAct, 17) + ' / 17';
+
+  document.getElementById('prog-mort').style.width = Math.min(parseFloat(pctMort) * 25, 100) + '%';
+  document.getElementById('prog-mort-label').textContent = pctMort + '%';
+
+  document.getElementById('prog-ali').style.width = Math.min((aliTotal / 50000) * 100, 100) + '%';
+  document.getElementById('prog-ali-label').textContent = aliTotal.toLocaleString() + ' kg';
+
+  // Ultima semana
+  const ultima = semanas[semanas.length - 1];
+  const uDiv = document.getElementById('ultima-semana-info');
+  if (ultima) {
+    uDiv.innerHTML = `
+      <div class="week-stats">
+        <div class="week-stat">Semana <span>${ultima.num}</span></div>
+        <div class="week-stat">Alimento <span>${ultima.aliTotal} kg</span></div>
+        <div class="week-stat">Muertes <span style="color:var(--red)">${ultima.mort}</span></div>
+        <div class="week-stat">Saldo <span>${ultima.saldo.toLocaleString()}</span></div>
+        ${ultima.peso ? <div class="week-stat">Peso <span>${ultima.peso}g</span></div> : ''}
+        ${ultima.obs ? <div class="week-stat">📝 <span>${ultima.obs}</span></div> : ''}
+      </div>`;
+  } else {
+    uDiv.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin registros aún</div>';
+  }
+
+  // Alertas
+  const alerts = [];
+  if (parseFloat(pctMort) > 4) {
+    alerts.push(<div class="alert alert-danger">⚠️ Mortalidad acumulada alta: ${pctMort}% — Revisar condiciones</div>);
+  } else if (parseFloat(pctMort) > 2) {
+    alerts.push(<div class="alert alert-warn">⚠️ Mortalidad: ${pctMort}% — Monitorear de cerca</div>);
+  } else if (semanas.length > 0) {
+    alerts.push(<div class="alert alert-ok">✅ Mortalidad normal: ${pctMort}%</div>);
+  }
+  document.getElementById('alerts-container').innerHTML = alerts.join('');
+
+  // Fechas clave
+  const nacimiento = new Date(config.fecha);
+  const sem17 = new Date(nacimiento); sem17.setDate(sem17.getDate() + 17*7);
+  const sem18 = new Date(nacimiento); sem18.setDate(sem18.getDate() + 18*7);
+  const fmtDate = d => d.toLocaleDateString('es-CO', {day:'2-digit', month:'short', year:'numeric'});
+
+  document.getElementById('fechas-clave').innerHTML = `
+    <div class="inversion-row">
+      <div class="inversion-label">🥚 Inicio postura estimado</div>
+      <div class="inversion-val accent" style="font-size:14px;">${fmtDate(sem17)}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">📅 Semana 18</div>
+      <div class="inversion-val" style="font-size:14px;">${fmtDate(sem18)}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">⏳ Días para postura</div>
+      <div class="inversion-val green" style="font-size:14px;">${Math.max(0, Math.ceil((sem17-new Date())/(1000*60*60*24)))} días</div>
+    </div>
+  `;
+}
+
+function actualizarHistorial() {
+  const list = document.getElementById('historial-list');
+  const tbody = document.getElementById('tabla-body');
+
+  if (semanas.length === 0) {
+    list.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin registros aún</div>';
+    tbody.innerHTML = '<tr><td colspan="7" style="color:var(--muted);">Sin datos</td></tr>';
+    return;
+  }
+
+  list.innerHTML = semanas.map(s => `
+    <div class="week-item">
+      <div class="week-item-header">
+        <div class="week-num">Semana ${s.num}</div>
+        <button class="btn btn-danger btn-sm" onclick="eliminarSemana(${s.num})">🗑</button>
+      </div>
+      <div class="week-stats">
+        <div class="week-stat">🌾 Ali total: <span>${s.aliTotal} kg</span></div>
+        <div class="week-stat">💀 Muertes: <span style="color:var(--red)">${s.mort}</span></div>
+        <div class="week-stat">🐔 Saldo: <span>${s.saldo.toLocaleString()}</span></div>
+        <div class="week-stat">📊 % Mort: <span>${s.pctMort}%</span></div>
+        ${s.peso ? <div class="week-stat">⚖️ Peso: <span>${s.peso}g</span></div> : ''}
+        ${s.obs ? <div class="week-stat">📝 <span>${s.obs}</span></div> : ''}
+      </div>
+    </div>
+  `).join('');
+
+  tbody.innerHTML = semanas.map(s => `
+    <tr>
+      <td class="td-week">${s.num}</td>
+      <td>${s.aliTotal}</td>
+      <td style="color:var(--red)">${s.mort}</td>
+      <td>${s.pctMort}%</td>
+      <td>${s.saldo.toLocaleString()}</td>
+      <td>${s.peso || '—'}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="eliminarSemana(${s.num})">🗑</button></td>
+    </tr>
+  `).join('');
+}
+
+function actualizarInversion() {
+  const semAct = getSemanaActual();
+  const totalCompra = config.avesInicial * config.costoAve;
+  const totalMant = config.avesInicial * config.mantenimiento * semAct;
+  const aliTotal = getAliTotal();
+  const totalAli = aliTotal * config.costoKgAli;
+  const totalInv = totalCompra + totalMant + totalAli;
+
+  document.getElementById('inversion-content').innerHTML = `
+    <div class="inversion-row">
+      <div class="inversion-label">Compra ${config.avesInicial.toLocaleString()} pollas</div>
+      <div class="inversion-val">$${totalCompra.toLocaleString()}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Mantenimiento (${semAct} semanas)</div>
+      <div class="inversion-val">$${totalMant.toLocaleString()}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Alimento (${aliTotal.toLocaleString()} kg)</div>
+      <div class="inversion-val">$${totalAli.toLocaleString()}</div>
+    </div>
+    <div class="inversion-row" style="border-top:2px solid var(--accent);margin-top:4px;padding-top:12px;">
+      <div class="inversion-label" style="color:var(--text);font-weight:600;">TOTAL INVERTIDO</div>
+      <div class="inversion-val accent">$${totalInv.toLocaleString()}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Costo por ave viva</div>
+      <div class="inversion-val" style="font-size:14px;">$${Math.round(totalInv / getAvesActuales()).toLocaleString()}</div>
+    </div>
+  `;
+
+  document.getElementById('costo-sem-content').innerHTML = `
+    <div class="inversion-row">
+      <div class="inversion-label">Costo semanal por ave</div>
+      <div class="inversion-val" style="font-size:14px;">$${config.mantenimiento.toLocaleString()}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Costo total por semana</div>
+      <div class="inversion-val accent" style="font-size:14px;">$${(config.avesInicial * config.mantenimiento).toLocaleString()}</div>
+    </div>
+    <div class="inversion-row">
+      <div class="inversion-label">Semanas transcurridas</div>
+      <div class="inversion-val" style="font-size:14px;">${semAct}</div>
+    </div>
+  `;
+}
+
+// ====== NAV ======
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ====== INIT ======
+cargarDatos();
+cargarConfigUI();
+actualizarTodo();
+</script>
+</body>
+</html>

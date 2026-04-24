@@ -295,7 +295,7 @@ select.fi{appearance:none;}
 </div>
 
 <script>
-const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyl30I25rIiVkSf1SV0nBFDHiaEuItHRLfnWgr6rp7Rw1gCIqd8WvcsB5pv4p4naM26rw/exec';
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbymQf_mJcyplfooDnSt-R0ECMfGAqpJm_nesiqviLsRROjaSIpONgwO4LGeiGenembSTA/exec';
 const REF=[
   {sem:1,min:12,max:14},{sem:2,min:17,max:21},{sem:3,min:20,max:25},
   {sem:4,min:25,max:30},{sem:5,min:29,max:36},{sem:6,min:35,max:44},
@@ -306,7 +306,7 @@ const REF=[
 ];
 let config={fecha:'2026-02-27',avesInicial:9180,costoAve:4682,costoTotal:42981000,valorDia:214};
 let semanas=[],ventas=[],vacunas=[],registrosDiarios=[];
-let bodega={sacosIniciales:111,entradas:[],sacosPorAlimento:40};
+let bodega={sacosIniciales:485,entradas:[],sacosPorAlimento:40};
 
 function getEdad(){return Math.floor((new Date()-new Date(config.fecha))/(1000*60*60*24));}
 function getSemana(){return Math.ceil(getEdad()/7);}
@@ -321,7 +321,7 @@ function getBultosVendidos(){return ventas.filter(v=>v.tipo==='bulto').reduce((a
 function getAvesVivas(){return config.avesInicial-getMortTotal()-getAvesVendidasAve();}
 function getSacosConsumidos(){return Math.ceil(getAliTotal()/bodega.sacosPorAlimento);}
 function getSacosDisponibles(){const e=bodega.entradas.reduce((a,e)=>a+e.cant,0);return bodega.sacosIniciales+e-getSacosConsumidos()-getBultosVendidos();}
-function getPrecioAve(){return Math.round((config.costoTotal/config.avesInicial)+((config.valorDia||214)*getEdad()));}
+function getPrecioAve(){const edad=getEdad();const semanasCompletas=Math.floor(edad/7);const diasExtra=edad-(semanasCompletas*7);return 6000+(1500*semanasCompletas)+(214*diasExtra);}
 function getRefDia(){
   const semAct=getSemana();const ref=REF.find(r=>r.sem===semAct)||REF[REF.length-1];
   const avesVivas=getAvesVivas();const promG=Math.round((ref.min+ref.max)/2);
@@ -338,7 +338,8 @@ async function sincronizar(){
     if(data.ventas&&data.ventas.length>0)ventas=data.ventas;
     if(data.vacunas)vacunas=data.vacunas;
     if(data.registrosDiarios)registrosDiarios=data.registrosDiarios;
-    if(data.bodega)bodega={...bodega,...data.bodega};
+    if(data.bodega){bodega.entradas=data.bodega.entradas||[];bodega.sacosPorAlimento=data.bodega.sacosPorAlimento||40;}
+    bodega.sacosIniciales=485;
     actualizarTodo();
     document.getElementById('sync-status').textContent='✅ '+new Date().toLocaleTimeString('es-CO');
   }catch(e){document.getElementById('sync-status').textContent='❌ Error de conexión';}

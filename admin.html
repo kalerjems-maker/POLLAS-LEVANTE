@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -21,9 +21,9 @@ body { background:var(--bg); color:var(--text); font-family:'Barlow',sans-serif;
 .lote-badge { background:var(--accent); color:#0f1923; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; padding:3px 10px; border-radius:20px; }
 .sync-btn { background:var(--blue); color:#fff; border:none; border-radius:20px; padding:5px 12px; font-size:12px; font-family:'Barlow Condensed',sans-serif; font-weight:700; cursor:pointer; }
 .sync-status { font-size:10px; color:var(--muted); text-align:right; margin-top:3px; }
-.nav { display:flex; background:var(--card); border-bottom:1px solid var(--border); overflow-x:auto; scrollbar-width:none; }
+.nav { display:flex; background:var(--card); border-bottom:1px solid var(--border); overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 .nav::-webkit-scrollbar { display:none; }
-.nav-btn { flex:1; min-width:70px; padding:10px 8px; background:none; border:none; color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap; }
+.nav-btn { flex:0 0 auto; min-width:60px; padding:10px 6px; background:none; border:none; color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap; }
 .nav-btn.active { color:var(--accent); border-bottom-color:var(--accent); }
 .page { display:none; padding:14px; }
 .page.active { display:block; }
@@ -94,6 +94,7 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
 <div class="nav">
   <button class="nav-btn active" onclick="showPage('resumen',this)">📊 Resumen</button>
   <button class="nav-btn" onclick="showPage('registro',this)">✏️ Registro</button>
+  <button class="nav-btn" onclick="showPage('ventas',this)">🛒 Ventas</button>
   <button class="nav-btn" onclick="showPage('historial',this)">📋 Historial</button>
   <button class="nav-btn" onclick="showPage('inversion',this)">💰 Inversión</button>
   <button class="nav-btn" onclick="showPage('referencia',this)">📖 Referencia</button>
@@ -107,6 +108,8 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
     <div class="stat-box"><div class="stat-val red" id="s-mort-total">—</div><div class="stat-lbl">Muertes total</div></div>
     <div class="stat-box"><div class="stat-val blue" id="s-semana">—</div><div class="stat-lbl">Semana actual</div></div>
     <div class="stat-box"><div class="stat-val green" id="s-edad">— días</div><div class="stat-lbl">Edad</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:#9b59b6;" id="s-vendidas">0</div><div class="stat-lbl">Aves vendidas</div></div>
+    <div class="stat-box"><div class="stat-val green" id="s-ingresos">$0</div><div class="stat-lbl">Ingresos ventas</div></div>
   </div>
   <div class="card">
     <div class="card-title">📈 Progreso levante</div>
@@ -172,6 +175,39 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
     </div>
     <div class="form-group"><label class="form-label">Costo kg alimento ($)</label><input type="number" class="form-input" id="cfg-kg" value="0"></div>
     <button class="btn btn-primary" onclick="guardarConfig()">💾 GUARDAR CONFIG</button>
+  </div>
+</div>
+
+<!-- VENTAS -->
+<div id="page-ventas" class="page">
+  <div class="card">
+    <div class="card-title">🛒 Registrar venta</div>
+    <div class="stats-grid" style="margin-bottom:12px;">
+      <div class="stat-box"><div class="stat-val green" id="v-precio-ave">—</div><div class="stat-lbl">Precio por ave hoy</div></div>
+      <div class="stat-box"><div class="stat-val blue" id="v-dias">—</div><div class="stat-lbl">Días de edad</div></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Cantidad de aves a vender</label>
+      <input type="number" class="form-input" id="v-cantidad" placeholder="Ej: 100" oninput="calcularVenta()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Precio por ave ($) — editable</label>
+      <input type="number" class="form-input" id="v-precio" placeholder="0" oninput="calcularTotal()">
+    </div>
+    <div style="background:var(--card2);border-radius:8px;padding:14px;margin-bottom:12px;text-align:center;">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Total venta</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--green);" id="v-total">$0</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Comprador (opcional)</label>
+      <input type="text" class="form-input" id="v-comprador" placeholder="Nombre del comprador">
+    </div>
+    <button class="btn btn-primary" onclick="guardarVenta()">💾 REGISTRAR VENTA</button>
+  </div>
+  <div class="card">
+    <div class="card-title">📋 Historial de ventas</div>
+    <div id="ventas-resumen" style="margin-bottom:12px;"></div>
+    <div id="ventas-list"><div style="color:var(--muted);font-size:13px;">Sin ventas aún</div></div>
   </div>
 </div>
 
@@ -346,10 +382,14 @@ function actualizarResumen() {
   const edad = getEdadDias(), semAct = getSemanaActual(), mortTotal = getMortTotal();
   const avesVivas = getAvesActuales(), aliTotal = getAliTotal();
   const pctMort = ((mortTotal / config.avesInicial) * 100).toFixed(2);
-  document.getElementById('s-aves').textContent = avesVivas.toLocaleString();
+  const avesVendidas = typeof getAvesVendidas === 'function' ? getAvesVendidas() : 0;
+  const totalIngresos = ventas.reduce((a,v) => a + v.total, 0);
+  document.getElementById('s-aves').textContent = (avesVivas - avesVendidas).toLocaleString();
   document.getElementById('s-mort-total').textContent = mortTotal.toLocaleString();
   document.getElementById('s-semana').textContent = semAct;
   document.getElementById('s-edad').textContent = edad + ' días';
+  document.getElementById('s-vendidas').textContent = avesVendidas.toLocaleString();
+  document.getElementById('s-ingresos').textContent = '$' + totalIngresos.toLocaleString();
   document.getElementById('prog-sem').style.width = Math.min((semAct/17)*100,100) + '%';
   document.getElementById('prog-sem-label').textContent = Math.min(semAct,17) + ' / 17';
   document.getElementById('prog-mort').style.width = Math.min(parseFloat(pctMort)*25,100) + '%';
@@ -430,11 +470,93 @@ function actualizarInversion() {
     '<div class="inversion-row"><div class="inversion-label">Semanas transcurridas</div><div class="inversion-val" style="font-size:14px;">' + semAct + '</div></div>';
 }
 
+// ====== VENTAS ======
+let ventas = [];
+
+function getPrecioAve() {
+  const edad = getEdadDias();
+  return Math.round(config.costoAve + (1500 / 7 * edad));
+}
+
+function calcularVenta() {
+  const precio = getPrecioAve();
+  document.getElementById('v-precio').value = precio;
+  calcularTotal();
+}
+
+function calcularTotal() {
+  const cant = parseInt(document.getElementById('v-cantidad').value) || 0;
+  const precio = parseInt(document.getElementById('v-precio').value) || 0;
+  document.getElementById('v-total').textContent = '$' + (cant * precio).toLocaleString();
+}
+
+async function guardarVenta() {
+  const cant = parseInt(document.getElementById('v-cantidad').value);
+  if (!cant || cant <= 0) { alert('Ingrese cantidad de aves'); return; }
+  const precio = parseInt(document.getElementById('v-precio').value) || getPrecioAve();
+  const total = cant * precio;
+  const comprador = document.getElementById('v-comprador').value;
+  const edad = getEdadDias();
+  const semana = getSemanaActual();
+  const fecha = new Date().toLocaleDateString('es-CO');
+  const venta = { fecha, semana, edad, cant, precio, total, comprador, id: Date.now() };
+  ventas.push(venta);
+  try {
+    await fetch(SCRIPT_URL + '?action=saveVenta&data=' + encodeURIComponent(JSON.stringify(venta)));
+    actualizarVentas();
+    actualizarResumen();
+    document.getElementById('v-cantidad').value = '';
+    document.getElementById('v-comprador').value = '';
+    document.getElementById('v-total').textContent = '$0';
+    alert('✅ Venta registrada: ' + cant + ' aves por $' + total.toLocaleString());
+  } catch(e) { alert('❌ Error al guardar venta'); }
+}
+
+function actualizarVentas() {
+  const edad = getEdadDias();
+  const precioHoy = getPrecioAve();
+  document.getElementById('v-precio-ave').textContent = '$' + precioHoy.toLocaleString();
+  document.getElementById('v-dias').textContent = edad + ' días';
+  document.getElementById('v-precio').value = precioHoy;
+
+  const totalAves = ventas.reduce((a,v) => a + v.cant, 0);
+  const totalDinero = ventas.reduce((a,v) => a + v.total, 0);
+
+  const resumen = document.getElementById('ventas-resumen');
+  if (ventas.length > 0) {
+    resumen.innerHTML =
+      '<div class="inversion-row"><div class="inversion-label">Total aves vendidas</div><div class="inversion-val accent">' + totalAves.toLocaleString() + '</div></div>' +
+      '<div class="inversion-row"><div class="inversion-label">Total recibido</div><div class="inversion-val green">$' + totalDinero.toLocaleString() + '</div></div>';
+  }
+
+  const list = document.getElementById('ventas-list');
+  if (ventas.length === 0) {
+    list.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin ventas aún</div>';
+    return;
+  }
+  list.innerHTML = [...ventas].reverse().map(v =>
+    '<div class="week-item" style="border-left-color:var(--green);">' +
+    '<div class="week-item-header"><div class="week-num" style="color:var(--green);">' + v.cant + ' aves</div>' +
+    '<div style="font-size:11px;color:var(--muted);">' + v.fecha + '</div></div>' +
+    '<div class="week-stats">' +
+    '<div class="week-stat">💰 <span style="color:var(--green);">$' + v.total.toLocaleString() + '</span></div>' +
+    '<div class="week-stat">💵 <span>$' + v.precio.toLocaleString() + '/ave</span></div>' +
+    '<div class="week-stat">📅 <span>Sem ' + v.semana + ' · ' + v.edad + ' días</span></div>' +
+    (v.comprador ? '<div class="week-stat">👤 <span>' + v.comprador + '</span></div>' : '') +
+    '</div></div>'
+  ).join('');
+}
+
+function getAvesVendidas() {
+  return ventas.reduce((a,v) => a + v.cant, 0);
+}
+
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   btn.classList.add('active');
+  if (id === 'ventas') actualizarVentas();
 }
 
 cargarConfigUI();

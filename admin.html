@@ -6,85 +6,82 @@
 <title>Hy Line Brown - Admin</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
-:root {
-  --bg: #0f1923; --card: #162030; --card2: #1c2a3a;
-  --accent: #f5a623; --accent2: #e8c14a;
-  --green: #2ecc71; --red: #e74c3c; --blue: #3498db;
-  --text: #e8f0fe; --muted: #7a9ab5; --border: rgba(245,166,35,0.2);
-}
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-body { background:var(--bg); color:var(--text); font-family:'Barlow',sans-serif; min-height:100vh; padding-bottom:80px; }
-.header { background:linear-gradient(135deg,#0f1923 0%,#1a2d42 100%); border-bottom:2px solid var(--accent); padding:14px 16px 10px; position:sticky; top:0; z-index:100; }
-.header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
-.header h1 { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:800; color:var(--accent); letter-spacing:1px; text-transform:uppercase; }
-.header-sub { font-size:11px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; }
-.lote-badge { background:var(--accent); color:#0f1923; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; padding:3px 10px; border-radius:20px; }
-.sync-btn { background:var(--blue); color:#fff; border:none; border-radius:20px; padding:5px 12px; font-size:12px; font-family:'Barlow Condensed',sans-serif; font-weight:700; cursor:pointer; }
-.sync-status { font-size:10px; color:var(--muted); text-align:right; margin-top:3px; }
-.nav { display:flex; background:var(--card); border-bottom:1px solid var(--border); overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
-.nav::-webkit-scrollbar { display:none; }
-.nav-btn { flex:0 0 auto; min-width:60px; padding:10px 6px; background:none; border:none; color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap; }
-.nav-btn.active { color:var(--accent); border-bottom-color:var(--accent); }
-.page { display:none; padding:14px; }
-.page.active { display:block; }
-.card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:12px; }
-.card-title { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-.stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
-.stat-box { background:var(--card2); border-radius:8px; padding:12px; text-align:center; border:1px solid rgba(255,255,255,0.05); }
-.stat-val { font-family:'Barlow Condensed',sans-serif; font-size:26px; font-weight:800; color:var(--accent); line-height:1; }
-.stat-val.green { color:var(--green); } .stat-val.red { color:var(--red); } .stat-val.blue { color:var(--blue); }
-.stat-lbl { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:3px; }
-.progress-wrap { margin-bottom:12px; }
-.progress-label { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:5px; }
-.progress-bar { height:8px; background:var(--card2); border-radius:4px; overflow:hidden; }
-.progress-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:width 0.5s ease; }
-.progress-fill.green { background:linear-gradient(90deg,#27ae60,#2ecc71); }
-.progress-fill.red { background:linear-gradient(90deg,#c0392b,#e74c3c); }
-.form-group { margin-bottom:12px; }
-.form-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; display:block; }
-.form-input { width:100%; background:var(--card2); border:1px solid var(--border); border-radius:6px; padding:10px 12px; color:var(--text); font-family:'Barlow',sans-serif; font-size:15px; outline:none; }
-.form-input:focus { border-color:var(--accent); }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.btn { width:100%; padding:13px; border:none; border-radius:8px; font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; }
-.btn-primary { background:var(--accent); color:#0f1923; }
-.btn-danger { background:var(--red); color:#fff; margin-top:8px; }
-.btn-sm { width:auto; padding:6px 14px; font-size:12px; }
-.table-wrap { overflow-x:auto; }
-table { width:100%; border-collapse:collapse; font-size:12px; min-width:500px; }
-th { background:var(--card2); color:var(--accent); font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; padding:8px 6px; text-align:center; border-bottom:1px solid var(--border); }
-td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text); }
-.td-week { font-family:'Barlow Condensed',sans-serif; font-weight:700; color:var(--accent); font-size:14px; }
-.alert { padding:10px 14px; border-radius:8px; font-size:13px; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
-.alert-warn { background:rgba(245,166,35,0.15); border:1px solid rgba(245,166,35,0.4); color:var(--accent2); }
-.alert-ok { background:rgba(46,204,113,0.12); border:1px solid rgba(46,204,113,0.3); color:var(--green); }
-.alert-danger { background:rgba(231,76,60,0.12); border:1px solid rgba(231,76,60,0.3); color:var(--red); }
-.week-item { background:var(--card2); border-radius:8px; padding:12px; margin-bottom:8px; border-left:3px solid var(--accent); }
-.week-item-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
-.week-num { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:18px; color:var(--accent); }
-.week-stats { display:flex; gap:12px; flex-wrap:wrap; }
-.week-stat { font-size:11px; color:var(--muted); }
-.week-stat span { color:var(--text); font-weight:600; }
-.inversion-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05); }
-.inversion-label { font-size:13px; color:var(--muted); }
-.inversion-val { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; color:var(--text); }
-.inversion-val.accent { color:var(--accent); } .inversion-val.green { color:var(--green); }
-.ref-row { display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.04); font-size:12px; }
-.ref-sem { color:var(--accent); font-weight:600; width:50px; }
-.ref-val { color:var(--text); text-align:right; }
-.ref-lbl { color:var(--muted); font-size:10px; }
-.loading { text-align:center; color:var(--muted); padding:20px; font-size:13px; }
+:root{--bg:#0f1923;--card:#162030;--card2:#1c2a3a;--accent:#f5a623;--accent2:#e8c14a;--green:#2ecc71;--red:#e74c3c;--blue:#3498db;--purple:#9b59b6;--text:#e8f0fe;--muted:#7a9ab5;--border:rgba(245,166,35,0.2);}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;padding-bottom:80px;}
+.header{background:linear-gradient(135deg,#0f1923 0%,#1a2d42 100%);border-bottom:2px solid var(--accent);padding:14px 16px 10px;position:sticky;top:0;z-index:100;}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.header h1{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--accent);letter-spacing:1px;text-transform:uppercase;}
+.header-sub{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+.lote-badge{background:var(--accent);color:#0f1923;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px;}
+.sync-btn{background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 12px;font-size:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;cursor:pointer;}
+.sync-status{font-size:10px;color:var(--muted);text-align:right;margin-top:3px;}
+.nav{display:flex;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-btn{flex:0 0 auto;padding:10px 8px;background:none;border:none;color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.page{display:none;padding:14px;}
+.page.active{display:block;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px;}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.stat-box{background:var(--card2);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(255,255,255,0.05);}
+.stat-val{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--accent);line-height:1;}
+.stat-val.green{color:var(--green);}.stat-val.red{color:var(--red);}.stat-val.blue{color:var(--blue);}.stat-val.purple{color:var(--purple);}
+.stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+.progress-wrap{margin-bottom:12px;}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:5px;}
+.progress-bar{height:8px;background:var(--card2);border-radius:4px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.5s ease;}
+.progress-fill.green{background:linear-gradient(90deg,#27ae60,#2ecc71);}
+.progress-fill.red{background:linear-gradient(90deg,#c0392b,#e74c3c);}
+.fg{margin-bottom:12px;}
+.fl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:block;}
+.fi{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;outline:none;}
+.fi:focus{border-color:var(--accent);}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.btn{width:100%;padding:13px;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
+.btn-primary{background:var(--accent);color:#0f1923;}
+.btn-danger{background:var(--red);color:#fff;margin-top:8px;}
+.btn-sm{width:auto;padding:6px 14px;font-size:12px;}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:400px;}
+th{background:var(--card2);color:var(--accent);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:8px 6px;text-align:center;border-bottom:1px solid var(--border);}
+td{padding:8px 6px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);}
+.td-week{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--accent);font-size:14px;}
+.alert{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.alert-ok{background:rgba(46,204,113,0.12);border:1px solid rgba(46,204,113,0.3);color:var(--green);}
+.alert-warn{background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:var(--accent2);}
+.alert-danger{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.3);color:var(--red);}
+.week-item{background:var(--card2);border-radius:8px;padding:12px;margin-bottom:8px;border-left:3px solid var(--accent);}
+.week-item.green{border-left-color:var(--green);}
+.week-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.week-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;color:var(--accent);}
+.week-stats{display:flex;gap:12px;flex-wrap:wrap;}
+.week-stat{font-size:11px;color:var(--muted);}
+.week-stat span{color:var(--text);font-weight:600;}
+.inv-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.inv-label{font-size:13px;color:var(--muted);}
+.inv-val{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--text);}
+.inv-val.accent{color:var(--accent);}.inv-val.green{color:var(--green);}.inv-val.red{color:var(--red);}
+.total-box{background:var(--card2);border-radius:8px;padding:12px;margin-bottom:10px;text-align:center;}
+.total-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.total-val{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--green);}
+.ref-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;}
+.ref-sem{color:var(--accent);font-weight:600;width:50px;}
+.ref-val{color:var(--text);text-align:right;}
+.ref-lbl{color:var(--muted);font-size:10px;}
+.diff-pos{color:var(--red);}
+.diff-neg{color:var(--green);}
+select.fi{appearance:none;}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-top">
-    <div>
-      <h1>🐔 Hy Line Brown</h1>
-      <div class="header-sub">Admin · Control de Levante</div>
-    </div>
+    <div><h1>🐔 Hy Line Brown</h1><div class="header-sub">Admin · Control de Levante</div></div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-      <div class="lote-badge">Lote 1</div>
+      <div class="lote-badge">Lote 1 — 2026</div>
       <button class="sync-btn" onclick="sincronizar()">☁️ Sync</button>
     </div>
   </div>
@@ -97,6 +94,7 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
   <button class="nav-btn" onclick="showPage('ventas',this)">🛒 Ventas</button>
   <button class="nav-btn" onclick="showPage('historial',this)">📋 Historial</button>
   <button class="nav-btn" onclick="showPage('inversion',this)">💰 Inversión</button>
+  <button class="nav-btn" onclick="showPage('analisis',this)">📈 Análisis</button>
   <button class="nav-btn" onclick="showPage('referencia',this)">📖 Referencia</button>
 </div>
 
@@ -105,16 +103,16 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
   <div id="alerts-container"></div>
   <div class="stats-grid">
     <div class="stat-box"><div class="stat-val" id="s-aves">—</div><div class="stat-lbl">Aves vivas</div></div>
-    <div class="stat-box"><div class="stat-val red" id="s-mort-total">—</div><div class="stat-lbl">Muertes total</div></div>
+    <div class="stat-box"><div class="stat-val red" id="s-mort">—</div><div class="stat-lbl">Muertes total</div></div>
     <div class="stat-box"><div class="stat-val blue" id="s-semana">—</div><div class="stat-lbl">Semana actual</div></div>
-    <div class="stat-box"><div class="stat-val green" id="s-edad">— días</div><div class="stat-lbl">Edad</div></div>
-    <div class="stat-box"><div class="stat-val" style="color:#9b59b6;" id="s-vendidas">0</div><div class="stat-lbl">Aves vendidas</div></div>
-    <div class="stat-box"><div class="stat-val green" id="s-ingresos">$0</div><div class="stat-lbl">Ingresos ventas</div></div>
+    <div class="stat-box"><div class="stat-val green" id="s-edad">—</div><div class="stat-lbl">Edad</div></div>
+    <div class="stat-box"><div class="stat-val purple" id="s-vendidas">—</div><div class="stat-lbl">Aves vendidas</div></div>
+    <div class="stat-box"><div class="stat-val green" id="s-ingresos">—</div><div class="stat-lbl">Ingresos ventas</div></div>
   </div>
   <div class="card">
     <div class="card-title">📈 Progreso levante</div>
     <div class="progress-wrap">
-      <div class="progress-label"><span>Semanas completadas</span><span id="prog-sem-label">0 / 17</span></div>
+      <div class="progress-label"><span>Semanas completadas</span><span id="prog-sem-label">0/17</span></div>
       <div class="progress-bar"><div class="progress-fill" id="prog-sem" style="width:0%"></div></div>
     </div>
     <div class="progress-wrap">
@@ -122,7 +120,7 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
       <div class="progress-bar"><div class="progress-fill red" id="prog-mort" style="width:0%"></div></div>
     </div>
     <div class="progress-wrap">
-      <div class="progress-label"><span>Alimento acumulado (kg)</span><span id="prog-ali-label">0 kg</span></div>
+      <div class="progress-label"><span>Alimento acumulado</span><span id="prog-ali-label">0 kg</span></div>
       <div class="progress-bar"><div class="progress-fill green" id="prog-ali" style="width:0%"></div></div>
     </div>
   </div>
@@ -131,7 +129,7 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
     <div id="ultima-semana-info" style="color:var(--muted);font-size:13px;">Sin registros aún</div>
   </div>
   <div class="card">
-    <div class="card-title">⏳ Próximas fechas clave</div>
+    <div class="card-title">⏳ Fechas clave</div>
     <div id="fechas-clave"></div>
   </div>
 </div>
@@ -140,40 +138,31 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
 <div id="page-registro" class="page">
   <div class="card">
     <div class="card-title">✏️ Registrar semana</div>
-    <div class="form-group">
-      <label class="form-label">Semana #</label>
-      <input type="number" class="form-input" id="r-semana" min="1" max="20" placeholder="Ej: 1">
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Ali Lun (kg)</label><input type="number" class="form-input" id="r-ali-lun" placeholder="0"></div>
-      <div class="form-group"><label class="form-label">Ali Mar (kg)</label><input type="number" class="form-input" id="r-ali-mar" placeholder="0"></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Ali Mié (kg)</label><input type="number" class="form-input" id="r-ali-mie" placeholder="0"></div>
-      <div class="form-group"><label class="form-label">Ali Jue (kg)</label><input type="number" class="form-input" id="r-ali-jue" placeholder="0"></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Ali Vie (kg)</label><input type="number" class="form-input" id="r-ali-vie" placeholder="0"></div>
-      <div class="form-group"><label class="form-label">Ali Sáb (kg)</label><input type="number" class="form-input" id="r-ali-sab" placeholder="0"></div>
-    </div>
-    <div class="form-group"><label class="form-label">Ali Dom (kg)</label><input type="number" class="form-input" id="r-ali-dom" placeholder="0"></div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Mortalidad semana</label><input type="number" class="form-input" id="r-mort" placeholder="0"></div>
-      <div class="form-group"><label class="form-label">Peso real (g)</label><input type="number" class="form-input" id="r-peso" placeholder="Ej: 142"></div>
-    </div>
-    <div class="form-group"><label class="form-label">Observaciones</label><input type="text" class="form-input" id="r-obs" placeholder="Ej: vacuna Newcastle..."></div>
+    <div class="fg"><label class="fl">Semana #</label><input type="number" class="fi" id="r-semana" min="1" max="20" placeholder="Ej: 9"></div>
+    <div class="fg"><label class="fl">🌾 Viernes (kg)</label><input type="number" class="fi" id="r-vie" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Sábado (kg)</label><input type="number" class="fi" id="r-sab" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Domingo (kg)</label><input type="number" class="fi" id="r-dom" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Lunes (kg)</label><input type="number" class="fi" id="r-lun" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Martes (kg)</label><input type="number" class="fi" id="r-mar" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Miércoles (kg)</label><input type="number" class="fi" id="r-mie" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Jueves (kg)</label><input type="number" class="fi" id="r-jue" placeholder="0"></div>
+    <div class="fg"><label class="fl">💀 Muertes</label><input type="number" class="fi" id="r-mort" placeholder="0"></div>
+    <div class="fg"><label class="fl">⚖️ Peso real (g)</label><input type="number" class="fi" id="r-peso" placeholder="Ej: 480"></div>
+    <div class="fg"><label class="fl">📝 Observaciones</label><input type="text" class="fi" id="r-obs" placeholder="Novedades..."></div>
     <button class="btn btn-primary" onclick="guardarSemana()">💾 GUARDAR SEMANA</button>
   </div>
-
   <div class="card">
-    <div class="card-title">⚙️ Configuración del lote</div>
-    <div class="form-group"><label class="form-label">Fecha de nacimiento</label><input type="date" class="form-input" id="cfg-fecha" value="2026-02-27"></div>
-    <div class="form-group"><label class="form-label">N° aves inicial</label><input type="number" class="form-input" id="cfg-aves" value="9180"></div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Costo por ave ($)</label><input type="number" class="form-input" id="cfg-costo-ave" value="6000"></div>
-      <div class="form-group"><label class="form-label">Mantenimiento/sem ($)</label><input type="number" class="form-input" id="cfg-mant" value="1500"></div>
+    <div class="card-title">⚙️ Configuración</div>
+    <div class="fg"><label class="fl">Fecha de nacimiento</label><input type="date" class="fi" id="cfg-fecha" value="2026-02-27"></div>
+    <div class="fg"><label class="fl">N° aves inicial</label><input type="number" class="fi" id="cfg-aves" value="9180"></div>
+    <div class="fr">
+      <div class="fg"><label class="fl">Costo pollita ($)</label><input type="number" class="fi" id="cfg-costo-ave" value="6000"></div>
+      <div class="fg"><label class="fl">Valor diario/ave ($)</label><input type="number" class="fi" id="cfg-valor-dia" value="214"></div>
     </div>
-    <div class="form-group"><label class="form-label">Costo kg alimento ($)</label><input type="number" class="form-input" id="cfg-kg" value="0"></div>
+    <div class="fr">
+      <div class="fg"><label class="fl">Precio saco inicio ($)</label><input type="number" class="fi" id="cfg-saco-inicio" value="83500"></div>
+      <div class="fg"><label class="fl">Precio saco crec ($)</label><input type="number" class="fi" id="cfg-saco-crec" value="77420"></div>
+    </div>
     <button class="btn btn-primary" onclick="guardarConfig()">💾 GUARDAR CONFIG</button>
   </div>
 </div>
@@ -181,32 +170,20 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
 <!-- VENTAS -->
 <div id="page-ventas" class="page">
   <div class="card">
-    <div class="card-title">🛒 Registrar venta</div>
-    <div class="stats-grid" style="margin-bottom:12px;">
-      <div class="stat-box"><div class="stat-val green" id="v-precio-ave">—</div><div class="stat-lbl">Precio por ave hoy</div></div>
-      <div class="stat-box"><div class="stat-val blue" id="v-dias">—</div><div class="stat-lbl">Días de edad</div></div>
+    <div class="card-title">🐔 Venta de aves</div>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-val green" id="v-precio-hoy">—</div><div class="stat-lbl">Precio sugerido/ave</div></div>
+      <div class="stat-box"><div class="stat-val blue" id="v-edad-hoy">—</div><div class="stat-lbl">Días de edad</div></div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Cantidad de aves a vender</label>
-      <input type="number" class="form-input" id="v-cantidad" placeholder="Ej: 100" oninput="calcularVenta()">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Precio por ave ($) — editable</label>
-      <input type="number" class="form-input" id="v-precio" placeholder="0" oninput="calcularTotal()">
-    </div>
-    <div style="background:var(--card2);border-radius:8px;padding:14px;margin-bottom:12px;text-align:center;">
-      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Total venta</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--green);" id="v-total">$0</div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Comprador (opcional)</label>
-      <input type="text" class="form-input" id="v-comprador" placeholder="Nombre del comprador">
-    </div>
+    <div class="fg"><label class="fl">Cantidad de aves</label><input type="number" class="fi" id="v-cant" placeholder="Ej: 100" oninput="calcVenta()"></div>
+    <div class="fg"><label class="fl">Precio por ave ($) — editable</label><input type="number" class="fi" id="v-precio-input" placeholder="0" oninput="calcTotal()"></div>
+    <div class="total-box"><div class="total-label">Total venta</div><div class="total-val" id="v-total">$0</div></div>
+    <div class="fg"><label class="fl">Comprador</label><input type="text" class="fi" id="v-comprador" placeholder="Nombre (opcional)"></div>
     <button class="btn btn-primary" onclick="guardarVenta()">💾 REGISTRAR VENTA</button>
   </div>
   <div class="card">
-    <div class="card-title">📋 Historial de ventas</div>
-    <div id="ventas-resumen" style="margin-bottom:12px;"></div>
+    <div class="card-title">📋 Historial ventas</div>
+    <div id="ventas-resumen" style="margin-bottom:10px;"></div>
     <div id="ventas-list"><div style="color:var(--muted);font-size:13px;">Sin ventas aún</div></div>
   </div>
 </div>
@@ -221,7 +198,7 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
     <div class="card-title">📊 Tabla completa</div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Sem</th><th>Ali (kg)</th><th>Mort</th><th>% Mort</th><th>Saldo</th><th>Peso (g)</th><th>Acción</th></tr></thead>
+        <thead><tr><th>Sem</th><th>Ali (kg)</th><th>Mort</th><th>% Mort</th><th>Saldo</th><th>Peso (g)</th><th>✏️</th></tr></thead>
         <tbody id="tabla-body"><tr><td colspan="7" style="color:var(--muted);">Sin datos</td></tr></tbody>
       </table>
     </div>
@@ -230,8 +207,36 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
 
 <!-- INVERSION -->
 <div id="page-inversion" class="page">
-  <div class="card"><div class="card-title">💰 Resumen de inversión</div><div id="inversion-content"></div></div>
-  <div class="card"><div class="card-title">📅 Costo por semana</div><div id="costo-sem-content" style="color:var(--muted);font-size:13px;">Configure el lote primero</div></div>
+  <div class="card">
+    <div class="card-title">💰 Inversión total</div>
+    <div id="inversion-content"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🌾 Detalle alimento</div>
+    <div id="alimento-detalle"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">💵 Ingresos vs Inversión</div>
+    <div id="balance-content"></div>
+  </div>
+</div>
+
+<!-- ANALISIS -->
+<div id="page-analisis" class="page">
+  <div class="card">
+    <div class="card-title">📈 Consumo real vs Hy Line</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">🟢 Menos de lo esperado &nbsp; 🔴 Más de lo esperado</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sem</th><th>Real (kg)</th><th>Ref (kg)</th><th>Dif (kg)</th><th>Dif sacos</th><th>Dif $</th></tr></thead>
+        <tbody id="analisis-body"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📊 Resumen análisis</div>
+    <div id="analisis-resumen"></div>
+  </div>
 </div>
 
 <!-- REFERENCIA -->
@@ -240,31 +245,13 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
     <div class="card-title">📖 Guía Hy Line Brown</div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Sem</th><th>Peso ref (g)</th><th>Ali/día (g/ave)</th><th>% Mort max</th></tr></thead>
-        <tbody>
-          <tr><td class="td-week">1</td><td>70-76</td><td>12-14</td><td>0.0019%</td></tr>
-          <tr><td class="td-week">2</td><td>110-136</td><td>17-21</td><td>0.0019%</td></tr>
-          <tr><td class="td-week">3</td><td>185-216</td><td>20-25</td><td>0.0019%</td></tr>
-          <tr><td class="td-week">4</td><td>260-310</td><td>25-30</td><td>0.0007%</td></tr>
-          <tr><td class="td-week">5</td><td>350-408</td><td>29-36</td><td>0.0025%</td></tr>
-          <tr><td class="td-week">6</td><td>465-315</td><td>35-44</td><td>0.0027%</td></tr>
-          <tr><td class="td-week">7</td><td>565-620</td><td>41-49</td><td>0.0029%</td></tr>
-          <tr><td class="td-week">8</td><td>670-720</td><td>47-56</td><td>0.0030%</td></tr>
-          <tr><td class="td-week">9</td><td>770-840</td><td>52-61</td><td>—</td></tr>
-          <tr><td class="td-week">10</td><td>880-940</td><td>56-64</td><td>—</td></tr>
-          <tr><td class="td-week">11</td><td>985-1050</td><td>60-69</td><td>—</td></tr>
-          <tr><td class="td-week">12</td><td>1085-1150</td><td>62-72</td><td>—</td></tr>
-          <tr><td class="td-week">13</td><td>1165-1240</td><td>64-74</td><td>—</td></tr>
-          <tr><td class="td-week">14</td><td>1269-1357</td><td>—</td><td>—</td></tr>
-          <tr><td class="td-week">15</td><td>1580-1929</td><td>—</td><td>—</td></tr>
-          <tr><td class="td-week">16</td><td>1940-2395</td><td>—</td><td>—</td></tr>
-          <tr><td class="td-week">17</td><td>2334-2806</td><td>—</td><td>—</td></tr>
-        </tbody>
+        <thead><tr><th>Sem</th><th>Peso ref (g)</th><th>g/ave/día</th><th>kg total/día</th></tr></thead>
+        <tbody id="ref-body"></tbody>
       </table>
     </div>
   </div>
   <div class="card">
-    <div class="card-title">💉 Vacunación</div>
+    <div class="card-title">💉 Programa vacunación</div>
     <div class="ref-row"><div class="ref-sem">Sem 1</div><div><div class="ref-val">Marek, Newcastle</div><div class="ref-lbl">Al nacer</div></div></div>
     <div class="ref-row"><div class="ref-sem">Sem 2</div><div><div class="ref-val">Gumboro</div><div class="ref-lbl">Bolsa de Fabricio</div></div></div>
     <div class="ref-row"><div class="ref-sem">Sem 4</div><div><div class="ref-val">Newcastle + Bronquitis</div><div class="ref-lbl">Refuerzo</div></div></div>
@@ -272,328 +259,309 @@ td { padding:8px 6px; text-align:center; border-bottom:1px solid rgba(255,255,25
     <div class="ref-row"><div class="ref-sem">Sem 12</div><div><div class="ref-val">Encefalomielitis</div><div class="ref-lbl">EAV</div></div></div>
     <div class="ref-row"><div class="ref-sem">Sem 15</div><div><div class="ref-val">Newcastle + Bronquitis</div><div class="ref-lbl">Pre-postura</div></div></div>
   </div>
+  <div class="card">
+    <div class="card-title">📌 Datos importantes</div>
+    <div class="alert alert-ok">✅ Inicio postura: semana 17-18 aprox.</div>
+    <div class="alert alert-warn">⚠️ Mortalidad normal: máx 3-4% total</div>
+    <div class="alert alert-warn">⚠️ Pico producción: 90-95% sem 25-30</div>
+  </div>
 </div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyl30I25rIiVkSf1SV0nBFDHiaEuItHRLfnWgr6rp7Rw1gCIqd8WvcsB5pv4p4naM26rw/exec';
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyl30I25rIiVkSf1SV0nBFDHiaEuItHRLfnWgr6rp7Rw1gCIqd8WvcsB5pv4p4naM26rw/exec';
 
-let config = { fecha:'2026-02-27', avesInicial:9180, costoAve:6000, mantenimiento:1500, costoKgAli:0 };
-let semanas = [];
-
-async function sincronizar() {
-  document.getElementById('sync-status').textContent = '⏳ Sincronizando...';
-  try {
-    const res = await fetch(SCRIPT_URL + '?action=getAll');
-    const data = await res.json();
-    if (data.config && Object.keys(data.config).length > 0) {
-      config = {
-        fecha: data.config.fecha || config.fecha,
-        avesInicial: parseInt(data.config.avesInicial) || config.avesInicial,
-        costoAve: parseInt(data.config.costoAve) || config.costoAve,
-        mantenimiento: parseInt(data.config.mantenimiento) || config.mantenimiento,
-        costoKgAli: parseInt(data.config.costoKgAli) || config.costoKgAli
-      };
-    }
-    if (data.semanas) semanas = data.semanas;
-    cargarConfigUI();
-    actualizarTodo();
-    document.getElementById('sync-status').textContent = '✅ Sincronizado: ' + new Date().toLocaleTimeString('es-CO');
-  } catch(e) {
-    document.getElementById('sync-status').textContent = '❌ Error al sincronizar';
-  }
-}
-
-async function guardarConfig() {
-  config.fecha = document.getElementById('cfg-fecha').value;
-  config.avesInicial = parseInt(document.getElementById('cfg-aves').value) || 9180;
-  config.costoAve = parseInt(document.getElementById('cfg-costo-ave').value) || 6000;
-  config.mantenimiento = parseInt(document.getElementById('cfg-mant').value) || 1500;
-  config.costoKgAli = parseInt(document.getElementById('cfg-kg').value) || 0;
-  try {
-    await fetch(SCRIPT_URL + '?action=saveConfig&data=' + encodeURIComponent(JSON.stringify(config)));
-    actualizarTodo();
-    alert('✅ Configuración guardada');
-  } catch(e) { alert('❌ Error al guardar'); }
-}
-
-function cargarConfigUI() {
-  document.getElementById('cfg-fecha').value = config.fecha;
-  document.getElementById('cfg-aves').value = config.avesInicial;
-  document.getElementById('cfg-costo-ave').value = config.costoAve;
-  document.getElementById('cfg-mant').value = config.mantenimiento;
-  document.getElementById('cfg-kg').value = config.costoKgAli;
-}
-
-async function guardarSemana() {
-  const num = parseInt(document.getElementById('r-semana').value);
-  if (!num) { alert('Ingrese el número de semana'); return; }
-  const dias = ['lun','mar','mie','jue','vie','sab','dom'];
-  const aliDias = dias.map(d => parseFloat(document.getElementById('r-ali-'+d).value) || 0);
-  const aliTotal = aliDias.reduce((a,b) => a+b, 0);
-  const mort = parseInt(document.getElementById('r-mort').value) || 0;
-  const peso = parseInt(document.getElementById('r-peso').value) || 0;
-  const obs = document.getElementById('r-obs').value;
-  semanas = semanas.filter(s => s.num !== num);
-  const mortPrev = semanas.filter(s => s.num < num).reduce((a,s) => a + s.mort, 0);
-  const saldo = config.avesInicial - mortPrev - mort;
-  const mortAcum = mortPrev + mort;
-  const pctMort = ((mortAcum / config.avesInicial) * 100).toFixed(4);
-  const nueva = { num, aliDias, aliTotal, mort, peso, obs, saldo, mortAcum, pctMort };
-  semanas.push(nueva);
-  semanas.sort((a,b) => a.num - b.num);
-  try {
-    await fetch(SCRIPT_URL + '?action=saveSemana&data=' + encodeURIComponent(JSON.stringify(nueva)));
-    actualizarTodo();
-    dias.forEach(d => document.getElementById('r-ali-'+d).value = '');
-    ['r-semana','r-mort','r-peso','r-obs'].forEach(id => document.getElementById(id).value = '');
-    alert('✅ Semana ' + num + ' guardada');
-  } catch(e) { alert('❌ Error al guardar'); }
-}
-
-async function eliminarSemana(num) {
-  if (!confirm('¿Eliminar semana ' + num + '?')) return;
-  semanas = semanas.filter(s => s.num !== num);
-  recalcularSemanas();
-  try {
-    await fetch(SCRIPT_URL + '?action=deleteSemana&num=' + num);
-    actualizarTodo();
-  } catch(e) { alert('❌ Error al eliminar'); }
-}
-
-function recalcularSemanas() {
-  let mortAcum = 0;
-  semanas.forEach(s => {
-    mortAcum += s.mort;
-    s.saldo = config.avesInicial - mortAcum;
-    s.mortAcum = mortAcum;
-    s.pctMort = ((mortAcum / config.avesInicial) * 100).toFixed(4);
-  });
-}
-
-function getEdadDias() { return Math.floor((new Date() - new Date(config.fecha)) / (1000*60*60*24)); }
-function getSemanaActual() { return Math.ceil(getEdadDias() / 7); }
-function getMortTotal() { return semanas.reduce((a,s) => a + s.mort, 0); }
-function getAliTotal() { return semanas.reduce((a,s) => a + s.aliTotal, 0); }
-function getAvesActuales() { return config.avesInicial - getMortTotal(); }
-
-function actualizarTodo() { actualizarResumen(); actualizarHistorial(); actualizarInversion(); }
-
-function actualizarResumen() {
-  const edad = getEdadDias(), semAct = getSemanaActual(), mortTotal = getMortTotal();
-  const avesVivas = getAvesActuales(), aliTotal = getAliTotal();
-  const pctMort = ((mortTotal / config.avesInicial) * 100).toFixed(2);
-  const avesVendidas = typeof getAvesVendidas === 'function' ? getAvesVendidas() : 0;
-  const totalIngresos = ventas.reduce((a,v) => a + v.total, 0);
-  document.getElementById('s-aves').textContent = (avesVivas - avesVendidas).toLocaleString();
-  document.getElementById('s-mort-total').textContent = mortTotal.toLocaleString();
-  document.getElementById('s-semana').textContent = semAct;
-  document.getElementById('s-edad').textContent = edad + ' días';
-  document.getElementById('s-vendidas').textContent = avesVendidas.toLocaleString();
-  document.getElementById('s-ingresos').textContent = '$' + totalIngresos.toLocaleString();
-  document.getElementById('prog-sem').style.width = Math.min((semAct/17)*100,100) + '%';
-  document.getElementById('prog-sem-label').textContent = Math.min(semAct,17) + ' / 17';
-  document.getElementById('prog-mort').style.width = Math.min(parseFloat(pctMort)*25,100) + '%';
-  document.getElementById('prog-mort-label').textContent = pctMort + '%';
-  document.getElementById('prog-ali').style.width = Math.min((aliTotal/50000)*100,100) + '%';
-  document.getElementById('prog-ali-label').textContent = aliTotal.toLocaleString() + ' kg';
-  const ultima = semanas[semanas.length-1];
-  const uDiv = document.getElementById('ultima-semana-info');
-  if (ultima) {
-    uDiv.innerHTML = '<div class="week-stats">' +
-      '<div class="week-stat">Semana <span>' + ultima.num + '</span></div>' +
-      '<div class="week-stat">Alimento <span>' + ultima.aliTotal + ' kg</span></div>' +
-      '<div class="week-stat">Muertes <span style="color:var(--red)">' + ultima.mort + '</span></div>' +
-      '<div class="week-stat">Saldo <span>' + ultima.saldo.toLocaleString() + '</span></div>' +
-      (ultima.peso ? '<div class="week-stat">Peso <span>' + ultima.peso + 'g</span></div>' : '') +
-      (ultima.obs ? '<div class="week-stat">📝 <span>' + ultima.obs + '</span></div>' : '') +
-      '</div>';
-  } else { uDiv.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin registros aún</div>'; }
-  const alerts = [];
-  if (parseFloat(pctMort) > 4) alerts.push('<div class="alert alert-danger">⚠️ Mortalidad alta: ' + pctMort + '%</div>');
-  else if (parseFloat(pctMort) > 2) alerts.push('<div class="alert alert-warn">⚠️ Mortalidad: ' + pctMort + '%</div>');
-  else if (semanas.length > 0) alerts.push('<div class="alert alert-ok">✅ Mortalidad normal: ' + pctMort + '%</div>');
-  document.getElementById('alerts-container').innerHTML = alerts.join('');
-  const nac = new Date(config.fecha);
-  const sem17 = new Date(nac); sem17.setDate(sem17.getDate()+17*7);
-  const sem18 = new Date(nac); sem18.setDate(sem18.getDate()+18*7);
-  const fmt = d => d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
-  document.getElementById('fechas-clave').innerHTML =
-    '<div class="inversion-row"><div class="inversion-label">🥚 Inicio postura</div><div class="inversion-val accent" style="font-size:14px;">' + fmt(sem17) + '</div></div>' +
-    '<div class="inversion-row"><div class="inversion-label">📅 Semana 18</div><div class="inversion-val" style="font-size:14px;">' + fmt(sem18) + '</div></div>' +
-    '<div class="inversion-row"><div class="inversion-label">⏳ Días para postura</div><div class="inversion-val green" style="font-size:14px;">' + Math.max(0,Math.ceil((sem17-new Date())/(1000*60*60*24))) + ' días</div></div>';
-}
-
-function actualizarHistorial() {
-  const list = document.getElementById('historial-list');
-  const tbody = document.getElementById('tabla-body');
-  if (semanas.length === 0) {
-    list.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin registros aún</div>';
-    tbody.innerHTML = '<tr><td colspan="7" style="color:var(--muted);">Sin datos</td></tr>';
-    return;
-  }
-  list.innerHTML = semanas.map(s =>
-    '<div class="week-item"><div class="week-item-header"><div class="week-num">Semana ' + s.num + '</div>' +
-    '<button class="btn btn-danger btn-sm" onclick="eliminarSemana(' + s.num + ')">🗑</button></div>' +
-    '<div class="week-stats">' +
-    '<div class="week-stat">🌾 <span>' + s.aliTotal + ' kg</span></div>' +
-    '<div class="week-stat">💀 <span style="color:var(--red)">' + s.mort + '</span></div>' +
-    '<div class="week-stat">🐔 <span>' + s.saldo.toLocaleString() + '</span></div>' +
-    '<div class="week-stat">📊 <span>' + s.pctMort + '%</span></div>' +
-    (s.peso ? '<div class="week-stat">⚖️ <span>' + s.peso + 'g</span></div>' : '') +
-    (s.obs ? '<div class="week-stat">📝 <span>' + s.obs + '</span></div>' : '') +
-    '</div></div>'
-  ).join('');
-  tbody.innerHTML = semanas.map(s =>
-    '<tr><td class="td-week">' + s.num + '</td><td>' + s.aliTotal + '</td>' +
-    '<td style="color:var(--red)">' + s.mort + '</td><td>' + s.pctMort + '%</td>' +
-    '<td>' + s.saldo.toLocaleString() + '</td><td>' + (s.peso||'—') + '</td>' +
-    '<td><button class="btn btn-danger btn-sm" onclick="eliminarSemana(' + s.num + ')">🗑</button></td></tr>'
-  ).join('');
-}
-
-function actualizarInversion() {
-  const semAct = getSemanaActual();
-  const totalCompra = config.avesInicial * config.costoAve;
-  const totalMant = config.avesInicial * config.mantenimiento * semAct;
-  const aliTotal = getAliTotal();
-  const totalAli = aliTotal * config.costoKgAli;
-  const totalInv = totalCompra + totalMant + totalAli;
-  document.getElementById('inversion-content').innerHTML =
-    '<div class="inversion-row"><div class="inversion-label">Compra ' + config.avesInicial.toLocaleString() + ' pollas</div><div class="inversion-val">$' + totalCompra.toLocaleString() + '</div></div>' +
-    '<div class="inversion-row"><div class="inversion-label">Mantenimiento (' + semAct + ' sem)</div><div class="inversion-val">$' + totalMant.toLocaleString() + '</div></div>' +
-    '<div class="inversion-row"><div class="inversion-label">Alimento (' + aliTotal + ' kg)</div><div class="inversion-val">$' + totalAli.toLocaleString() + '</div></div>' +
-    '<div class="inversion-row" style="border-top:2px solid var(--accent);padding-top:12px;"><div class="inversion-label" style="color:var(--text);font-weight:600;">TOTAL INVERTIDO</div><div class="inversion-val accent">$' + totalInv.toLocaleString() + '</div></div>' +
-    '<div class="inversion-row"><div class="inversion-label">Costo por ave viva</div><div class="inversion-val" style="font-size:14px;">$' + Math.round(totalInv/getAvesActuales()).toLocaleString() + '</div></div>';
-  document.getElementById('costo-sem-content').innerHTML =
-    '<div class="inversion-row"><div class="inversion-label">Costo/sem por ave</div><div class="inversion-val" style="font-size:14px;">$' + config.mantenimiento.toLocaleString() + '</div></div>' +
-    '<div class="inversion-row"><div class="inversion-label">Costo total/semana</div><div class="inversion-val accent" style="font-size:14px;">$' + (config.avesInicial*config.mantenimiento).toLocaleString() + '</div></div>' +
-    '<div class="inversion-row"><div class="inversion-label">Semanas transcurridas</div><div class="inversion-val" style="font-size:14px;">' + semAct + '</div></div>';
-}
-
-// ====== VENTAS ======
-let ventas = [];
-
-function getPrecioAve() {
-  const edad = getEdadDias();
-  return Math.round(config.costoAve + (1500 / 7 * edad));
-}
-
-function calcularVenta() {
-  const precio = getPrecioAve();
-  document.getElementById('v-precio').value = precio;
-  calcularTotal();
-}
-
-function calcularTotal() {
-  const cant = parseInt(document.getElementById('v-cantidad').value) || 0;
-  const precio = parseInt(document.getElementById('v-precio').value) || 0;
-  document.getElementById('v-total').textContent = '$' + (cant * precio).toLocaleString();
-}
-
-async function guardarVenta() {
-  const cant = parseInt(document.getElementById('v-cantidad').value);
-  if (!cant || cant <= 0) { alert('Ingrese cantidad de aves'); return; }
-  const precio = parseInt(document.getElementById('v-precio').value) || getPrecioAve();
-  const total = cant * precio;
-  const comprador = document.getElementById('v-comprador').value;
-  const edad = getEdadDias();
-  const semana = getSemanaActual();
-  const fecha = new Date().toLocaleDateString('es-CO');
-  const venta = { fecha, semana, edad, cant, precio, total, comprador, id: Date.now() };
-  ventas.push(venta);
-  try {
-    await fetch(SCRIPT_URL + '?action=saveVenta&data=' + encodeURIComponent(JSON.stringify(venta)));
-    actualizarVentas();
-    actualizarResumen();
-    document.getElementById('v-cantidad').value = '';
-    document.getElementById('v-comprador').value = '';
-    document.getElementById('v-total').textContent = '$0';
-    alert('✅ Venta registrada: ' + cant + ' aves por $' + total.toLocaleString());
-  } catch(e) { alert('❌ Error al guardar venta'); }
-}
-
-function actualizarVentas() {
-  const edad = getEdadDias();
-  const precioHoy = getPrecioAve();
-  document.getElementById('v-precio-ave').textContent = '$' + precioHoy.toLocaleString();
-  document.getElementById('v-dias').textContent = edad + ' días';
-  document.getElementById('v-precio').value = precioHoy;
-
-  const totalAves = ventas.reduce((a,v) => a + v.cant, 0);
-  const totalDinero = ventas.reduce((a,v) => a + v.total, 0);
-
-  const resumen = document.getElementById('ventas-resumen');
-  if (ventas.length > 0) {
-    resumen.innerHTML =
-      '<div class="inversion-row"><div class="inversion-label">Total aves vendidas</div><div class="inversion-val accent">' + totalAves.toLocaleString() + '</div></div>' +
-      '<div class="inversion-row"><div class="inversion-label">Total recibido</div><div class="inversion-val green">$' + totalDinero.toLocaleString() + '</div></div>';
-  }
-
-  const list = document.getElementById('ventas-list');
-  if (ventas.length === 0) {
-    list.innerHTML = '<div style="color:var(--muted);font-size:13px;">Sin ventas aún</div>';
-    return;
-  }
-  list.innerHTML = [...ventas].reverse().map(v =>
-    '<div class="week-item" style="border-left-color:var(--green);">' +
-    '<div class="week-item-header"><div class="week-num" style="color:var(--green);">' + v.cant + ' aves</div>' +
-    '<div style="font-size:11px;color:var(--muted);">' + v.fecha + '</div></div>' +
-    '<div class="week-stats">' +
-    '<div class="week-stat">💰 <span style="color:var(--green);">$' + v.total.toLocaleString() + '</span></div>' +
-    '<div class="week-stat">💵 <span>$' + v.precio.toLocaleString() + '/ave</span></div>' +
-    '<div class="week-stat">📅 <span>Sem ' + v.semana + ' · ' + v.edad + ' días</span></div>' +
-    (v.comprador ? '<div class="week-stat">👤 <span>' + v.comprador + '</span></div>' : '') +
-    '</div></div>'
-  ).join('');
-}
-
-function getAvesVendidas() {
-  return ventas.reduce((a,v) => a + v.cant, 0);
-}
-
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  btn.classList.add('active');
-  if (id === 'ventas') actualizarVentas();
-}
-
-// ====== DATOS HISTORICOS PRECARGADOS ======
-const DATOS_HISTORICOS = [
-  { num:1, aliDias:[40,40,60,60,120,120,120], mort:18 },
-  { num:2, aliDias:[180,180,180,200,160,240,200], mort:5 },
-  { num:3, aliDias:[180,180,180,200,240,240,280], mort:0 },
-  { num:4, aliDias:[160,200,220,280,220,220,320], mort:1 },
-  { num:5, aliDias:[300,300,340,340,360,280,360], mort:1 }
+const REF_DATA=[
+  {sem:1,pesoMin:70,pesoMax:76,aliMin:12,aliMax:14},
+  {sem:2,pesoMin:110,pesoMax:136,aliMin:17,aliMax:21},
+  {sem:3,pesoMin:185,pesoMax:216,aliMin:20,aliMax:25},
+  {sem:4,pesoMin:260,pesoMax:310,aliMin:25,aliMax:30},
+  {sem:5,pesoMin:350,pesoMax:408,aliMin:29,aliMax:36},
+  {sem:6,pesoMin:465,pesoMax:515,aliMin:35,aliMax:44},
+  {sem:7,pesoMin:565,pesoMax:620,aliMin:41,aliMax:49},
+  {sem:8,pesoMin:670,pesoMax:720,aliMin:47,aliMax:56},
+  {sem:9,pesoMin:770,pesoMax:840,aliMin:52,aliMax:61},
+  {sem:10,pesoMin:880,pesoMax:940,aliMin:56,aliMax:64},
+  {sem:11,pesoMin:985,pesoMax:1050,aliMin:60,aliMax:69},
+  {sem:12,pesoMin:1085,pesoMax:1150,aliMin:62,aliMax:72},
+  {sem:13,pesoMin:1165,pesoMax:1240,aliMin:64,aliMax:74},
+  {sem:14,pesoMin:1269,pesoMax:1357,aliMin:66,aliMax:76},
+  {sem:15,pesoMin:1580,pesoMax:1929,aliMin:68,aliMax:78},
+  {sem:16,pesoMin:1940,pesoMax:2395,aliMin:70,aliMax:80},
+  {sem:17,pesoMin:2334,pesoMax:2806,aliMin:72,aliMax:82}
 ];
 
-async function cargarHistoricos() {
-  // Solo cargar si no hay datos ya en Google Sheets
-  if (semanas.length > 0) return;
-  
-  document.getElementById('sync-status').textContent = '⏳ Cargando datos históricos...';
-  
-  let mortAcum = 0;
-  for (const d of DATOS_HISTORICOS) {
-    const aliTotal = d.aliDias.reduce((a,b) => a+b, 0);
-    mortAcum += d.mort;
-    const saldo = config.avesInicial - mortAcum;
-    const pctMort = ((mortAcum / config.avesInicial) * 100).toFixed(4);
-    const s = { num: d.num, aliDias: d.aliDias, aliTotal, mort: d.mort, peso: 0, obs: '', saldo, mortAcum, pctMort };
+// DATOS HISTORICOS PRECARGADOS
+const HISTORICOS = [
+  {num:1, aliDias:[40,40,60,60,120,120,120], aliTotal:560, mort:18},
+  {num:2, aliDias:[180,180,180,200,160,240,200], aliTotal:1340, mort:5},
+  {num:3, aliDias:[180,180,180,200,240,240,280], aliTotal:1500, mort:0},
+  {num:4, aliDias:[160,200,220,280,220,220,320], aliTotal:1620, mort:2},
+  {num:5, aliDias:[200,200,240,200,280,280,300], aliTotal:1700, mort:1},
+  {num:6, aliDias:[300,300,340,340,360,280,360], aliTotal:2280, mort:0},
+  {num:7, aliDias:[340,360,360,400,420,400,400], aliTotal:2680, mort:3},
+  {num:8, aliDias:[440,460,460,480,460,480,500], aliTotal:3280, mort:0}
+];
+
+const VENTA_HISTORICA = {tipo:'ave',fecha:'24/04/2026',edad:56,semana:8,cant:35,precio:18000,total:630000,comprador:'',id:1};
+
+let config={fecha:'2026-02-27',avesInicial:9180,costoAve:6000,valorDia:214,sacoInicio:83500,sacoCrec:77420};
+let semanas=[];
+let ventas=[];
+
+function getEdad(){return Math.floor((new Date()-new Date(config.fecha))/(1000*60*60*24));}
+function getSemana(){return Math.ceil(getEdad()/7);}
+function getMortTotal(){return semanas.reduce((a,s)=>a+s.mort,0);}
+function getAliTotal(){return semanas.reduce((a,s)=>a+s.aliTotal,0);}
+function getAvesVendidas(){return ventas.reduce((a,v)=>a+v.cant,0);}
+function getAvesVivas(){return config.avesInicial-getMortTotal()-getAvesVendidas();}
+function getPrecioAve(){return Math.round(config.costoAve+(config.valorDia*getEdad()));}
+function getTotalIngresos(){return ventas.reduce((a,v)=>a+v.total,0);}
+
+async function sincronizar(){
+  document.getElementById('sync-status').textContent='⏳ Sincronizando...';
+  try{
+    const res=await fetch(SCRIPT_URL+'?action=getAll');
+    const data=await res.json();
+    if(data.config&&Object.keys(data.config).length>0){
+      config={...config,...data.config};
+      config.avesInicial=parseInt(data.config.avesInicial)||config.avesInicial;
+      config.costoAve=parseInt(data.config.costoAve)||config.costoAve;
+    }
+    if(data.semanas&&data.semanas.length>0)semanas=data.semanas;
+    if(data.ventas&&data.ventas.length>0)ventas=data.ventas;
+    cargarConfigUI();
+    actualizarTodo();
+    document.getElementById('sync-status').textContent='✅ '+new Date().toLocaleTimeString('es-CO');
+    // Cargar históricos si no hay datos
+    if(semanas.length===0)await cargarHistoricos();
+  }catch(e){document.getElementById('sync-status').textContent='❌ Error al sincronizar';}
+}
+
+async function cargarHistoricos(){
+  document.getElementById('sync-status').textContent='⏳ Cargando datos históricos...';
+  let mortAcum=0;
+  for(const d of HISTORICOS){
+    mortAcum+=d.mort;
+    const saldo=config.avesInicial-mortAcum;
+    const pctMort=((mortAcum/config.avesInicial)*100).toFixed(4);
+    const s={...d,saldo,mortAcum,pctMort,peso:0,obs:''};
     semanas.push(s);
-    try {
-      await fetch(SCRIPT_URL + '?action=saveSemana&data=' + encodeURIComponent(JSON.stringify(s)));
-    } catch(e) {}
+    try{await fetch(SCRIPT_URL+'?action=saveSemana&data='+encodeURIComponent(JSON.stringify(s)));}catch(e){}
   }
-  
+  // Cargar venta histórica
+  if(ventas.length===0){
+    ventas.push(VENTA_HISTORICA);
+    try{await fetch(SCRIPT_URL+'?action=saveVenta&data='+encodeURIComponent(JSON.stringify(VENTA_HISTORICA)));}catch(e){}
+  }
   actualizarTodo();
-  document.getElementById('sync-status').textContent = '✅ Datos históricos cargados';
+  document.getElementById('sync-status').textContent='✅ Datos históricos cargados';
+}
+
+function cargarConfigUI(){
+  document.getElementById('cfg-fecha').value=config.fecha;
+  document.getElementById('cfg-aves').value=config.avesInicial;
+  document.getElementById('cfg-costo-ave').value=config.costoAve;
+  document.getElementById('cfg-valor-dia').value=config.valorDia||214;
+  document.getElementById('cfg-saco-inicio').value=config.sacoInicio||83500;
+  document.getElementById('cfg-saco-crec').value=config.sacoCrec||77420;
+}
+
+async function guardarConfig(){
+  config.fecha=document.getElementById('cfg-fecha').value;
+  config.avesInicial=parseInt(document.getElementById('cfg-aves').value)||9180;
+  config.costoAve=parseInt(document.getElementById('cfg-costo-ave').value)||6000;
+  config.valorDia=parseInt(document.getElementById('cfg-valor-dia').value)||214;
+  config.sacoInicio=parseInt(document.getElementById('cfg-saco-inicio').value)||83500;
+  config.sacoCrec=parseInt(document.getElementById('cfg-saco-crec').value)||77420;
+  try{await fetch(SCRIPT_URL+'?action=saveConfig&data='+encodeURIComponent(JSON.stringify(config)));actualizarTodo();alert('✅ Configuración guardada');}
+  catch(e){alert('❌ Error al guardar');}
+}
+
+async function guardarSemana(){
+  const num=parseInt(document.getElementById('r-semana').value);
+  if(!num){alert('Ingrese el número de semana');return;}
+  const dias=['vie','sab','dom','lun','mar','mie','jue'];
+  const aliDias=dias.map(d=>parseFloat(document.getElementById('r-'+d).value)||0);
+  const aliTotal=aliDias.reduce((a,b)=>a+b,0);
+  const mort=parseInt(document.getElementById('r-mort').value)||0;
+  const peso=parseInt(document.getElementById('r-peso').value)||0;
+  const obs=document.getElementById('r-obs').value;
+  semanas=semanas.filter(s=>s.num!==num);
+  const mortPrev=semanas.filter(s=>s.num<num).reduce((a,s)=>a+s.mort,0);
+  const saldo=config.avesInicial-mortPrev-mort-getAvesVendidas();
+  const mortAcum=mortPrev+mort;
+  const pctMort=((mortAcum/config.avesInicial)*100).toFixed(4);
+  const nueva={num,aliDias,aliTotal,mort,peso,obs,saldo,mortAcum,pctMort};
+  semanas.push(nueva);semanas.sort((a,b)=>a.num-b.num);
+  try{await fetch(SCRIPT_URL+'?action=saveSemana&data='+encodeURIComponent(JSON.stringify(nueva)));actualizarTodo();dias.forEach(d=>document.getElementById('r-'+d).value='');['r-semana','r-mort','r-peso','r-obs'].forEach(id=>document.getElementById(id).value='');alert('✅ Semana '+num+' guardada');}
+  catch(e){alert('❌ Error al guardar');}
+}
+
+async function eliminarSemana(num){
+  if(!confirm('¿Eliminar semana '+num+'?'))return;
+  semanas=semanas.filter(s=>s.num!==num);
+  recalcular();
+  try{await fetch(SCRIPT_URL+'?action=deleteSemana&num='+num);actualizarTodo();}
+  catch(e){alert('❌ Error al eliminar');}
+}
+
+function recalcular(){
+  let mortAcum=0;
+  semanas.forEach(s=>{mortAcum+=s.mort;s.saldo=config.avesInicial-mortAcum-getAvesVendidas();s.mortAcum=mortAcum;s.pctMort=((mortAcum/config.avesInicial)*100).toFixed(4);});
+}
+
+function calcVenta(){document.getElementById('v-precio-input').value=getPrecioAve();calcTotal();}
+function calcTotal(){const c=parseInt(document.getElementById('v-cant').value)||0,p=parseInt(document.getElementById('v-precio-input').value)||0;document.getElementById('v-total').textContent='$'+(c*p).toLocaleString();}
+
+async function guardarVenta(){
+  const cant=parseInt(document.getElementById('v-cant').value);if(!cant){alert('Ingrese cantidad');return;}
+  const precio=parseInt(document.getElementById('v-precio-input').value)||getPrecioAve();
+  const venta={tipo:'ave',fecha:new Date().toLocaleDateString('es-CO'),edad:getEdad(),semana:getSemana(),cant,precio,total:cant*precio,comprador:document.getElementById('v-comprador').value,id:Date.now()};
+  ventas.push(venta);
+  try{await fetch(SCRIPT_URL+'?action=saveVenta&data='+encodeURIComponent(JSON.stringify(venta)));actualizarTodo();document.getElementById('v-cant').value='';document.getElementById('v-comprador').value='';document.getElementById('v-total').textContent='$0';alert('✅ '+cant+' aves vendidas por $'+venta.total.toLocaleString());}
+  catch(e){alert('❌ Error');}
+}
+
+function actualizarTodo(){actualizarResumen();actualizarHistorial();actualizarVentas();actualizarInversion();actualizarAnalisis();actualizarRefTabla();}
+
+function actualizarResumen(){
+  const edad=getEdad(),semAct=getSemana(),mortTotal=getMortTotal(),avesVivas=getAvesVivas();
+  const pctMort=((mortTotal/config.avesInicial)*100).toFixed(2);
+  const aliTotal=getAliTotal();
+  document.getElementById('s-aves').textContent=avesVivas.toLocaleString();
+  document.getElementById('s-mort').textContent=mortTotal;
+  document.getElementById('s-semana').textContent='Sem '+semAct;
+  document.getElementById('s-edad').textContent=edad+' días';
+  document.getElementById('s-vendidas').textContent=getAvesVendidas();
+  document.getElementById('s-ingresos').textContent='$'+getTotalIngresos().toLocaleString();
+  const progSem=Math.min((semAct/17)*100,100);
+  document.getElementById('prog-sem').style.width=progSem+'%';
+  document.getElementById('prog-sem-label').textContent=Math.min(semAct,17)+'/17';
+  document.getElementById('prog-mort').style.width=Math.min(parseFloat(pctMort)*25,100)+'%';
+  document.getElementById('prog-mort-label').textContent=pctMort+'%';
+  document.getElementById('prog-ali').style.width=Math.min((aliTotal/50000)*100,100)+'%';
+  document.getElementById('prog-ali-label').textContent=aliTotal.toLocaleString()+' kg';
+  const alerts=[];
+  if(parseFloat(pctMort)>4)alerts.push('<div class="alert alert-danger">⚠️ Mortalidad alta: '+pctMort+'%</div>');
+  else if(parseFloat(pctMort)>2)alerts.push('<div class="alert alert-warn">⚠️ Mortalidad: '+pctMort+'%</div>');
+  else if(semanas.length>0)alerts.push('<div class="alert alert-ok">✅ Mortalidad normal: '+pctMort+'%</div>');
+  document.getElementById('alerts-container').innerHTML=alerts.join('');
+  const ultima=semanas[semanas.length-1];
+  if(ultima){document.getElementById('ultima-semana-info').innerHTML='<div class="week-stats"><div class="week-stat">Semana <span>'+ultima.num+'</span></div><div class="week-stat">Alimento <span>'+ultima.aliTotal+' kg</span></div><div class="week-stat">Muertes <span style="color:var(--red)">'+ultima.mort+'</span></div><div class="week-stat">Saldo <span>'+ultima.saldo.toLocaleString()+'</span></div>'+(ultima.peso?'<div class="week-stat">Peso <span>'+ultima.peso+'g</span></div>':'')+'</div>';}
+  const nac=new Date(config.fecha);
+  const sem17=new Date(nac);sem17.setDate(sem17.getDate()+17*7);
+  const sem18=new Date(nac);sem18.setDate(sem18.getDate()+18*7);
+  const fmt=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
+  const diasPost=Math.max(0,Math.ceil((sem17-new Date())/(1000*60*60*24)));
+  document.getElementById('fechas-clave').innerHTML='<div class="inv-row"><div class="inv-label">🥚 Inicio postura</div><div class="inv-val accent" style="font-size:14px;">'+fmt(sem17)+'</div></div><div class="inv-row"><div class="inv-label">📅 Semana 18</div><div class="inv-val" style="font-size:14px;">'+fmt(sem18)+'</div></div><div class="inv-row"><div class="inv-label">⏳ Días para postura</div><div class="inv-val green" style="font-size:14px;">'+diasPost+' días</div></div>';
+}
+
+function actualizarHistorial(){
+  const list=document.getElementById('historial-list');
+  const tbody=document.getElementById('tabla-body');
+  if(semanas.length===0){list.innerHTML='<div style="color:var(--muted);font-size:13px;">Sin registros</div>';tbody.innerHTML='<tr><td colspan="7" style="color:var(--muted);">Sin datos</td></tr>';return;}
+  list.innerHTML=semanas.map(s=>'<div class="week-item"><div class="week-item-header"><div class="week-num">Semana '+s.num+'</div><button class="btn btn-danger btn-sm" onclick="eliminarSemana('+s.num+')">🗑</button></div><div class="week-stats"><div class="week-stat">🌾 <span>'+s.aliTotal+' kg</span></div><div class="week-stat">💀 <span style="color:var(--red)">'+s.mort+'</span></div><div class="week-stat">🐔 <span>'+s.saldo.toLocaleString()+'</span></div><div class="week-stat">📊 <span>'+s.pctMort+'%</span></div>'+(s.peso?'<div class="week-stat">⚖️ <span>'+s.peso+'g</span></div>':'')+(s.obs?'<div class="week-stat">📝 <span>'+s.obs+'</span></div>':'')+'</div></div>').join('');
+  tbody.innerHTML=semanas.map(s=>'<tr><td class="td-week">'+s.num+'</td><td>'+s.aliTotal+'</td><td style="color:var(--red)">'+s.mort+'</td><td>'+s.pctMort+'%</td><td>'+s.saldo.toLocaleString()+'</td><td>'+(s.peso||'—')+'</td><td><button class="btn btn-danger btn-sm" onclick="eliminarSemana('+s.num+')">🗑</button></td></tr>').join('');
+}
+
+function actualizarVentas(){
+  const precio=getPrecioAve();
+  document.getElementById('v-precio-hoy').textContent='$'+precio.toLocaleString();
+  document.getElementById('v-edad-hoy').textContent=getEdad()+' días';
+  document.getElementById('v-precio-input').value=precio;
+  const totalAves=getAvesVendidas();
+  const totalDinero=getTotalIngresos();
+  if(ventas.length>0)document.getElementById('ventas-resumen').innerHTML='<div class="inv-row"><div class="inv-label">Total aves vendidas</div><div class="inv-val accent">'+totalAves.toLocaleString()+'</div></div><div class="inv-row"><div class="inv-label">Total ingresos</div><div class="inv-val green">$'+totalDinero.toLocaleString()+'</div></div>';
+  const list=document.getElementById('ventas-list');
+  if(ventas.length===0){list.innerHTML='<div style="color:var(--muted);font-size:13px;">Sin ventas aún</div>';return;}
+  list.innerHTML=[...ventas].reverse().map(v=>'<div class="week-item green"><div class="week-item-header"><div class="week-num" style="color:var(--green);">🐔 '+v.cant+' aves</div><div style="font-size:11px;color:var(--muted);">'+v.fecha+'</div></div><div class="week-stats"><div class="week-stat">💰 <span style="color:var(--green);">$'+v.total.toLocaleString()+'</span></div><div class="week-stat">💵 <span>$'+v.precio.toLocaleString()+'/ave</span></div><div class="week-stat">📅 <span>Sem '+v.semana+' · '+v.edad+' días</span></div>'+(v.comprador?'<div class="week-stat">👤 <span>'+v.comprador+'</span></div>':'')+'</div></div>').join('');
+}
+
+function actualizarInversion(){
+  const semAct=getSemana();
+  const aliTotal=getAliTotal();
+  // Alimento inicio (sem 1-6) vs crecimiento (sem 7+)
+  const aliInicio=semanas.filter(s=>s.num<=6).reduce((a,s)=>a+s.aliTotal,0);
+  const aliCrec=semanas.filter(s=>s.num>6).reduce((a,s)=>a+s.aliTotal,0);
+  const sacosInicio=Math.ceil(aliInicio/40);
+  const sacosCrec=Math.ceil(aliCrec/40);
+  const valorInicio=sacosInicio*(config.sacoInicio||83500);
+  const valorCrec=sacosCrec*(config.sacoCrec||77420);
+  const totalAlimento=valorInicio+valorCrec;
+  const totalIngresos=getTotalIngresos();
+  const balance=totalIngresos-totalAlimento;
+
+  document.getElementById('alimento-detalle').innerHTML=
+    '<div class="inv-row"><div class="inv-label">🌱 Alimento inicio (Sem 1-6)</div><div class="inv-val">'+aliInicio.toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Sacos inicio (×$'+( config.sacoInicio||83500).toLocaleString()+')</div><div class="inv-val">'+sacosInicio+' sacos</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Valor alimento inicio</div><div class="inv-val red">$'+valorInicio.toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">🌾 Alimento crecimiento (Sem 7+)</div><div class="inv-val">'+aliCrec.toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Sacos crecimiento (×$'+(config.sacoCrec||77420).toLocaleString()+')</div><div class="inv-val">'+sacosCrec+' sacos</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Valor alimento crecimiento</div><div class="inv-val red">$'+valorCrec.toLocaleString()+'</div></div>'+
+    '<div class="inv-row" style="border-top:2px solid var(--accent);padding-top:8px;"><div class="inv-label" style="font-weight:700;color:var(--text);">TOTAL ALIMENTO</div><div class="inv-val accent">$'+totalAlimento.toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Total sacos consumidos</div><div class="inv-val">'+(sacosInicio+sacosCrec)+' sacos</div></div>';
+
+  document.getElementById('inversion-content').innerHTML=
+    '<div class="inv-row"><div class="inv-label">Compra '+config.avesInicial.toLocaleString()+' pollitas</div><div class="inv-val">Ver config</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Total alimento invertido</div><div class="inv-val red">$'+totalAlimento.toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Semanas transcurridas</div><div class="inv-val">'+semAct+'</div></div>';
+
+  document.getElementById('balance-content').innerHTML=
+    '<div class="inv-row"><div class="inv-label">💰 Ingresos por ventas</div><div class="inv-val green">$'+totalIngresos.toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">💸 Gasto en alimento</div><div class="inv-val red">$'+totalAlimento.toLocaleString()+'</div></div>'+
+    '<div class="inv-row" style="border-top:2px solid var(--accent);padding-top:8px;"><div class="inv-label" style="font-weight:700;color:var(--text);">BALANCE</div><div class="inv-val '+(balance>=0?'green':'red')+'">$'+balance.toLocaleString()+'</div></div>';
+}
+
+function actualizarAnalisis(){
+  const avesVivas=getAvesVivas();
+  const sacoPrecio=(sem)=>sem<=6?(config.sacoInicio||83500):(config.sacoCrec||77420);
+  let totalRealKg=0,totalRefKg=0,totalDifSacos=0,totalDifPesos=0;
+  const rows=semanas.map(s=>{
+    const ref=REF_DATA.find(r=>r.sem===s.num);
+    if(!ref)return '';
+    const promG=Math.round((ref.aliMin+ref.aliMax)/2);
+    const refKg=Math.round((promG*config.avesInicial/1000)*7);
+    const difKg=s.aliTotal-refKg;
+    const difSacos=(difKg/40).toFixed(1);
+    const precio=sacoPrecio(s.num);
+    const difPesos=Math.round((difKg/40)*precio);
+    totalRealKg+=s.aliTotal;totalRefKg+=refKg;totalDifSacos+=parseFloat(difSacos);totalDifPesos+=difPesos;
+    const color=difKg>0?'var(--red)':'var(--green)';
+    const signo=difKg>0?'+':'';
+    return '<tr><td class="td-week">'+s.num+'</td><td>'+s.aliTotal+'</td><td>'+refKg+'</td><td style="color:'+color+'">'+signo+difKg+'</td><td style="color:'+color+'">'+signo+difSacos+'</td><td style="color:'+color+'">'+signo+'$'+Math.abs(difPesos).toLocaleString()+'</td></tr>';
+  });
+  document.getElementById('analisis-body').innerHTML=rows.join('')+'<tr style="font-weight:700;background:rgba(245,166,35,0.1);"><td style="color:var(--accent);">Total</td><td>'+totalRealKg+'</td><td>'+Math.round(totalRefKg)+'</td><td style="color:'+(totalDifSacos>0?'var(--red)':'var(--green)')+';">'+(totalDifSacos>0?'+':'')+Math.round(totalRealKg-totalRefKg)+'</td><td style="color:'+(totalDifSacos>0?'var(--red)':'var(--green)')+';">'+(totalDifSacos>0?'+':'')+totalDifSacos.toFixed(1)+'</td><td style="color:'+(totalDifPesos>0?'var(--red)':'var(--green)')+';">'+(totalDifPesos>0?'+':'-')+'$'+Math.abs(totalDifPesos).toLocaleString()+'</td></tr>';
+
+  const estado=totalDifSacos>0?'⚠️ Ha consumido MÁS de lo esperado':'✅ Ha consumido MENOS de lo esperado';
+  const claseAlert=totalDifSacos>5?'alert-warn':totalDifSacos<-5?'alert-ok':'alert-ok';
+  document.getElementById('analisis-resumen').innerHTML=
+    '<div class="alert '+claseAlert+'">'+estado+'</div>'+
+    '<div class="inv-row"><div class="inv-label">Total real consumido</div><div class="inv-val">'+totalRealKg.toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Total referencia Hy Line</div><div class="inv-val">'+Math.round(totalRefKg).toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Diferencia kg</div><div class="inv-val '+(totalRealKg>totalRefKg?'red':'green')+'">'+(totalRealKg>totalRefKg?'+':'')+(totalRealKg-Math.round(totalRefKg)).toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Diferencia sacos</div><div class="inv-val '+(totalDifSacos>0?'red':'green')+'">'+(totalDifSacos>0?'+':'')+totalDifSacos.toFixed(1)+' sacos</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Diferencia en plata</div><div class="inv-val '+(totalDifPesos>0?'red':'green')+'">'+(totalDifPesos>0?'Gastó de más: ':'Ahorró: ')+'$'+Math.abs(totalDifPesos).toLocaleString()+'</div></div>';
+}
+
+function actualizarRefTabla(){
+  const avesVivas=getAvesVivas();
+  document.getElementById('ref-body').innerHTML=REF_DATA.map(r=>{
+    const prom=Math.round((r.aliMin+r.aliMax)/2);
+    const kgDia=((prom*avesVivas)/1000).toFixed(0);
+    return '<tr><td class="td-week">'+r.sem+'</td><td>'+r.pesoMin+'-'+r.pesoMax+'</td><td>'+r.aliMin+'-'+r.aliMax+'</td><td><strong>'+kgDia+' kg</strong></td></tr>';
+  }).join('');
+}
+
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');
 }
 
 cargarConfigUI();
 actualizarTodo();
-sincronizar().then(() => cargarHistoricos());
+sincronizar();
 </script>
 </body>
 </html>

@@ -559,9 +559,41 @@ function showPage(id, btn) {
   if (id === 'ventas') actualizarVentas();
 }
 
+// ====== DATOS HISTORICOS PRECARGADOS ======
+const DATOS_HISTORICOS = [
+  { num:1, aliDias:[40,40,60,60,120,120,120], mort:18 },
+  { num:2, aliDias:[180,180,180,200,160,240,200], mort:5 },
+  { num:3, aliDias:[180,180,180,200,240,240,280], mort:0 },
+  { num:4, aliDias:[160,200,220,280,220,220,320], mort:1 },
+  { num:5, aliDias:[300,300,340,340,360,280,360], mort:1 }
+];
+
+async function cargarHistoricos() {
+  // Solo cargar si no hay datos ya en Google Sheets
+  if (semanas.length > 0) return;
+  
+  document.getElementById('sync-status').textContent = '⏳ Cargando datos históricos...';
+  
+  let mortAcum = 0;
+  for (const d of DATOS_HISTORICOS) {
+    const aliTotal = d.aliDias.reduce((a,b) => a+b, 0);
+    mortAcum += d.mort;
+    const saldo = config.avesInicial - mortAcum;
+    const pctMort = ((mortAcum / config.avesInicial) * 100).toFixed(4);
+    const s = { num: d.num, aliDias: d.aliDias, aliTotal, mort: d.mort, peso: 0, obs: '', saldo, mortAcum, pctMort };
+    semanas.push(s);
+    try {
+      await fetch(SCRIPT_URL + '?action=saveSemana&data=' + encodeURIComponent(JSON.stringify(s)));
+    } catch(e) {}
+  }
+  
+  actualizarTodo();
+  document.getElementById('sync-status').textContent = '✅ Datos históricos cargados';
+}
+
 cargarConfigUI();
 actualizarTodo();
-sincronizar();
+sincronizar().then(() => cargarHistoricos());
 </script>
 </body>
 </html>

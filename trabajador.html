@@ -295,7 +295,7 @@ select.fi{appearance:none;}
 </div>
 
 <script>
-const SCRIPT_URL='https://script.google.com/macros/s/AKfycbymQf_mJcyplfooDnSt-R0ECMfGAqpJm_nesiqviLsRROjaSIpONgwO4LGeiGenembSTA/exec';
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyl30I25rIiVkSf1SV0nBFDHiaEuItHRLfnWgr6rp7Rw1gCIqd8WvcsB5pv4p4naM26rw/exec';
 const REF=[
   {sem:1,min:12,max:14},{sem:2,min:17,max:21},{sem:3,min:20,max:25},
   {sem:4,min:25,max:30},{sem:5,min:29,max:36},{sem:6,min:35,max:44},
@@ -306,7 +306,7 @@ const REF=[
 ];
 let config={fecha:'2026-02-27',avesInicial:9180,costoAve:4682,costoTotal:42981000,valorDia:214};
 let semanas=[],ventas=[],vacunas=[],registrosDiarios=[];
-let bodega={sacosIniciales:485,entradas:[],sacosPorAlimento:40};
+let bodega={sacosIniciales:111,entradas:[],sacosPorAlimento:40};
 
 function getEdad(){return Math.floor((new Date()-new Date(config.fecha))/(1000*60*60*24));}
 function getSemana(){return Math.ceil(getEdad()/7);}

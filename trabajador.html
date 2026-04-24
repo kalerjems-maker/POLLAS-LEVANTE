@@ -315,7 +315,11 @@ function getMortTotal(){
   const md=registrosDiarios.reduce((a,r)=>a+(parseInt(r.mort)||0),0);
   return ms+md;
 }
-function getAliTotal(){return semanas.reduce((a,s)=>a+s.aliTotal,0);}
+function getAliTotal(){
+  const aliSemanas=semanas.reduce((a,s)=>a+s.aliTotal,0);
+  const aliDiarios=registrosDiarios.reduce((a,r)=>a+(parseFloat(r.ali)||0),0);
+  return aliSemanas+aliDiarios;
+}
 function getAvesVendidasAve(){return ventas.filter(v=>v.tipo==='ave').reduce((a,v)=>a+(parseInt(v.cant)||0),0);}
 function getBultosVendidos(){return ventas.filter(v=>v.tipo==='bulto').reduce((a,v)=>a+(parseInt(v.cant)||0),0);}
 function getAvesVivas(){return config.avesInicial-getMortTotal()-getAvesVendidasAve();}

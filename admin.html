@@ -300,7 +300,7 @@ const REF_DATA=[
 let config={fecha:'2026-02-27',avesInicial:9180,costoAve:4682,costoTotal:42981000,valorDia:214,sacoInicio:83500,sacoCrec:77420};
 let semanas=[],ventas=[];
 
-function getEdad(){return Math.floor((new Date()-new Date(config.fecha))/(1000*60*60*24));}
+function getEdad(){const fecha=config.fecha.substring(0,10);const nac=new Date(fecha+'T00:00:00');const hoy=new Date();hoy.setHours(0,0,0,0);return Math.floor((hoy-nac)/(1000*60*60*24));}
 function getSemana(){return Math.ceil(getEdad()/7);}
 function getMortTotal(){return semanas.reduce((a,s)=>a+s.mort,0);}
 function getAliTotal(){return semanas.reduce((a,s)=>a+s.aliTotal,0);}

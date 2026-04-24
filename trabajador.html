@@ -28,7 +28,7 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
 .stat-box{background:var(--card2);border-radius:8px;padding:10px;text-align:center;}
 .stat-val{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--accent);line-height:1;}
-.stat-val.green{color:var(--green);}.stat-val.red{color:var(--red);}.stat-val.blue{color:var(--blue);}
+.stat-val.green{color:var(--green);}.stat-val.red{color:var(--red);}.stat-val.blue{color:var(--blue);}.stat-val.purple{color:var(--purple);}
 .stat-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
 .big-box{border-radius:12px;padding:14px;margin-bottom:10px;text-align:center;}
 .big-box.ok{background:linear-gradient(135deg,#1a3a1a,#1c2a3a);border:2px solid var(--green);}
@@ -36,8 +36,9 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .big-box.danger{background:linear-gradient(135deg,#3a1a1a,#2a1a1a);border:2px solid var(--red);}
 .big-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
 .big-val{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;line-height:1;}
-.big-unit{font-size:13px;color:var(--muted);margin-top:4px;}
-.big-sub{font-size:11px;margin-top:6px;}
+.big-sub-row{display:flex;justify-content:center;gap:16px;margin-top:6px;flex-wrap:wrap;}
+.big-sub{font-size:12px;color:var(--muted);}
+.big-sub strong{color:var(--green);}
 .status-box{border-radius:10px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
 .status-box.ok{background:rgba(46,204,113,0.12);border:1px solid rgba(46,204,113,0.3);}
 .status-box.warn{background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.3);}
@@ -53,14 +54,10 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .fi:focus{border-color:var(--accent);}
 .btn{width:100%;padding:12px;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
 .btn-primary{background:var(--accent);color:#0f1923;}
-.btn-danger-full{background:var(--red);color:#fff;}
 .btn-green{background:var(--green);color:#0f1923;}
 .btn-sm{width:auto;padding:5px 12px;font-size:11px;}
 .item{background:var(--card2);border-radius:8px;padding:10px;margin-bottom:7px;border-left:3px solid var(--accent);}
-.item.green{border-left-color:var(--green);}
-.item.red{border-left-color:var(--red);}
-.item.purple{border-left-color:var(--purple);}
-.item.blue{border-left-color:var(--blue);}
+.item.green{border-left-color:var(--green);}.item.red{border-left-color:var(--red);}.item.purple{border-left-color:var(--purple);}.item.blue{border-left-color:var(--blue);}
 .item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
 .item-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;color:var(--accent);}
 .item-date{font-size:10px;color:var(--muted);}
@@ -77,6 +74,8 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .bodega-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#27ae60,#2ecc71);transition:width 0.5s;}
 .bodega-fill.warn{background:linear-gradient(90deg,#e67e22,#f39c12);}
 .bodega-fill.danger{background:linear-gradient(90deg,#c0392b,#e74c3c);}
+.alerta-bodega{background:rgba(231,76,60,0.15);border:2px solid var(--red);border-radius:10px;padding:12px;margin-bottom:10px;text-align:center;display:none;}
+.alerta-bodega-titulo{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--red);}
 table{width:100%;border-collapse:collapse;font-size:12px;}
 th{background:var(--card2);color:var(--accent);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 6px;text-align:center;border-bottom:1px solid var(--border);}
 td{padding:8px 6px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);}
@@ -109,24 +108,32 @@ select.fi{appearance:none;}
 
 <!-- INICIO -->
 <div id="page-inicio" class="page active">
+
+  <!-- ALERTA BODEGA -->
+  <div class="alerta-bodega" id="alerta-bodega">
+    <div class="alerta-bodega-titulo">⚠️ BODEGA BAJA</div>
+    <div style="font-size:13px;color:var(--red);margin-top:4px;">Quedan <strong id="alerta-bultos">—</strong> bultos — Pedir más pronto</div>
+  </div>
+
   <div class="grid2">
     <div class="stat-box"><div class="stat-val" id="t-aves">—</div><div class="stat-lbl">Aves vivas</div></div>
     <div class="stat-box"><div class="stat-val green" id="t-edad">—</div><div class="stat-lbl">Edad</div></div>
     <div class="stat-box"><div class="stat-val blue" id="t-semana">—</div><div class="stat-lbl">Semana</div></div>
     <div class="stat-box"><div class="stat-val red" id="t-mort">—</div><div class="stat-lbl">Muertes total</div></div>
-    <div class="stat-box"><div class="stat-val" style="color:var(--purple);" id="t-vendidas">—</div><div class="stat-lbl">Aves vendidas</div></div>
+    <div class="stat-box"><div class="stat-val purple" id="t-vendidas">—</div><div class="stat-lbl">Aves vendidas</div></div>
     <div class="stat-box"><div class="stat-val green" id="t-ingresos">—</div><div class="stat-lbl">Ingresos ventas</div></div>
   </div>
 
-  <!-- ALIMENTO HOY -->
   <div class="big-box ok" id="ali-box">
-    <div class="big-label" id="ali-label" style="color:var(--green);">🌾 Alimento total hoy</div>
+    <div class="big-label" style="color:var(--green);">🌾 Alimento total hoy</div>
     <div class="big-val" id="ali-total-hoy" style="color:var(--green);">—</div>
-    <div class="big-unit">kg para todas las aves</div>
-    <div class="big-sub" id="ali-rango-hoy" style="color:var(--muted);"></div>
+    <div class="big-sub-row">
+      <div class="big-sub">kg recomendados</div>
+      <div class="big-sub">≈ <strong id="ali-bultos-hoy">—</strong> bultos/día</div>
+    </div>
+    <div class="big-sub" id="ali-rango-hoy" style="margin-top:4px;"></div>
   </div>
 
-  <!-- ESTADO CONSUMO -->
   <div class="status-box ok" id="status-consumo">
     <div class="status-icon" id="status-icon">📊</div>
     <div class="status-text">
@@ -135,10 +142,9 @@ select.fi{appearance:none;}
     </div>
   </div>
 
-  <!-- BODEGA RAPIDA -->
   <div class="card">
     <div class="card-title">📦 Bodega</div>
-    <div class="inv-row"><div class="inv-label">Sacos disponibles</div><div class="inv-val accent" id="b-sacos">—</div></div>
+    <div class="inv-row"><div class="inv-label">Bultos disponibles</div><div class="inv-val accent" id="b-sacos">—</div></div>
     <div class="inv-row"><div class="inv-label">Kg disponibles</div><div class="inv-val green" id="b-kg">—</div></div>
     <div class="inv-row"><div class="inv-label">Días estimados</div><div class="inv-val blue" id="b-dias">—</div></div>
     <div class="bodega-bar"><div class="bodega-fill" id="b-bar" style="width:100%"></div></div>
@@ -157,13 +163,12 @@ select.fi{appearance:none;}
     <div class="fg"><label class="fl">🌾 Alimento echado hoy (kg)</label><input type="number" class="fi" id="r-ali" placeholder="Ej: 470" oninput="calcDiferencia()"></div>
     <div id="diferencia-box" style="display:none;background:var(--card2);border-radius:8px;padding:10px;margin-bottom:10px;text-align:center;">
       <div style="font-size:11px;color:var(--muted);">Diferencia vs referencia</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;" id="dif-texto">—</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;" id="dif-texto">—</div>
     </div>
     <div class="fg"><label class="fl">💀 Muertes hoy</label><input type="number" class="fi" id="r-mort-dia" placeholder="0"></div>
     <div class="fg"><label class="fl">📝 Observaciones</label><input type="text" class="fi" id="r-obs-dia" placeholder="Novedades del día..."></div>
     <button class="btn btn-primary" onclick="guardarDia()">💾 GUARDAR DÍA</button>
   </div>
-
   <div class="card">
     <div class="card-title">📋 Registros recientes</div>
     <div id="registros-list"><div style="color:var(--muted);font-size:12px;">Sin registros aún</div></div>
@@ -172,7 +177,6 @@ select.fi{appearance:none;}
 
 <!-- VENTAS -->
 <div id="page-ventas" class="page">
-  <!-- Aves -->
   <div class="card">
     <div class="card-title">🐔 Venta de aves</div>
     <div class="grid2">
@@ -183,20 +187,18 @@ select.fi{appearance:none;}
     <div class="fg"><label class="fl">Precio por ave ($) — editable</label><input type="number" class="fi" id="v-precio-input" placeholder="0" oninput="calcTotal()"></div>
     <div class="total-box"><div class="total-label">Total venta</div><div class="total-val" id="v-total">$0</div></div>
     <div class="fg"><label class="fl">Comprador</label><input type="text" class="fi" id="v-comprador" placeholder="Nombre (opcional)"></div>
-    <button class="btn btn-primary" onclick="guardarVentaAve()">💾 REGISTRAR VENTA AVES</button>
+    <button class="btn btn-primary" onclick="guardarVenta('ave')">💾 REGISTRAR VENTA AVES</button>
   </div>
 
-  <!-- Sacos -->
   <div class="card">
-    <div class="card-title">🌾 Venta de sacos</div>
-    <div class="fg"><label class="fl">Cantidad de sacos</label><input type="number" class="fi" id="vs-cant" placeholder="Ej: 5" oninput="calcVentaSaco()"></div>
-    <div class="fg"><label class="fl">Precio por saco ($)</label><input type="number" class="fi" id="vs-precio" placeholder="0" oninput="calcVentaSaco()"></div>
-    <div class="total-box"><div class="total-label">Total sacos</div><div class="total-val" id="vs-total">$0</div></div>
+    <div class="card-title">🌾 Venta de bultos de alimento</div>
+    <div class="fg"><label class="fl">Cantidad de bultos</label><input type="number" class="fi" id="vs-cant" placeholder="Ej: 5" oninput="calcVentaBulto()"></div>
+    <div class="fg"><label class="fl">Precio por bulto ($)</label><input type="number" class="fi" id="vs-precio" placeholder="0" oninput="calcVentaBulto()"></div>
+    <div class="total-box"><div class="total-label">Total bultos</div><div class="total-val" id="vs-total">$0</div></div>
     <div class="fg"><label class="fl">Comprador</label><input type="text" class="fi" id="vs-comprador" placeholder="Nombre (opcional)"></div>
-    <button class="btn btn-primary" onclick="guardarVentaSaco()">💾 REGISTRAR VENTA SACOS</button>
+    <button class="btn btn-primary" onclick="guardarVenta('bulto')">💾 REGISTRAR VENTA BULTOS</button>
   </div>
 
-  <!-- Gallinaza -->
   <div class="card">
     <div class="card-title">💩 Venta de gallinaza</div>
     <div class="fg"><label class="fl">Cantidad</label><input type="number" class="fi" id="vg-cant" placeholder="Ej: 20" oninput="calcVentaGallinaza()"></div>
@@ -204,10 +206,9 @@ select.fi{appearance:none;}
     <div class="fg"><label class="fl">Precio ($)</label><input type="number" class="fi" id="vg-precio" placeholder="0" oninput="calcVentaGallinaza()"></div>
     <div class="total-box"><div class="total-label">Total gallinaza</div><div class="total-val" id="vg-total">$0</div></div>
     <div class="fg"><label class="fl">Comprador</label><input type="text" class="fi" id="vg-comprador" placeholder="Nombre (opcional)"></div>
-    <button class="btn btn-primary" onclick="guardarVentaGallinaza()">💾 REGISTRAR VENTA GALLINAZA</button>
+    <button class="btn btn-primary" onclick="guardarVenta('gallinaza')">💾 REGISTRAR VENTA GALLINAZA</button>
   </div>
 
-  <!-- Historial -->
   <div class="card">
     <div class="card-title">📋 Historial ventas</div>
     <div id="ventas-list"><div style="color:var(--muted);font-size:12px;">Sin ventas aún</div></div>
@@ -218,22 +219,22 @@ select.fi{appearance:none;}
 <div id="page-bodega" class="page">
   <div class="card">
     <div class="card-title">📦 Estado bodega</div>
-    <div class="inv-row"><div class="inv-label">Sacos iniciales</div><div class="inv-val" id="bod-inicial">111</div></div>
-    <div class="inv-row"><div class="inv-label">Sacos consumidos</div><div class="inv-val red" id="bod-consumidos">—</div></div>
-    <div class="inv-row"><div class="inv-label">Sacos vendidos</div><div class="inv-val red" id="bod-vendidos">—</div></div>
-    <div class="inv-row"><div class="inv-label">Sacos disponibles</div><div class="inv-val green" id="bod-disponibles">—</div></div>
+    <div class="inv-row"><div class="inv-label">Bultos iniciales</div><div class="inv-val" id="bod-inicial">111</div></div>
+    <div class="inv-row"><div class="inv-label">Bultos consumidos</div><div class="inv-val red" id="bod-consumidos">—</div></div>
+    <div class="inv-row"><div class="inv-label">Bultos vendidos</div><div class="inv-val red" id="bod-vendidos">—</div></div>
+    <div class="inv-row"><div class="inv-label">Bultos disponibles</div><div class="inv-val green" id="bod-disponibles">—</div></div>
     <div class="inv-row"><div class="inv-label">Kg disponibles</div><div class="inv-val accent" id="bod-kg">—</div></div>
     <div class="inv-row"><div class="inv-label">Días estimados</div><div class="inv-val blue" id="bod-dias-est">—</div></div>
     <div class="bodega-bar"><div class="bodega-fill" id="bod-bar" style="width:100%"></div></div>
   </div>
   <div class="card">
-    <div class="card-title">➕ Entrada de sacos</div>
-    <div class="fg"><label class="fl">Cantidad recibida</label><input type="number" class="fi" id="ent-sacos" placeholder="Ej: 50"></div>
+    <div class="card-title">➕ Entrada de bultos</div>
+    <div class="fg"><label class="fl">Cantidad de bultos recibidos</label><input type="number" class="fi" id="ent-sacos" placeholder="Ej: 50"></div>
     <div class="fg"><label class="fl">Proveedor</label><input type="text" class="fi" id="ent-proveedor" placeholder="Nombre (opcional)"></div>
     <button class="btn btn-green" onclick="registrarEntrada()">📥 REGISTRAR ENTRADA</button>
   </div>
   <div class="card">
-    <div class="card-title">📋 Entradas</div>
+    <div class="card-title">📋 Entradas registradas</div>
     <div id="bodega-movimientos"><div style="color:var(--muted);font-size:12px;">Sin entradas aún</div></div>
   </div>
 </div>
@@ -281,13 +282,13 @@ select.fi{appearance:none;}
   </div>
 </div>
 
-<!-- ALIMENTO REFERENCIA -->
+<!-- ALIMENTO -->
 <div id="page-alimento" class="page">
   <div class="card">
     <div class="card-title">📖 Alimento por semana</div>
-    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Fila resaltada = semana actual ◀ · kg calculados para aves vivas actuales</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Fila resaltada = semana actual ◀</div>
     <table>
-      <thead><tr><th>Sem</th><th>g/ave/día</th><th>kg/día recomendado</th></tr></thead>
+      <thead><tr><th>Sem</th><th>g/ave/día</th><th>kg/día</th><th>bultos/día</th></tr></thead>
       <tbody id="tabla-ref"></tbody>
     </table>
   </div>
@@ -295,7 +296,6 @@ select.fi{appearance:none;}
 
 <script>
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyl30I25rIiVkSf1SV0nBFDHiaEuItHRLfnWgr6rp7Rw1gCIqd8WvcsB5pv4p4naM26rw/exec';
-
 const REF=[
   {sem:1,min:12,max:14},{sem:2,min:17,max:21},{sem:3,min:20,max:25},
   {sem:4,min:25,max:30},{sem:5,min:29,max:36},{sem:6,min:35,max:44},
@@ -304,31 +304,27 @@ const REF=[
   {sem:13,min:64,max:74},{sem:14,min:66,max:76},{sem:15,min:68,max:78},
   {sem:16,min:70,max:80},{sem:17,min:72,max:82}
 ];
-
-let config={fecha:'2026-02-27',avesInicial:9180,costoAve:6000,valorDia:214};
-let semanas=[],vacunas=[],registrosDiarios=[];
+let config={fecha:'2026-02-27',avesInicial:9180,costoAve:4682,costoTotal:42981000,valorDia:214};
+let semanas=[],ventas=[],vacunas=[],registrosDiarios=[];
 let bodega={sacosIniciales:111,entradas:[],sacosPorAlimento:40};
-let ventas=[{tipo:'ave',fecha:'24/04/2026',edad:56,semana:8,cant:35,precio:18000,total:630000,comprador:'',id:1}];
 
 function getEdad(){return Math.floor((new Date()-new Date(config.fecha))/(1000*60*60*24));}
 function getSemana(){return Math.ceil(getEdad()/7);}
 function getMortTotal(){
-  const mortSemanas=semanas.reduce((a,s)=>a+s.mort,0);
-  const mortDiarios=registrosDiarios.reduce((a,r)=>a+(r.mort||0),0);
-  return mortSemanas+mortDiarios;
+  const ms=semanas.reduce((a,s)=>a+s.mort,0);
+  const md=registrosDiarios.reduce((a,r)=>a+(parseInt(r.mort)||0),0);
+  return ms+md;
 }
 function getAliTotal(){return semanas.reduce((a,s)=>a+s.aliTotal,0);}
-function getAvesVendidasAve(){return ventas.filter(v=>v.tipo==='ave').reduce((a,v)=>a+v.cant,0);}
-function getSacosVendidos(){return ventas.filter(v=>v.tipo==='saco').reduce((a,v)=>a+v.cant,0);}
+function getAvesVendidasAve(){return ventas.filter(v=>v.tipo==='ave').reduce((a,v)=>a+(parseInt(v.cant)||0),0);}
+function getBultosVendidos(){return ventas.filter(v=>v.tipo==='bulto').reduce((a,v)=>a+(parseInt(v.cant)||0),0);}
 function getAvesVivas(){return config.avesInicial-getMortTotal()-getAvesVendidasAve();}
 function getSacosConsumidos(){return Math.ceil(getAliTotal()/bodega.sacosPorAlimento);}
-function getSacosDisponibles(){const entTotal=bodega.entradas.reduce((a,e)=>a+e.cant,0);return bodega.sacosIniciales+entTotal-getSacosConsumidos()-getSacosVendidos();}
-function getPrecioAve(){return Math.round(config.costoAve+((config.valorDia||214)*getEdad()));}
+function getSacosDisponibles(){const e=bodega.entradas.reduce((a,e)=>a+e.cant,0);return bodega.sacosIniciales+e-getSacosConsumidos()-getBultosVendidos();}
+function getPrecioAve(){return Math.round((config.costoTotal/config.avesInicial)+((config.valorDia||214)*getEdad()));}
 function getRefDia(){
-  const semAct=getSemana();
-  const ref=REF.find(r=>r.sem===semAct)||REF[REF.length-1];
-  const avesVivas=getAvesVivas();
-  const promG=Math.round((ref.min+ref.max)/2);
+  const semAct=getSemana();const ref=REF.find(r=>r.sem===semAct)||REF[REF.length-1];
+  const avesVivas=getAvesVivas();const promG=Math.round((ref.min+ref.max)/2);
   return Math.round((promG*avesVivas)/1000);
 }
 
@@ -349,27 +345,20 @@ async function sincronizar(){
 }
 
 function actualizarTodo(){
-  actualizarInicio();
-  actualizarRegistros();
-  actualizarVentasUI();
-  actualizarBodega();
-  actualizarVacunas();
-  actualizarTablaRef();
-  // Fecha de hoy
-  const hoy=new Date().toLocaleDateString('es-CO',{weekday:'long',day:'2-digit',month:'long'});
-  document.getElementById('fecha-hoy').textContent=hoy;
+  actualizarInicio();actualizarRegistros();actualizarVentasUI();actualizarBodega();actualizarVacunas();actualizarTablaRef();
+  document.getElementById('fecha-hoy').textContent=new Date().toLocaleDateString('es-CO',{weekday:'long',day:'2-digit',month:'long'});
   document.getElementById('semana-hoy').textContent='Semana '+getSemana()+' · Día '+getEdad();
 }
 
 function actualizarInicio(){
   const edad=getEdad(),semAct=getSemana(),avesVivas=getAvesVivas();
   const avesVendidas=getAvesVendidasAve();
-  const ingresos=ventas.filter(v=>v.tipo==='ave').reduce((a,v)=>a+v.total,0);
+  const ingresos=ventas.filter(v=>v.tipo==='ave').reduce((a,v)=>a+(parseInt(v.total)||0),0);
   document.getElementById('t-aves').textContent=avesVivas.toLocaleString();
   document.getElementById('t-edad').textContent=edad+' días';
   document.getElementById('t-semana').textContent='Sem '+semAct;
   document.getElementById('t-mort').textContent=getMortTotal();
-  document.getElementById('t-vendidas').textContent=avesVendidas.toLocaleString();
+  document.getElementById('t-vendidas').textContent=avesVendidas;
   document.getElementById('t-ingresos').textContent='$'+ingresos.toLocaleString();
 
   const ref=REF.find(r=>r.sem===semAct)||REF[REF.length-1];
@@ -377,63 +366,55 @@ function actualizarInicio(){
   const kgRef=Math.round((promG*avesVivas)/1000);
   const kgMin=Math.round((ref.min*avesVivas)/1000);
   const kgMax=Math.round((ref.max*avesVivas)/1000);
+  const bultosHoy=(kgRef/40).toFixed(1);
 
   document.getElementById('ali-total-hoy').textContent=kgRef;
+  document.getElementById('ali-bultos-hoy').textContent=bultosHoy+' bultos';
   document.getElementById('ali-rango-hoy').textContent='Rango: '+kgMin+' – '+kgMax+' kg/día';
 
-  // Estado consumo - comparar último registro diario
+  // Estado consumo
   const ultimoReg=registrosDiarios.length>0?registrosDiarios[registrosDiarios.length-1]:null;
   const statusBox=document.getElementById('status-consumo');
   const statusIcon=document.getElementById('status-icon');
   const statusTitle=document.getElementById('status-title');
   const statusDesc=document.getElementById('status-desc');
-
   if(ultimoReg&&ultimoReg.ali>0){
     const dif=ultimoReg.ali-kgRef;
     const difPct=Math.round((Math.abs(dif)/kgRef)*100);
-    if(Math.abs(dif)<=kgRef*0.05){
-      statusBox.className='status-box ok';statusIcon.textContent='✅';
-      statusTitle.className='status-title ok';statusTitle.textContent='Alimento correcto';
-      statusDesc.textContent='Ayer echó '+ultimoReg.ali+' kg — dentro del rango recomendado';
-    }else if(dif>0){
-      statusBox.className='status-box danger';statusIcon.textContent='⚠️';
-      statusTitle.className='status-title danger';statusTitle.textContent='Echando '+dif+' kg de MÁS';
-      statusDesc.textContent='Ayer echó '+ultimoReg.ali+' kg — referencia: '+kgRef+' kg ('+difPct+'% más)';
-    }else{
-      statusBox.className='status-box warn';statusIcon.textContent='⬇️';
-      statusTitle.className='status-title warn';statusTitle.textContent='Echando '+Math.abs(dif)+' kg de MENOS';
-      statusDesc.textContent='Ayer echó '+ultimoReg.ali+' kg — referencia: '+kgRef+' kg ('+difPct+'% menos)';
-    }
+    if(Math.abs(dif)<=kgRef*0.05){statusBox.className='status-box ok';statusIcon.textContent='✅';statusTitle.className='status-title ok';statusTitle.textContent='Alimento correcto';statusDesc.textContent='Ayer echó '+ultimoReg.ali+' kg — dentro del rango';}
+    else if(dif>0){statusBox.className='status-box danger';statusIcon.textContent='⚠️';statusTitle.className='status-title danger';statusTitle.textContent='Echando '+dif+' kg de MÁS';statusDesc.textContent='Ayer: '+ultimoReg.ali+' kg · Ref: '+kgRef+' kg ('+difPct+'% más)';}
+    else{statusBox.className='status-box warn';statusIcon.textContent='⬇️';statusTitle.className='status-title warn';statusTitle.textContent='Echando '+Math.abs(dif)+' kg de MENOS';statusDesc.textContent='Ayer: '+ultimoReg.ali+' kg · Ref: '+kgRef+' kg ('+difPct+'% menos)';}
   }else{
-    statusBox.className='status-box ok';statusIcon.textContent='📊';
-    statusTitle.className='status-title ok';statusTitle.textContent='Hoy debe echar '+kgRef+' kg';
-    statusDesc.textContent='Rango recomendado: '+kgMin+' – '+kgMax+' kg';
+    statusBox.className='status-box ok';statusIcon.textContent='📊';statusTitle.className='status-title ok';statusTitle.textContent='Hoy debe echar '+kgRef+' kg';statusDesc.textContent='≈ '+bultosHoy+' bultos · Rango: '+kgMin+' – '+kgMax+' kg';
   }
 
   // Bodega
   const sacos=getSacosDisponibles();
   const kgDisp=sacos*bodega.sacosPorAlimento;
   const diasEst=kgRef>0?Math.floor(kgDisp/kgRef):0;
-  document.getElementById('b-sacos').textContent=sacos+' sacos';
+  document.getElementById('b-sacos').textContent=sacos+' bultos';
   document.getElementById('b-kg').textContent=kgDisp.toLocaleString()+' kg';
   document.getElementById('b-dias').textContent=diasEst+' días';
   const pct=Math.min((sacos/bodega.sacosIniciales)*100,100);
   const bar=document.getElementById('b-bar');
   bar.style.width=pct+'%';
   bar.className='bodega-fill'+(pct<20?' danger':pct<40?' warn':'');
+
+  // Alerta bodega < 40 bultos
+  const alertaBodega=document.getElementById('alerta-bodega');
+  if(sacos<40){alertaBodega.style.display='block';document.getElementById('alerta-bultos').textContent=sacos;}
+  else{alertaBodega.style.display='none';}
 }
 
 function calcDiferencia(){
   const ali=parseInt(document.getElementById('r-ali').value)||0;
   if(!ali){document.getElementById('diferencia-box').style.display='none';return;}
-  const kgRef=getRefDia();
-  const dif=ali-kgRef;
-  const box=document.getElementById('diferencia-box');
-  const texto=document.getElementById('dif-texto');
+  const kgRef=getRefDia();const dif=ali-kgRef;
+  const box=document.getElementById('diferencia-box');const texto=document.getElementById('dif-texto');
   box.style.display='block';
   if(Math.abs(dif)<=kgRef*0.05){texto.style.color='var(--green)';texto.textContent='✅ Cantidad correcta';}
-  else if(dif>0){texto.style.color='var(--red)';texto.textContent='⚠️ '+dif+' kg de MÁS vs referencia ('+kgRef+' kg)';}
-  else{texto.style.color='var(--accent)';texto.textContent='⬇️ '+Math.abs(dif)+' kg de MENOS vs referencia ('+kgRef+' kg)';}
+  else if(dif>0){texto.style.color='var(--red)';texto.textContent='⚠️ '+dif+' kg de MÁS (ref: '+kgRef+' kg)';}
+  else{texto.style.color='var(--accent)';texto.textContent='⬇️ '+Math.abs(dif)+' kg de MENOS (ref: '+kgRef+' kg)';}
 }
 
 async function guardarDia(){
@@ -472,7 +453,7 @@ function actualizarVentasUI(){
   if(ventas.length===0){list.innerHTML='<div style="color:var(--muted);font-size:12px;">Sin ventas aún</div>';return;}
   list.innerHTML=[...ventas].reverse().map(v=>{
     let color='green',icon='🐔',titulo=v.cant+' aves';
-    if(v.tipo==='saco'){color='blue';icon='🌾';titulo=v.cant+' sacos';}
+    if(v.tipo==='bulto'){color='blue';icon='🌾';titulo=v.cant+' bultos';}
     if(v.tipo==='gallinaza'){color='purple';icon='💩';titulo=v.cant+' '+(v.unidad||'');}
     return '<div class="item '+color+'"><div class="item-header"><div class="item-title" style="color:var(--'+color+');">'+icon+' '+titulo+'</div><div class="item-date">'+v.fecha+'</div></div><div class="item-stats"><div class="is">💰 <span style="color:var(--green);">$'+v.total.toLocaleString()+'</span></div>'+(v.comprador?'<div class="is">👤 <span>'+v.comprador+'</span></div>':'')+'</div></div>';
   }).join('');
@@ -480,21 +461,19 @@ function actualizarVentasUI(){
 
 function actualizarBodega(){
   const sacos=getSacosDisponibles(),kgDisp=sacos*bodega.sacosPorAlimento;
-  const kgRef=getRefDia();
-  const diasEst=kgRef>0?Math.floor(kgDisp/kgRef):0;
-  document.getElementById('bod-inicial').textContent=bodega.sacosIniciales+' sacos';
-  document.getElementById('bod-consumidos').textContent=getSacosConsumidos()+' sacos';
-  document.getElementById('bod-vendidos').textContent=getSacosVendidos()+' sacos';
-  document.getElementById('bod-disponibles').textContent=sacos+' sacos';
+  const kgRef=getRefDia();const diasEst=kgRef>0?Math.floor(kgDisp/kgRef):0;
+  document.getElementById('bod-inicial').textContent=bodega.sacosIniciales+' bultos';
+  document.getElementById('bod-consumidos').textContent=getSacosConsumidos()+' bultos';
+  document.getElementById('bod-vendidos').textContent=getBultosVendidos()+' bultos';
+  document.getElementById('bod-disponibles').textContent=sacos+' bultos';
   document.getElementById('bod-kg').textContent=kgDisp.toLocaleString()+' kg';
   document.getElementById('bod-dias-est').textContent=diasEst+' días';
   const pct=Math.min((sacos/bodega.sacosIniciales)*100,100);
   const bar=document.getElementById('bod-bar');
-  bar.style.width=pct+'%';
-  bar.className='bodega-fill'+(pct<20?' danger':pct<40?' warn':'');
+  bar.style.width=pct+'%';bar.className='bodega-fill'+(pct<20?' danger':pct<40?' warn':'');
   const mov=document.getElementById('bodega-movimientos');
   if(!bodega.entradas||bodega.entradas.length===0){mov.innerHTML='<div style="color:var(--muted);font-size:12px;">Sin entradas</div>';return;}
-  mov.innerHTML=[...bodega.entradas].reverse().map(e=>'<div class="item blue"><div class="item-header"><div class="item-title" style="color:var(--blue);">+'+e.cant+' sacos</div><div class="item-date">'+e.fecha+'</div></div>'+(e.proveedor?'<div class="item-stats"><div class="is">👤 <span>'+e.proveedor+'</span></div></div>':'')+'</div>').join('');
+  mov.innerHTML=[...bodega.entradas].reverse().map(e=>'<div class="item blue"><div class="item-header"><div class="item-title" style="color:var(--blue);">+'+e.cant+' bultos</div><div class="item-date">'+e.fecha+'</div></div>'+(e.proveedor?'<div class="item-stats"><div class="is">👤 <span>'+e.proveedor+'</span></div></div>':'')+'</div>').join('');
 }
 
 function actualizarVacunas(){
@@ -508,42 +487,43 @@ function actualizarTablaRef(){
   document.getElementById('tabla-ref').innerHTML=REF.map(r=>{
     const prom=Math.round((r.min+r.max)/2);
     const kg=Math.round((prom*avesVivas)/1000);
+    const bultos=(kg/40).toFixed(1);
     const esAct=r.sem===semAct;
-    return '<tr class="'+(esAct?'current':'')+'"><td class="tw">'+r.sem+(esAct?' ◀':'')+'</td><td>'+r.min+'–'+r.max+'</td><td><strong>'+kg+' kg</strong></td></tr>';
+    return '<tr class="'+(esAct?'current':'')+'"><td class="tw">'+r.sem+(esAct?' ◀':'')+'</td><td>'+r.min+'–'+r.max+'</td><td><strong>'+kg+' kg</strong></td><td>'+bultos+'</td></tr>';
   }).join('');
 }
 
 function calcVenta(){document.getElementById('v-precio-input').value=getPrecioAve();calcTotal();}
 function calcTotal(){const c=parseInt(document.getElementById('v-cant').value)||0,p=parseInt(document.getElementById('v-precio-input').value)||0;document.getElementById('v-total').textContent='$'+(c*p).toLocaleString();}
-function calcVentaSaco(){const c=parseInt(document.getElementById('vs-cant').value)||0,p=parseInt(document.getElementById('vs-precio').value)||0;document.getElementById('vs-total').textContent='$'+(c*p).toLocaleString();}
+function calcVentaBulto(){const c=parseInt(document.getElementById('vs-cant').value)||0,p=parseInt(document.getElementById('vs-precio').value)||0;document.getElementById('vs-total').textContent='$'+(c*p).toLocaleString();}
 function calcVentaGallinaza(){const c=parseInt(document.getElementById('vg-cant').value)||0,p=parseInt(document.getElementById('vg-precio').value)||0;document.getElementById('vg-total').textContent='$'+(c*p).toLocaleString();}
 
-async function guardarVentaAve(){
-  const cant=parseInt(document.getElementById('v-cant').value);if(!cant){alert('Ingrese cantidad');return;}
-  const precio=parseInt(document.getElementById('v-precio-input').value)||getPrecioAve();
-  const venta={tipo:'ave',fecha:new Date().toLocaleDateString('es-CO'),edad:getEdad(),semana:getSemana(),cant,precio,total:cant*precio,comprador:document.getElementById('v-comprador').value,id:Date.now()};
+async function guardarVenta(tipo){
+  let cant,precio,total,comprador,unidad='';
+  if(tipo==='ave'){
+    cant=parseInt(document.getElementById('v-cant').value);if(!cant){alert('Ingrese cantidad');return;}
+    precio=parseInt(document.getElementById('v-precio-input').value)||getPrecioAve();
+    total=cant*precio;comprador=document.getElementById('v-comprador').value;
+  }else if(tipo==='bulto'){
+    cant=parseInt(document.getElementById('vs-cant').value);if(!cant){alert('Ingrese cantidad');return;}
+    precio=parseInt(document.getElementById('vs-precio').value)||0;
+    total=cant*precio;comprador=document.getElementById('vs-comprador').value;
+  }else{
+    cant=parseInt(document.getElementById('vg-cant').value);if(!cant){alert('Ingrese cantidad');return;}
+    precio=parseInt(document.getElementById('vg-precio').value)||0;
+    unidad=document.getElementById('vg-unidad').value;
+    total=cant*precio;comprador=document.getElementById('vg-comprador').value;
+  }
+  const venta={tipo,fecha:new Date().toLocaleDateString('es-CO'),edad:getEdad(),semana:getSemana(),cant,precio,total,comprador,unidad,id:Date.now()};
   ventas.push(venta);
-  try{await fetch(SCRIPT_URL+'?action=saveVenta&data='+encodeURIComponent(JSON.stringify(venta)));actualizarTodo();document.getElementById('v-cant').value='';document.getElementById('v-comprador').value='';document.getElementById('v-total').textContent='$0';alert('✅ '+cant+' aves vendidas por $'+venta.total.toLocaleString());}
-  catch(e){alert('❌ Error');}
-}
-
-async function guardarVentaSaco(){
-  const cant=parseInt(document.getElementById('vs-cant').value);if(!cant){alert('Ingrese cantidad');return;}
-  const precio=parseInt(document.getElementById('vs-precio').value)||0;
-  const venta={tipo:'saco',fecha:new Date().toLocaleDateString('es-CO'),cant,precio,total:cant*precio,comprador:document.getElementById('vs-comprador').value,id:Date.now()};
-  ventas.push(venta);
-  try{await fetch(SCRIPT_URL+'?action=saveVenta&data='+encodeURIComponent(JSON.stringify(venta)));actualizarTodo();document.getElementById('vs-cant').value='';document.getElementById('vs-precio').value='';document.getElementById('vs-comprador').value='';document.getElementById('vs-total').textContent='$0';alert('✅ '+cant+' sacos vendidos');}
-  catch(e){alert('❌ Error');}
-}
-
-async function guardarVentaGallinaza(){
-  const cant=parseInt(document.getElementById('vg-cant').value);if(!cant){alert('Ingrese cantidad');return;}
-  const precio=parseInt(document.getElementById('vg-precio').value)||0;
-  const unidad=document.getElementById('vg-unidad').value;
-  const venta={tipo:'gallinaza',fecha:new Date().toLocaleDateString('es-CO'),cant,unidad,precio,total:cant*precio,comprador:document.getElementById('vg-comprador').value,id:Date.now()};
-  ventas.push(venta);
-  try{await fetch(SCRIPT_URL+'?action=saveVenta&data='+encodeURIComponent(JSON.stringify(venta)));actualizarTodo();document.getElementById('vg-cant').value='';document.getElementById('vg-precio').value='';document.getElementById('vg-comprador').value='';document.getElementById('vg-total').textContent='$0';alert('✅ Gallinaza registrada');}
-  catch(e){alert('❌ Error');}
+  try{
+    await fetch(SCRIPT_URL+'?action=saveVenta&data='+encodeURIComponent(JSON.stringify(venta)));
+    actualizarTodo();
+    if(tipo==='ave'){document.getElementById('v-cant').value='';document.getElementById('v-comprador').value='';document.getElementById('v-total').textContent='$0';}
+    else if(tipo==='bulto'){document.getElementById('vs-cant').value='';document.getElementById('vs-precio').value='';document.getElementById('vs-comprador').value='';document.getElementById('vs-total').textContent='$0';}
+    else{document.getElementById('vg-cant').value='';document.getElementById('vg-precio').value='';document.getElementById('vg-comprador').value='';document.getElementById('vg-total').textContent='$0';}
+    alert('✅ Venta registrada por $'+total.toLocaleString());
+  }catch(e){alert('❌ Error');}
 }
 
 async function guardarVacuna(){
@@ -558,7 +538,7 @@ async function registrarEntrada(){
   const cant=parseInt(document.getElementById('ent-sacos').value);if(!cant){alert('Ingrese cantidad');return;}
   const entrada={cant,proveedor:document.getElementById('ent-proveedor').value,fecha:new Date().toLocaleDateString('es-CO'),id:Date.now()};
   bodega.entradas.push(entrada);
-  try{await fetch(SCRIPT_URL+'?action=saveBodega&data='+encodeURIComponent(JSON.stringify(bodega)));actualizarBodega();document.getElementById('ent-sacos').value='';document.getElementById('ent-proveedor').value='';alert('✅ '+cant+' sacos registrados');}
+  try{await fetch(SCRIPT_URL+'?action=saveBodega&data='+encodeURIComponent(JSON.stringify(bodega)));actualizarBodega();document.getElementById('ent-sacos').value='';document.getElementById('ent-proveedor').value='';alert('✅ '+cant+' bultos registrados');}
   catch(e){alert('❌ Error');}
 }
 

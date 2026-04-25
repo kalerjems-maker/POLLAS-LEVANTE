@@ -752,11 +752,8 @@ async function enviarIA(){
 
   try{
     const contexto=getContextoGranja();
-    const res=await fetch(SCRIPT_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:'action=ia&pregunta='+encodeURIComponent(pregunta)+'&contexto='+encodeURIComponent(contexto)
-    });
+    const url=SCRIPT_URL+'?action=ia&pregunta='+encodeURIComponent(pregunta)+'&contexto='+encodeURIComponent(contexto);
+    const res=await fetch(url);
     const data=await res.json();
     const respuesta=data.respuesta||'Sin respuesta';
     document.getElementById('ia-pensando').outerHTML='<div style="background:var(--card2);border-radius:8px;padding:10px;margin-bottom:8px;border-left:3px solid var(--blue);"><div style="font-size:12px;color:var(--blue);font-weight:600;margin-bottom:4px;">🤖 Asistente IA</div><div style="font-size:13px;color:var(--text);line-height:1.5;">'+respuesta.replace(/\n/g,'<br>')+'</div></div>';

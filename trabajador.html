@@ -3,175 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Granja Kaler - Trabajador</title>
+<title>Hy Line Brown - Admin</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
-:root{--bg:#0f1923;--card:#162030;--card2:#1c2a3a;--accent:#f5a623;--green:#2ecc71;--red:#e74c3c;--blue:#3498db;--purple:#9b59b6;--text:#e8f0fe;--muted:#7a9ab5;--border:rgba(245,166,35,0.2);}
+:root{--bg:#0f1923;--card:#162030;--card2:#1c2a3a;--accent:#f5a623;--accent2:#e8c14a;--green:#2ecc71;--red:#e74c3c;--blue:#3498db;--purple:#9b59b6;--text:#e8f0fe;--muted:#7a9ab5;--border:rgba(245,166,35,0.2);}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;padding-bottom:60px;}
-.header{background:linear-gradient(135deg,#0f1923 0%,#1a2d42 100%);border-bottom:2px solid var(--accent);padding:12px 14px 8px;position:sticky;top:0;z-index:100;}
-.header-top{display:flex;align-items:center;justify-content:space-between;}
-.header h1{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:var(--accent);letter-spacing:1px;text-transform:uppercase;}
-.header-sub{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
-.badge{background:#e74c3c;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;padding:3px 10px;border-radius:20px;}
-.sync-row{display:flex;align-items:center;gap:8px;margin-top:6px;}
-.sync-btn{background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 12px;font-size:11px;font-family:'Barlow Condensed',sans-serif;font-weight:700;cursor:pointer;}
-.sync-status{font-size:10px;color:var(--muted);}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;padding-bottom:80px;}
+.header{background:linear-gradient(135deg,#0f1923 0%,#1a2d42 100%);border-bottom:2px solid var(--accent);padding:14px 16px 10px;position:sticky;top:0;z-index:100;}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.header h1{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--accent);letter-spacing:1px;text-transform:uppercase;}
+.header-sub{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+.lote-badge{background:var(--accent);color:#0f1923;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px;}
+.sync-btn{background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 12px;font-size:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;cursor:pointer;}
+.sync-status{font-size:10px;color:var(--muted);text-align:right;margin-top:3px;}
 .nav{display:flex;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .nav::-webkit-scrollbar{display:none;}
-.nav-btn{flex:0 0 auto;padding:9px 10px;background:none;border:none;color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+.nav-btn{flex:0 0 auto;padding:10px 8px;background:none;border:none;color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
-.page{display:none;padding:12px;}
+.page{display:none;padding:14px;}
 .page.active{display:block;}
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;}
-.card-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-.stat-box{background:var(--card2);border-radius:8px;padding:10px;text-align:center;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px;}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.stat-box{background:var(--card2);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(255,255,255,0.05);}
 .stat-val{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--accent);line-height:1;}
 .stat-val.green{color:var(--green);}.stat-val.red{color:var(--red);}.stat-val.blue{color:var(--blue);}.stat-val.purple{color:var(--purple);}
-.stat-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
-.big-box{border-radius:12px;padding:14px;margin-bottom:10px;text-align:center;}
-.big-box.ok{background:linear-gradient(135deg,#1a3a1a,#1c2a3a);border:2px solid var(--green);}
-.big-box.warn{background:linear-gradient(135deg,#3a2a1a,#2a1c1a);border:2px solid var(--accent);}
-.big-box.danger{background:linear-gradient(135deg,#3a1a1a,#2a1a1a);border:2px solid var(--red);}
-.big-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
-.big-val{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;line-height:1;}
-.big-sub-row{display:flex;justify-content:center;gap:16px;margin-top:6px;flex-wrap:wrap;}
-.big-sub{font-size:12px;color:var(--muted);}
-.big-sub strong{color:var(--green);}
-.status-box{border-radius:10px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
-.status-box.ok{background:rgba(46,204,113,0.12);border:1px solid rgba(46,204,113,0.3);}
-.status-box.warn{background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.3);}
-.status-box.danger{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.3);}
-.status-icon{font-size:28px;}
-.status-text{flex:1;}
-.status-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;}
-.status-title.ok{color:var(--green);}.status-title.warn{color:var(--accent);}.status-title.danger{color:var(--red);}
-.status-desc{font-size:12px;color:var(--muted);margin-top:2px;}
-.fg{margin-bottom:10px;}
-.fl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;display:block;}
-.fi{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:9px 11px;color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;outline:none;}
+.stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+.progress-wrap{margin-bottom:12px;}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:5px;}
+.progress-bar{height:8px;background:var(--card2);border-radius:4px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.5s;}
+.progress-fill.green{background:linear-gradient(90deg,#27ae60,#2ecc71);}
+.progress-fill.red{background:linear-gradient(90deg,#c0392b,#e74c3c);}
+.fg{margin-bottom:12px;}
+.fl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:block;}
+.fi{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;outline:none;}
 .fi:focus{border-color:var(--accent);}
-.btn{width:100%;padding:12px;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.btn{width:100%;padding:13px;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
 .btn-primary{background:var(--accent);color:#0f1923;}
-.btn-green{background:var(--green);color:#0f1923;}
-.btn-sm{width:auto;padding:5px 12px;font-size:11px;}
-.item{background:var(--card2);border-radius:8px;padding:10px;margin-bottom:7px;border-left:3px solid var(--accent);}
-.item.green{border-left-color:var(--green);}.item.red{border-left-color:var(--red);}.item.purple{border-left-color:var(--purple);}.item.blue{border-left-color:var(--blue);}
-.item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
-.item-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;color:var(--accent);}
-.item-date{font-size:10px;color:var(--muted);}
-.item-stats{display:flex;gap:10px;flex-wrap:wrap;}
-.is{font-size:10px;color:var(--muted);}.is span{color:var(--text);font-weight:600;}
-.inv-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
-.inv-label{font-size:12px;color:var(--muted);}
+.btn-danger{background:var(--red);color:#fff;margin-top:8px;}
+.btn-sm{width:auto;padding:6px 14px;font-size:12px;margin-top:0;}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:380px;}
+th{background:var(--card2);color:var(--accent);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 5px;text-align:center;border-bottom:1px solid var(--border);}
+td{padding:8px 5px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);}
+.td-week{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--accent);font-size:13px;}
+.alert{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:10px;}
+.alert-ok{background:rgba(46,204,113,0.12);border:1px solid rgba(46,204,113,0.3);color:var(--green);}
+.alert-warn{background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:var(--accent2);}
+.alert-danger{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.3);color:var(--red);}
+.week-item{background:var(--card2);border-radius:8px;padding:12px;margin-bottom:8px;border-left:3px solid var(--accent);}
+.week-item.green{border-left-color:var(--green);}
+.week-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.week-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;color:var(--accent);}
+.week-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.week-stat{font-size:11px;color:var(--muted);}
+.week-stat span{color:var(--text);font-weight:600;}
+.inv-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.inv-label{font-size:13px;color:var(--muted);}
 .inv-val{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--text);}
 .inv-val.accent{color:var(--accent);}.inv-val.green{color:var(--green);}.inv-val.red{color:var(--red);}
 .total-box{background:var(--card2);border-radius:8px;padding:12px;margin-bottom:10px;text-align:center;}
-.total-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.total-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
 .total-val{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--green);}
-.bodega-bar{height:12px;background:var(--card2);border-radius:6px;overflow:hidden;margin-top:8px;}
-.bodega-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#27ae60,#2ecc71);transition:width 0.5s;}
-.bodega-fill.warn{background:linear-gradient(90deg,#e67e22,#f39c12);}
-.bodega-fill.danger{background:linear-gradient(90deg,#c0392b,#e74c3c);}
-.alerta-bodega{background:rgba(231,76,60,0.15);border:2px solid var(--red);border-radius:10px;padding:12px;margin-bottom:10px;text-align:center;display:none;}
-.alerta-bodega-titulo{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--red);}
-table{width:100%;border-collapse:collapse;font-size:12px;}
-th{background:var(--card2);color:var(--accent);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 6px;text-align:center;border-bottom:1px solid var(--border);}
-td{padding:8px 6px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);}
-tr.current td{background:rgba(245,166,35,0.12);font-weight:700;}
-.tw{font-family:'Barlow Condensed',sans-serif;font-weight:800;color:var(--accent);font-size:14px;}
+.ref-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;}
+.ref-sem{color:var(--accent);font-weight:600;width:50px;}
+.ref-val{color:var(--text);}
+.ref-lbl{color:var(--muted);font-size:10px;}
 select.fi{appearance:none;}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-top">
-    <div><h1>🐔 Hy Line Brown</h1><div class="header-sub">Granja Kaler · Trabajador</div></div>
-    <div class="badge">Trabajador</div>
+    <div><h1>🐔 Hy Line Brown</h1><div class="header-sub">Admin · Control de Levante</div></div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+      <div class="lote-badge">Lote 1 — 2026</div>
+      <button class="sync-btn" onclick="sincronizar()">☁️ Sync</button>
+    </div>
   </div>
-  <div class="sync-row">
-    <button class="sync-btn" onclick="sincronizar()">☁️ Sincronizar</button>
-    <div class="sync-status" id="sync-status">Toca para cargar</div>
-  </div>
+  <div class="sync-status" id="sync-status">Toca Sync para cargar</div>
 </div>
 
 <div class="nav">
-  <button class="nav-btn active" onclick="showPage('inicio',this)">🏠 Inicio</button>
+  <button class="nav-btn active" onclick="showPage('resumen',this)">📊 Resumen</button>
   <button class="nav-btn" onclick="showPage('registro',this)">✏️ Registro</button>
   <button class="nav-btn" onclick="showPage('ventas',this)">🛒 Ventas</button>
-  <button class="nav-btn" onclick="showPage('bodega',this)">📦 Bodega</button>
-  <button class="nav-btn" onclick="showPage('vacunas',this)">💉 Vacunas</button>
-  <button class="nav-btn" onclick="showPage('alimento',this)">📖 Alimento</button>
+  <button class="nav-btn" onclick="showPage('historial',this)">📋 Historial</button>
+  <button class="nav-btn" onclick="showPage('inversion',this)">💰 Inversión</button>
+  <button class="nav-btn" onclick="showPage('analisis',this)">📈 Análisis</button>
+  <button class="nav-btn" onclick="showPage('referencia',this)">📖 Referencia</button>
 </div>
 
-<!-- INICIO -->
-<div id="page-inicio" class="page active">
-
-  <!-- ALERTA BODEGA -->
-  <div class="alerta-bodega" id="alerta-bodega">
-    <div class="alerta-bodega-titulo">⚠️ BODEGA BAJA</div>
-    <div style="font-size:13px;color:var(--red);margin-top:4px;">Quedan <strong id="alerta-bultos">—</strong> bultos — Pedir más pronto</div>
+<!-- RESUMEN -->
+<div id="page-resumen" class="page active">
+  <div id="alerts-container"></div>
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-val" id="s-aves">—</div><div class="stat-lbl">Aves vivas</div></div>
+    <div class="stat-box"><div class="stat-val red" id="s-mort">—</div><div class="stat-lbl">Muertes total</div></div>
+    <div class="stat-box"><div class="stat-val blue" id="s-semana">—</div><div class="stat-lbl">Semana actual</div></div>
+    <div class="stat-box"><div class="stat-val green" id="s-edad">—</div><div class="stat-lbl">Edad</div></div>
+    <div class="stat-box"><div class="stat-val purple" id="s-vendidas">—</div><div class="stat-lbl">Aves vendidas</div></div>
+    <div class="stat-box"><div class="stat-val green" id="s-ingresos">—</div><div class="stat-lbl">Ingresos ventas</div></div>
   </div>
-
-  <div class="grid2">
-    <div class="stat-box"><div class="stat-val" id="t-aves">—</div><div class="stat-lbl">Aves vivas</div></div>
-    <div class="stat-box"><div class="stat-val green" id="t-edad">—</div><div class="stat-lbl">Edad</div></div>
-    <div class="stat-box"><div class="stat-val blue" id="t-semana">—</div><div class="stat-lbl">Semana</div></div>
-    <div class="stat-box"><div class="stat-val red" id="t-mort">—</div><div class="stat-lbl">Muertes total</div></div>
-    <div class="stat-box"><div class="stat-val purple" id="t-vendidas">—</div><div class="stat-lbl">Aves vendidas</div></div>
-    <div class="stat-box"><div class="stat-val green" id="t-ingresos">—</div><div class="stat-lbl">Ingresos ventas</div></div>
-  </div>
-
-  <div class="big-box ok" id="ali-box">
-    <div class="big-label" style="color:var(--green);">🌾 Alimento total hoy</div>
-    <div class="big-val" id="ali-total-hoy" style="color:var(--green);">—</div>
-    <div class="big-sub-row">
-      <div class="big-sub">kg recomendados</div>
-      <div class="big-sub">≈ <strong id="ali-bultos-hoy">—</strong> bultos/día</div>
-    </div>
-    <div class="big-sub" id="ali-rango-hoy" style="margin-top:4px;"></div>
-  </div>
-
-  <div class="status-box ok" id="status-consumo">
-    <div class="status-icon" id="status-icon">📊</div>
-    <div class="status-text">
-      <div class="status-title ok" id="status-title">Cargando...</div>
-      <div class="status-desc" id="status-desc"></div>
-    </div>
-  </div>
-
   <div class="card">
-    <div class="card-title">📦 Bodega</div>
-    <div class="inv-row"><div class="inv-label">Bultos disponibles</div><div class="inv-val accent" id="b-sacos">—</div></div>
-    <div class="inv-row"><div class="inv-label">Kg disponibles</div><div class="inv-val green" id="b-kg">—</div></div>
-    <div class="inv-row"><div class="inv-label">Días estimados</div><div class="inv-val blue" id="b-dias">—</div></div>
-    <div class="bodega-bar"><div class="bodega-fill" id="b-bar" style="width:100%"></div></div>
+    <div class="card-title">📈 Progreso levante</div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Semanas completadas</span><span id="prog-sem-label">0/17</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-sem" style="width:0%"></div></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Mortalidad acumulada</span><span id="prog-mort-label">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill red" id="prog-mort" style="width:0%"></div></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Alimento acumulado</span><span id="prog-ali-label">0 kg</span></div>
+      <div class="progress-bar"><div class="progress-fill green" id="prog-ali" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📅 Última semana</div>
+    <div id="ultima-semana-info" style="color:var(--muted);font-size:13px;">Sin registros</div>
+  </div>
+  <div class="card">
+    <div class="card-title">⏳ Fechas clave</div>
+    <div id="fechas-clave"></div>
   </div>
 </div>
 
-<!-- REGISTRO DIARIO -->
+<!-- REGISTRO -->
 <div id="page-registro" class="page">
   <div class="card">
-    <div class="card-title">✏️ Registro del día</div>
-    <div style="background:var(--card2);border-radius:8px;padding:10px;margin-bottom:12px;text-align:center;">
-      <div style="font-size:11px;color:var(--muted);">Fecha de hoy</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--accent);" id="fecha-hoy">—</div>
-      <div style="font-size:11px;color:var(--muted);" id="semana-hoy">—</div>
-    </div>
-    <div class="fg"><label class="fl">🌾 Alimento echado hoy (kg)</label><input type="number" class="fi" id="r-ali" placeholder="Ej: 470" oninput="calcDiferencia()"></div>
-    <div id="diferencia-box" style="display:none;background:var(--card2);border-radius:8px;padding:10px;margin-bottom:10px;text-align:center;">
-      <div style="font-size:11px;color:var(--muted);">Diferencia vs referencia</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;" id="dif-texto">—</div>
-    </div>
-    <div class="fg"><label class="fl">💀 Muertes hoy</label><input type="number" class="fi" id="r-mort-dia" placeholder="0"></div>
-    <div class="fg"><label class="fl">📝 Observaciones</label><input type="text" class="fi" id="r-obs-dia" placeholder="Novedades del día..."></div>
-    <button class="btn btn-primary" onclick="guardarDia()">💾 GUARDAR DÍA</button>
+    <div class="card-title">✏️ Registrar semana</div>
+    <div class="fg"><label class="fl">Semana #</label><input type="number" class="fi" id="r-semana" min="1" max="20" placeholder="Ej: 9"></div>
+    <div class="fg"><label class="fl">🌾 Viernes (kg)</label><input type="number" class="fi" id="r-vie" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Sábado (kg)</label><input type="number" class="fi" id="r-sab" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Domingo (kg)</label><input type="number" class="fi" id="r-dom" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Lunes (kg)</label><input type="number" class="fi" id="r-lun" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Martes (kg)</label><input type="number" class="fi" id="r-mar" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Miércoles (kg)</label><input type="number" class="fi" id="r-mie" placeholder="0"></div>
+    <div class="fg"><label class="fl">🌾 Jueves (kg)</label><input type="number" class="fi" id="r-jue" placeholder="0"></div>
+    <div class="fg"><label class="fl">💀 Muertes</label><input type="number" class="fi" id="r-mort" placeholder="0"></div>
+    <div class="fg"><label class="fl">⚖️ Peso real (g)</label><input type="number" class="fi" id="r-peso" placeholder="Ej: 480"></div>
+    <div class="fg"><label class="fl">📝 Observaciones</label><input type="text" class="fi" id="r-obs" placeholder="Novedades..."></div>
+    <button class="btn btn-primary" onclick="guardarSemana()">💾 GUARDAR SEMANA</button>
   </div>
   <div class="card">
-    <div class="card-title">📋 Registros recientes</div>
-    <div id="registros-list"><div style="color:var(--muted);font-size:12px;">Sin registros aún</div></div>
+    <div class="card-title">⚙️ Configuración del lote</div>
+    <div class="fg"><label class="fl">Fecha de nacimiento</label><input type="date" class="fi" id="cfg-fecha" value="2026-02-27"></div>
+    <div class="fg"><label class="fl">N° pollitas inicial</label><input type="number" class="fi" id="cfg-aves" value="9180"></div>
+    <div class="fg"><label class="fl">Costo total compra pollitas ($)</label><input type="number" class="fi" id="cfg-costo-total" value="42981000"></div>
+    <div class="fr">
+      <div class="fg"><label class="fl">Costo por pollita ($)</label><input type="number" class="fi" id="cfg-costo-ave" value="4682"></div>
+      <div class="fg"><label class="fl">Valor diario/ave ($)</label><input type="number" class="fi" id="cfg-valor-dia" value="214"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label class="fl">Precio bulto inicio ($)</label><input type="number" class="fi" id="cfg-saco-inicio" value="83500"></div>
+      <div class="fg"><label class="fl">Precio bulto crec ($)</label><input type="number" class="fi" id="cfg-saco-crec" value="77420"></div>
+    </div>
+    <button class="btn btn-primary" onclick="guardarConfig()">💾 GUARDAR CONFIG</button>
   </div>
 </div>
 
@@ -179,9 +170,9 @@ select.fi{appearance:none;}
 <div id="page-ventas" class="page">
   <div class="card">
     <div class="card-title">🐔 Venta de aves</div>
-    <div class="grid2">
-      <div class="stat-box"><div class="stat-val green" id="v-precio">—</div><div class="stat-lbl">Precio sugerido/ave</div></div>
-      <div class="stat-box"><div class="stat-val blue" id="v-dias2">—</div><div class="stat-lbl">Días de edad</div></div>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-val green" id="v-precio-hoy">—</div><div class="stat-lbl">Precio sugerido/ave</div></div>
+      <div class="stat-box"><div class="stat-val blue" id="v-edad-hoy">—</div><div class="stat-lbl">Días de edad</div></div>
     </div>
     <div class="fg"><label class="fl">Cantidad de aves</label><input type="number" class="fi" id="v-cant" placeholder="Ej: 100" oninput="calcVenta()"></div>
     <div class="fg"><label class="fl">Precio por ave ($) — editable</label><input type="number" class="fi" id="v-precio-input" placeholder="0" oninput="calcTotal()"></div>
@@ -211,291 +202,198 @@ select.fi{appearance:none;}
 
   <div class="card">
     <div class="card-title">📋 Historial ventas</div>
-    <div id="ventas-list"><div style="color:var(--muted);font-size:12px;">Sin ventas aún</div></div>
+    <div id="ventas-resumen" style="margin-bottom:10px;"></div>
+    <div id="ventas-list"><div style="color:var(--muted);font-size:13px;">Sin ventas aún</div></div>
   </div>
 </div>
 
-<!-- BODEGA -->
-<div id="page-bodega" class="page">
+<!-- HISTORIAL -->
+<div id="page-historial" class="page">
   <div class="card">
-    <div class="card-title">📦 Estado bodega</div>
-    <div class="inv-row"><div class="inv-label">Bultos iniciales</div><div class="inv-val" id="bod-inicial">111</div></div>
-    <div class="inv-row"><div class="inv-label">Bultos consumidos</div><div class="inv-val red" id="bod-consumidos">—</div></div>
-    <div class="inv-row"><div class="inv-label">Bultos vendidos</div><div class="inv-val red" id="bod-vendidos">—</div></div>
-    <div class="inv-row"><div class="inv-label">Bultos disponibles</div><div class="inv-val green" id="bod-disponibles">—</div></div>
-    <div class="inv-row"><div class="inv-label">Kg disponibles</div><div class="inv-val accent" id="bod-kg">—</div></div>
-    <div class="inv-row"><div class="inv-label">Días estimados</div><div class="inv-val blue" id="bod-dias-est">—</div></div>
-    <div class="bodega-bar"><div class="bodega-fill" id="bod-bar" style="width:100%"></div></div>
+    <div class="card-title">📋 Historial por semana</div>
+    <div id="historial-list"><div style="color:var(--muted);font-size:13px;">Sin registros</div></div>
   </div>
   <div class="card">
-    <div class="card-title">➕ Entrada de bultos</div>
-    <div class="fg"><label class="fl">Cantidad de bultos recibidos</label><input type="number" class="fi" id="ent-sacos" placeholder="Ej: 50"></div>
-    <div class="fg"><label class="fl">Proveedor</label><input type="text" class="fi" id="ent-proveedor" placeholder="Nombre (opcional)"></div>
-    <button class="btn btn-green" onclick="registrarEntrada()">📥 REGISTRAR ENTRADA</button>
-  </div>
-  <div class="card">
-    <div class="card-title">📋 Entradas registradas</div>
-    <div id="bodega-movimientos"><div style="color:var(--muted);font-size:12px;">Sin entradas aún</div></div>
-  </div>
-</div>
-
-<!-- VACUNAS -->
-<div id="page-vacunas" class="page">
-  <div class="card">
-    <div class="card-title">💉 Registrar vacuna/medicamento</div>
-    <div class="fg"><label class="fl">Nombre del producto</label><input type="text" class="fi" id="vac-nombre" placeholder="Ej: Newcastle, Gumboro..."></div>
-    <div class="fg"><label class="fl">Tipo</label>
-      <select class="fi" id="vac-tipo">
-        <option value="vacuna">Vacuna</option>
-        <option value="medicamento">Medicamento</option>
-        <option value="vitamina">Vitamina</option>
-        <option value="antibiotico">Antibiótico</option>
-        <option value="desparasitante">Desparasitante</option>
-      </select>
+    <div class="card-title">📊 Tabla completa</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sem</th><th>Ali(kg)</th><th>Mort</th><th>%Mort</th><th>Saldo</th><th>Peso(g)</th><th>✏️</th></tr></thead>
+        <tbody id="tabla-body"><tr><td colspan="7" style="color:var(--muted);">Sin datos</td></tr></tbody>
+      </table>
     </div>
-    <div class="fg"><label class="fl">Dosis</label><input type="text" class="fi" id="vac-dosis" placeholder="Ej: 1ml/ave"></div>
-    <div class="fg"><label class="fl">Vía</label>
-      <select class="fi" id="vac-via">
-        <option value="agua">Agua</option>
-        <option value="inyectable">Inyectable</option>
-        <option value="ocular">Ocular</option>
-        <option value="spray">Spray</option>
-        <option value="oral">Oral</option>
-      </select>
-    </div>
-    <div class="fg"><label class="fl">Cantidad usada</label><input type="text" class="fi" id="vac-cantidad" placeholder="Ej: 10 frascos"></div>
-    <div class="fg"><label class="fl">📝 Observaciones</label><input type="text" class="fi" id="vac-obs" placeholder="Reacciones, novedades..."></div>
-    <button class="btn btn-primary" onclick="guardarVacuna()">💾 REGISTRAR</button>
-  </div>
-  <div class="card">
-    <div class="card-title">📋 Historial</div>
-    <div id="vacunas-list"><div style="color:var(--muted);font-size:12px;">Sin registros aún</div></div>
-  </div>
-  <div class="card">
-    <div class="card-title">📅 Programa Hy Line Brown</div>
-    <div class="inv-row"><div class="inv-label">Sem 1</div><div style="font-size:12px;color:var(--text);">Marek, Newcastle</div></div>
-    <div class="inv-row"><div class="inv-label">Sem 2</div><div style="font-size:12px;color:var(--text);">Gumboro</div></div>
-    <div class="inv-row"><div class="inv-label">Sem 4</div><div style="font-size:12px;color:var(--text);">Newcastle + Bronquitis</div></div>
-    <div class="inv-row"><div class="inv-label">Sem 8</div><div style="font-size:12px;color:var(--text);">Newcastle (refuerzo)</div></div>
-    <div class="inv-row"><div class="inv-label">Sem 12</div><div style="font-size:12px;color:var(--text);">Encefalomielitis</div></div>
-    <div class="inv-row"><div class="inv-label">Sem 15</div><div style="font-size:12px;color:var(--text);">Newcastle + Bronquitis</div></div>
   </div>
 </div>
 
-<!-- ALIMENTO -->
-<div id="page-alimento" class="page">
+<!-- INVERSION -->
+<div id="page-inversion" class="page">
+  <div class="card"><div class="card-title">💰 Inversión total</div><div id="inversion-content"></div></div>
+  <div class="card"><div class="card-title">🌾 Detalle alimento (bultos)</div><div id="alimento-detalle"></div></div>
+  <div class="card"><div class="card-title">💵 Balance ingresos vs inversión</div><div id="balance-content"></div></div>
+</div>
+
+<!-- ANALISIS -->
+<div id="page-analisis" class="page">
   <div class="card">
-    <div class="card-title">📖 Alimento por semana</div>
-    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Fila resaltada = semana actual ◀</div>
-    <table>
-      <thead><tr><th>Sem</th><th>g/ave/día</th><th>kg/día</th><th>bultos/día</th></tr></thead>
-      <tbody id="tabla-ref"></tbody>
-    </table>
+    <div class="card-title">📈 Consumo real vs Hy Line por semana</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Incluye saldo de aves · 🟢 Menos · 🔴 Más de lo esperado</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sem</th><th>Saldo</th><th>Real(kg)</th><th>Ref(kg)</th><th>Dif(g/ave)</th><th>Peso est(g)</th></tr></thead>
+        <tbody id="analisis-body"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">📊 Resumen análisis</div><div id="analisis-resumen"></div></div>
+</div>
+
+<!-- REFERENCIA -->
+<div id="page-referencia" class="page">
+  <div class="card">
+    <div class="card-title">📖 Guía Hy Line Brown</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sem</th><th>Peso ref(g)</th><th>g/ave/día</th><th>kg total/día</th></tr></thead>
+        <tbody id="ref-body"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">💉 Programa vacunación</div>
+    <div class="ref-row"><div class="ref-sem">Sem 1</div><div><div class="ref-val">Marek, Newcastle</div><div class="ref-lbl">Al nacer</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 2</div><div><div class="ref-val">Gumboro</div><div class="ref-lbl">Bolsa de Fabricio</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 4</div><div><div class="ref-val">Newcastle + Bronquitis</div><div class="ref-lbl">Refuerzo</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 8</div><div><div class="ref-val">Newcastle</div><div class="ref-lbl">Refuerzo</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 12</div><div><div class="ref-val">Encefalomielitis</div><div class="ref-lbl">EAV</div></div></div>
+    <div class="ref-row"><div class="ref-sem">Sem 15</div><div><div class="ref-val">Newcastle + Bronquitis</div><div class="ref-lbl">Pre-postura</div></div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📌 Datos importantes</div>
+    <div class="alert alert-ok">✅ Inicio postura: semana 17-18 aprox.</div>
+    <div class="alert alert-warn">⚠️ Mortalidad normal: máx 3-4% total</div>
+    <div class="alert alert-warn">⚠️ Pico producción: 90-95% sem 25-30</div>
   </div>
 </div>
 
 <script>
-const SCRIPT_URL='https://script.google.com/macros/s/AKfycbymQf_mJcyplfooDnSt-R0ECMfGAqpJm_nesiqviLsRROjaSIpONgwO4LGeiGenembSTA/exec';
-const REF=[
-  {sem:1,min:12,max:14},{sem:2,min:17,max:21},{sem:3,min:20,max:25},
-  {sem:4,min:25,max:30},{sem:5,min:29,max:36},{sem:6,min:35,max:44},
-  {sem:7,min:41,max:49},{sem:8,min:47,max:56},{sem:9,min:52,max:61},
-  {sem:10,min:56,max:64},{sem:11,min:60,max:69},{sem:12,min:62,max:72},
-  {sem:13,min:64,max:74},{sem:14,min:66,max:76},{sem:15,min:68,max:78},
-  {sem:16,min:70,max:80},{sem:17,min:72,max:82}
-];
-let config={fecha:'2026-02-27',avesInicial:9180,costoAve:4682,costoTotal:42981000,valorDia:214};
-let semanas=[],ventas=[],vacunas=[],registrosDiarios=[];
-let bodega={sacosIniciales:485,entradas:[],sacosPorAlimento:40};
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyl30I25rIiVkSf1SV0nBFDHiaEuItHRLfnWgr6rp7Rw1gCIqd8WvcsB5pv4p4naM26rw/exec';
 
-function getEdad(){const fecha=config.fecha.substring(0,10);const nac=new Date(fecha+'T00:00:00');const hoy=new Date();hoy.setHours(0,0,0,0);return Math.floor((hoy-nac)/(1000*60*60*24));}
+const REF_DATA=[
+  {sem:1,pesoMin:70,pesoMax:76,aliMin:12,aliMax:14},
+  {sem:2,pesoMin:110,pesoMax:136,aliMin:17,aliMax:21},
+  {sem:3,pesoMin:185,pesoMax:216,aliMin:20,aliMax:25},
+  {sem:4,pesoMin:260,pesoMax:310,aliMin:25,aliMax:30},
+  {sem:5,pesoMin:350,pesoMax:408,aliMin:29,aliMax:36},
+  {sem:6,pesoMin:465,pesoMax:515,aliMin:35,aliMax:44},
+  {sem:7,pesoMin:565,pesoMax:620,aliMin:41,aliMax:49},
+  {sem:8,pesoMin:670,pesoMax:720,aliMin:47,aliMax:56},
+  {sem:9,pesoMin:770,pesoMax:840,aliMin:52,aliMax:61},
+  {sem:10,pesoMin:880,pesoMax:940,aliMin:56,aliMax:64},
+  {sem:11,pesoMin:985,pesoMax:1050,aliMin:60,aliMax:69},
+  {sem:12,pesoMin:1085,pesoMax:1150,aliMin:62,aliMax:72},
+  {sem:13,pesoMin:1165,pesoMax:1240,aliMin:64,aliMax:74},
+  {sem:14,pesoMin:1269,pesoMax:1357,aliMin:66,aliMax:76},
+  {sem:15,pesoMin:1580,pesoMax:1929,aliMin:68,aliMax:78},
+  {sem:16,pesoMin:1940,pesoMax:2395,aliMin:70,aliMax:80},
+  {sem:17,pesoMin:2334,pesoMax:2806,aliMin:72,aliMax:82}
+];
+
+let config={fecha:'2026-02-27',avesInicial:9180,costoAve:4682,costoTotal:42981000,valorDia:214,sacoInicio:83500,sacoCrec:77420};
+let semanas=[],ventas=[];
+
+function getEdad(){return Math.floor((new Date()-new Date(config.fecha))/(1000*60*60*24));}
 function getSemana(){return Math.ceil(getEdad()/7);}
-function getMortTotal(){
-  const ms=semanas.reduce((a,s)=>a+s.mort,0);
-  const md=registrosDiarios.reduce((a,r)=>a+(parseInt(r.mort)||0),0);
-  return ms+md;
-}
-function getAliTotal(){
-  const aliSemanas=semanas.reduce((a,s)=>a+s.aliTotal,0);
-  const aliDiarios=registrosDiarios.reduce((a,r)=>a+(parseFloat(r.ali)||0),0);
-  return aliSemanas+aliDiarios;
-}
+function getMortTotal(){return semanas.reduce((a,s)=>a+s.mort,0);}
+function getAliTotal(){return semanas.reduce((a,s)=>a+s.aliTotal,0);}
 function getAvesVendidasAve(){return ventas.filter(v=>v.tipo==='ave').reduce((a,v)=>a+(parseInt(v.cant)||0),0);}
 function getBultosVendidos(){return ventas.filter(v=>v.tipo==='bulto').reduce((a,v)=>a+(parseInt(v.cant)||0),0);}
 function getAvesVivas(){return config.avesInicial-getMortTotal()-getAvesVendidasAve();}
-function getSacosConsumidos(){return Math.ceil(getAliTotal()/bodega.sacosPorAlimento);}
-function getSacosDisponibles(){const e=bodega.entradas.reduce((a,e)=>a+e.cant,0);return bodega.sacosIniciales+e-getSacosConsumidos()-getBultosVendidos();}
-function getPrecioAve(){const edad=getEdad();const semanasCompletas=Math.floor(edad/7);const diasExtra=edad-(semanasCompletas*7);return 6000+(1500*semanasCompletas)+(214*diasExtra);}
-function getRefDia(){
-  const semAct=getSemana();const ref=REF.find(r=>r.sem===semAct)||REF[REF.length-1];
-  const avesVivas=getAvesVivas();const promG=Math.round((ref.min+ref.max)/2);
-  return Math.round((promG*avesVivas)/1000);
-}
+function getPrecioAve(){return Math.round((config.costoTotal/config.avesInicial)+((config.valorDia||214)*getEdad()));}
+function getTotalIngresosAve(){return ventas.filter(v=>v.tipo==='ave').reduce((a,v)=>a+(parseInt(v.total)||0),0);}
+function getTotalIngresos(){return ventas.reduce((a,v)=>a+(parseInt(v.total)||0),0);}
 
 async function sincronizar(){
   document.getElementById('sync-status').textContent='⏳ Sincronizando...';
   try{
     const res=await fetch(SCRIPT_URL+'?action=getAll');
     const data=await res.json();
-    if(data.config&&Object.keys(data.config).length>0){config={...config,...data.config};config.avesInicial=parseInt(data.config.avesInicial)||config.avesInicial;}
+    if(data.config&&Object.keys(data.config).length>0){
+      config={...config,...data.config};
+      config.avesInicial=parseInt(data.config.avesInicial)||config.avesInicial;
+      config.costoAve=parseInt(data.config.costoAve)||config.costoAve;
+      config.costoTotal=parseInt(data.config.costoTotal)||config.costoTotal;
+      config.valorDia=parseInt(data.config.valorDia)||config.valorDia;
+      config.sacoInicio=parseInt(data.config.sacoInicio)||config.sacoInicio;
+      config.sacoCrec=parseInt(data.config.sacoCrec)||config.sacoCrec;
+    }
     if(data.semanas&&data.semanas.length>0)semanas=data.semanas;
     if(data.ventas&&data.ventas.length>0)ventas=data.ventas;
-    if(data.vacunas)vacunas=data.vacunas;
-    if(data.registrosDiarios)registrosDiarios=data.registrosDiarios;
-    if(data.bodega){bodega.entradas=data.bodega.entradas||[];bodega.sacosPorAlimento=data.bodega.sacosPorAlimento||40;}
-    bodega.sacosIniciales=485;
+    cargarConfigUI();
     actualizarTodo();
     document.getElementById('sync-status').textContent='✅ '+new Date().toLocaleTimeString('es-CO');
-  }catch(e){document.getElementById('sync-status').textContent='❌ Error de conexión';}
+  }catch(e){document.getElementById('sync-status').textContent='❌ Error al sincronizar';}
 }
 
-function actualizarTodo(){
-  actualizarInicio();actualizarRegistros();actualizarVentasUI();actualizarBodega();actualizarVacunas();actualizarTablaRef();
-  document.getElementById('fecha-hoy').textContent=new Date().toLocaleDateString('es-CO',{weekday:'long',day:'2-digit',month:'long'});
-  document.getElementById('semana-hoy').textContent='Semana '+getSemana()+' · Día '+getEdad();
+function cargarConfigUI(){
+  document.getElementById('cfg-fecha').value=config.fecha;
+  document.getElementById('cfg-aves').value=config.avesInicial;
+  document.getElementById('cfg-costo-total').value=config.costoTotal||42981000;
+  document.getElementById('cfg-costo-ave').value=Math.round((config.costoTotal||42981000)/config.avesInicial);
+  document.getElementById('cfg-valor-dia').value=config.valorDia||214;
+  document.getElementById('cfg-saco-inicio').value=config.sacoInicio||83500;
+  document.getElementById('cfg-saco-crec').value=config.sacoCrec||77420;
 }
 
-function actualizarInicio(){
-  const edad=getEdad(),semAct=getSemana(),avesVivas=getAvesVivas();
-  const avesVendidas=getAvesVendidasAve();
-  const ingresos=ventas.filter(v=>v.tipo==='ave').reduce((a,v)=>a+(parseInt(v.total)||0),0);
-  document.getElementById('t-aves').textContent=avesVivas.toLocaleString();
-  document.getElementById('t-edad').textContent=edad+' días';
-  document.getElementById('t-semana').textContent='Sem '+semAct;
-  document.getElementById('t-mort').textContent=getMortTotal();
-  document.getElementById('t-vendidas').textContent=avesVendidas;
-  document.getElementById('t-ingresos').textContent='$'+ingresos.toLocaleString();
-
-  const ref=REF.find(r=>r.sem===semAct)||REF[REF.length-1];
-  const promG=Math.round((ref.min+ref.max)/2);
-  const kgRef=Math.round((promG*avesVivas)/1000);
-  const kgMin=Math.round((ref.min*avesVivas)/1000);
-  const kgMax=Math.round((ref.max*avesVivas)/1000);
-  const bultosHoy=(kgRef/40).toFixed(1);
-
-  document.getElementById('ali-total-hoy').textContent=kgRef;
-  document.getElementById('ali-bultos-hoy').textContent=bultosHoy+' bultos';
-  document.getElementById('ali-rango-hoy').textContent='Rango: '+kgMin+' – '+kgMax+' kg/día';
-
-  // Estado consumo
-  const ultimoReg=registrosDiarios.length>0?registrosDiarios[registrosDiarios.length-1]:null;
-  const statusBox=document.getElementById('status-consumo');
-  const statusIcon=document.getElementById('status-icon');
-  const statusTitle=document.getElementById('status-title');
-  const statusDesc=document.getElementById('status-desc');
-  if(ultimoReg&&ultimoReg.ali>0){
-    const dif=ultimoReg.ali-kgRef;
-    const difPct=Math.round((Math.abs(dif)/kgRef)*100);
-    if(Math.abs(dif)<=kgRef*0.05){statusBox.className='status-box ok';statusIcon.textContent='✅';statusTitle.className='status-title ok';statusTitle.textContent='Alimento correcto';statusDesc.textContent='Ayer echó '+ultimoReg.ali+' kg — dentro del rango';}
-    else if(dif>0){statusBox.className='status-box danger';statusIcon.textContent='⚠️';statusTitle.className='status-title danger';statusTitle.textContent='Echando '+dif+' kg de MÁS';statusDesc.textContent='Ayer: '+ultimoReg.ali+' kg · Ref: '+kgRef+' kg ('+difPct+'% más)';}
-    else{statusBox.className='status-box warn';statusIcon.textContent='⬇️';statusTitle.className='status-title warn';statusTitle.textContent='Echando '+Math.abs(dif)+' kg de MENOS';statusDesc.textContent='Ayer: '+ultimoReg.ali+' kg · Ref: '+kgRef+' kg ('+difPct+'% menos)';}
-  }else{
-    statusBox.className='status-box ok';statusIcon.textContent='📊';statusTitle.className='status-title ok';statusTitle.textContent='Hoy debe echar '+kgRef+' kg';statusDesc.textContent='≈ '+bultosHoy+' bultos · Rango: '+kgMin+' – '+kgMax+' kg';
-  }
-
-  // Bodega
-  const sacos=getSacosDisponibles();
-  const kgDisp=sacos*bodega.sacosPorAlimento;
-  const diasEst=kgRef>0?Math.floor(kgDisp/kgRef):0;
-  document.getElementById('b-sacos').textContent=sacos+' bultos';
-  document.getElementById('b-kg').textContent=kgDisp.toLocaleString()+' kg';
-  document.getElementById('b-dias').textContent=diasEst+' días';
-  const pct=Math.min((sacos/bodega.sacosIniciales)*100,100);
-  const bar=document.getElementById('b-bar');
-  bar.style.width=pct+'%';
-  bar.className='bodega-fill'+(pct<20?' danger':pct<40?' warn':'');
-
-  // Alerta bodega < 40 bultos
-  const alertaBodega=document.getElementById('alerta-bodega');
-  if(sacos<40){alertaBodega.style.display='block';document.getElementById('alerta-bultos').textContent=sacos;}
-  else{alertaBodega.style.display='none';}
+async function guardarConfig(){
+  const costoTotal=parseInt(document.getElementById('cfg-costo-total').value)||42981000;
+  const avesInicial=parseInt(document.getElementById('cfg-aves').value)||9180;
+  config.fecha=document.getElementById('cfg-fecha').value;
+  config.avesInicial=avesInicial;
+  config.costoTotal=costoTotal;
+  config.costoAve=Math.round(costoTotal/avesInicial);
+  config.valorDia=parseInt(document.getElementById('cfg-valor-dia').value)||214;
+  config.sacoInicio=parseInt(document.getElementById('cfg-saco-inicio').value)||83500;
+  config.sacoCrec=parseInt(document.getElementById('cfg-saco-crec').value)||77420;
+  try{await fetch(SCRIPT_URL+'?action=saveConfig&data='+encodeURIComponent(JSON.stringify(config)));actualizarTodo();alert('✅ Configuración guardada');}
+  catch(e){alert('❌ Error al guardar');}
 }
 
-function calcDiferencia(){
-  const ali=parseInt(document.getElementById('r-ali').value)||0;
-  if(!ali){document.getElementById('diferencia-box').style.display='none';return;}
-  const kgRef=getRefDia();const dif=ali-kgRef;
-  const box=document.getElementById('diferencia-box');const texto=document.getElementById('dif-texto');
-  box.style.display='block';
-  if(Math.abs(dif)<=kgRef*0.05){texto.style.color='var(--green)';texto.textContent='✅ Cantidad correcta';}
-  else if(dif>0){texto.style.color='var(--red)';texto.textContent='⚠️ '+dif+' kg de MÁS (ref: '+kgRef+' kg)';}
-  else{texto.style.color='var(--accent)';texto.textContent='⬇️ '+Math.abs(dif)+' kg de MENOS (ref: '+kgRef+' kg)';}
-}
-
-async function guardarDia(){
-  const ali=parseFloat(document.getElementById('r-ali').value)||0;
-  const mort=parseInt(document.getElementById('r-mort-dia').value)||0;
-  const obs=document.getElementById('r-obs-dia').value;
-  if(!ali&&!mort){alert('Ingrese al menos el alimento o las muertes');return;}
-  const reg={fecha:new Date().toLocaleDateString('es-CO'),edad:getEdad(),semana:getSemana(),ali,mort,obs,kgRef:getRefDia(),id:Date.now()};
-  registrosDiarios.push(reg);
+async function guardarSemana(){
+  const num=parseInt(document.getElementById('r-semana').value);
+  if(!num){alert('Ingrese el número de semana');return;}
+  const dias=['vie','sab','dom','lun','mar','mie','jue'];
+  const aliDias=dias.map(d=>parseFloat(document.getElementById('r-'+d).value)||0);
+  const aliTotal=aliDias.reduce((a,b)=>a+b,0);
+  const mort=parseInt(document.getElementById('r-mort').value)||0;
+  const peso=parseInt(document.getElementById('r-peso').value)||0;
+  const obs=document.getElementById('r-obs').value;
+  semanas=semanas.filter(s=>s.num!==num);
+  const mortPrev=semanas.filter(s=>s.num<num).reduce((a,s)=>a+s.mort,0);
+  const saldo=config.avesInicial-mortPrev-mort-getAvesVendidasAve();
+  const mortAcum=mortPrev+mort;
+  const pctMort=((mortAcum/config.avesInicial)*100).toFixed(4);
+  const nueva={num,aliDias,aliTotal,mort,peso,obs,saldo,mortAcum,pctMort};
+  semanas.push(nueva);semanas.sort((a,b)=>a.num-b.num);
   try{
-    await fetch(SCRIPT_URL+'?action=saveRegistroDiario&data='+encodeURIComponent(JSON.stringify(reg)));
+    await fetch(SCRIPT_URL+'?action=saveSemana&data='+encodeURIComponent(JSON.stringify(nueva)));
     actualizarTodo();
-    document.getElementById('r-ali').value='';document.getElementById('r-mort-dia').value='';document.getElementById('r-obs-dia').value='';
-    document.getElementById('diferencia-box').style.display='none';
-    alert('✅ Registro del día guardado');
+    dias.forEach(d=>document.getElementById('r-'+d).value='');
+    ['r-semana','r-mort','r-peso','r-obs'].forEach(id=>document.getElementById(id).value='');
+    alert('✅ Semana '+num+' guardada');
   }catch(e){alert('❌ Error al guardar');}
 }
 
-function actualizarRegistros(){
-  const list=document.getElementById('registros-list');
-  if(registrosDiarios.length===0){list.innerHTML='<div style="color:var(--muted);font-size:12px;">Sin registros aún</div>';return;}
-  list.innerHTML=[...registrosDiarios].reverse().slice(0,10).map(r=>{
-    const dif=r.ali-r.kgRef;
-    const difColor=Math.abs(dif)<=r.kgRef*0.05?'var(--green)':dif>0?'var(--red)':'var(--accent)';
-    const difTexto=Math.abs(dif)<=r.kgRef*0.05?'✅ Correcto':dif>0?'⚠️ +'+dif+' kg':'⬇️ '+dif+' kg';
-    return '<div class="item '+(r.mort>0?'red':'green')+'"><div class="item-header"><div class="item-title">📅 '+r.fecha+'</div><div class="item-date">Sem '+r.semana+'</div></div><div class="item-stats"><div class="is">🌾 <span>'+r.ali+' kg</span></div><div class="is">💀 <span style="color:var(--red)">'+r.mort+'</span></div><div class="is" style="color:'+difColor+';">'+difTexto+'</div>'+(r.obs?'<div class="is">📝 <span>'+r.obs+'</span></div>':'')+'</div></div>';
-  }).join('');
+async function eliminarSemana(num){
+  if(!confirm('¿Eliminar semana '+num+'?'))return;
+  semanas=semanas.filter(s=>s.num!==num);
+  try{await fetch(SCRIPT_URL+'?action=deleteSemana&num='+num);actualizarTodo();}
+  catch(e){alert('❌ Error');}
 }
 
-function actualizarVentasUI(){
-  const precio=getPrecioAve();
-  document.getElementById('v-precio').textContent='$'+precio.toLocaleString();
-  document.getElementById('v-dias2').textContent=getEdad()+' días';
-  document.getElementById('v-precio-input').value=precio;
-  const list=document.getElementById('ventas-list');
-  if(ventas.length===0){list.innerHTML='<div style="color:var(--muted);font-size:12px;">Sin ventas aún</div>';return;}
-  list.innerHTML=[...ventas].reverse().map(v=>{
-    let color='green',icon='🐔',titulo=v.cant+' aves';
-    if(v.tipo==='bulto'){color='blue';icon='🌾';titulo=v.cant+' bultos';}
-    if(v.tipo==='gallinaza'){color='purple';icon='💩';titulo=v.cant+' '+(v.unidad||'');}
-    return '<div class="item '+color+'"><div class="item-header"><div class="item-title" style="color:var(--'+color+');">'+icon+' '+titulo+'</div><div class="item-date">'+v.fecha+'</div></div><div class="item-stats"><div class="is">💰 <span style="color:var(--green);">$'+v.total.toLocaleString()+'</span></div>'+(v.comprador?'<div class="is">👤 <span>'+v.comprador+'</span></div>':'')+'</div></div>';
-  }).join('');
-}
-
-function actualizarBodega(){
-  const sacos=getSacosDisponibles(),kgDisp=sacos*bodega.sacosPorAlimento;
-  const kgRef=getRefDia();const diasEst=kgRef>0?Math.floor(kgDisp/kgRef):0;
-  document.getElementById('bod-inicial').textContent=bodega.sacosIniciales+' bultos';
-  document.getElementById('bod-consumidos').textContent=getSacosConsumidos()+' bultos';
-  document.getElementById('bod-vendidos').textContent=getBultosVendidos()+' bultos';
-  document.getElementById('bod-disponibles').textContent=sacos+' bultos';
-  document.getElementById('bod-kg').textContent=kgDisp.toLocaleString()+' kg';
-  document.getElementById('bod-dias-est').textContent=diasEst+' días';
-  const pct=Math.min((sacos/bodega.sacosIniciales)*100,100);
-  const bar=document.getElementById('bod-bar');
-  bar.style.width=pct+'%';bar.className='bodega-fill'+(pct<20?' danger':pct<40?' warn':'');
-  const mov=document.getElementById('bodega-movimientos');
-  if(!bodega.entradas||bodega.entradas.length===0){mov.innerHTML='<div style="color:var(--muted);font-size:12px;">Sin entradas</div>';return;}
-  mov.innerHTML=[...bodega.entradas].reverse().map(e=>'<div class="item blue"><div class="item-header"><div class="item-title" style="color:var(--blue);">+'+e.cant+' bultos</div><div class="item-date">'+e.fecha+'</div></div>'+(e.proveedor?'<div class="item-stats"><div class="is">👤 <span>'+e.proveedor+'</span></div></div>':'')+'</div>').join('');
-}
-
-function actualizarVacunas(){
-  const list=document.getElementById('vacunas-list');
-  if(!vacunas||vacunas.length===0){list.innerHTML='<div style="color:var(--muted);font-size:12px;">Sin registros aún</div>';return;}
-  list.innerHTML=[...vacunas].reverse().map(v=>'<div class="item purple"><div class="item-header"><div class="item-title" style="color:var(--purple);">💉 '+v.nombre+'</div><div class="item-date">'+v.fecha+'</div></div><div class="item-stats"><div class="is">Tipo: <span>'+v.tipo+'</span></div><div class="is">Vía: <span>'+v.via+'</span></div><div class="is">Sem: <span>'+v.semana+'</span></div>'+(v.obs?'<div class="is">📝 <span>'+v.obs+'</span></div>':'')+'</div></div>').join('');
-}
-
-function actualizarTablaRef(){
-  const semAct=getSemana(),avesVivas=getAvesVivas();
-  document.getElementById('tabla-ref').innerHTML=REF.map(r=>{
-    const prom=Math.round((r.min+r.max)/2);
-    const kg=Math.round((prom*avesVivas)/1000);
-    const bultos=(kg/40).toFixed(1);
-    const esAct=r.sem===semAct;
-    return '<tr class="'+(esAct?'current':'')+'"><td class="tw">'+r.sem+(esAct?' ◀':'')+'</td><td>'+r.min+'–'+r.max+'</td><td><strong>'+kg+' kg</strong></td><td>'+bultos+'</td></tr>';
-  }).join('');
+async function eliminarVenta(id){
+  if(!confirm('¿Eliminar esta venta?'))return;
+  ventas=ventas.filter(v=>String(v.id)!==String(id));
+  try{await fetch(SCRIPT_URL+'?action=deleteVenta&id='+id);actualizarTodo();alert('✅ Venta eliminada');}
+  catch(e){alert('❌ Error');}
 }
 
 function calcVenta(){document.getElementById('v-precio-input').value=getPrecioAve();calcTotal();}
@@ -531,20 +429,137 @@ async function guardarVenta(tipo){
   }catch(e){alert('❌ Error');}
 }
 
-async function guardarVacuna(){
-  const nombre=document.getElementById('vac-nombre').value;if(!nombre){alert('Ingrese el nombre');return;}
-  const vac={nombre,tipo:document.getElementById('vac-tipo').value,dosis:document.getElementById('vac-dosis').value,via:document.getElementById('vac-via').value,cantidad:document.getElementById('vac-cantidad').value,obs:document.getElementById('vac-obs').value,fecha:new Date().toLocaleDateString('es-CO'),edad:getEdad(),semana:getSemana(),id:Date.now()};
-  vacunas.push(vac);
-  try{await fetch(SCRIPT_URL+'?action=saveVacuna&data='+encodeURIComponent(JSON.stringify(vac)));actualizarVacunas();['vac-nombre','vac-dosis','vac-cantidad','vac-obs'].forEach(id=>document.getElementById(id).value='');alert('✅ '+nombre+' registrado');}
-  catch(e){alert('❌ Error');}
+function actualizarTodo(){actualizarResumen();actualizarHistorial();actualizarVentasUI();actualizarInversion();actualizarAnalisis();actualizarRefTabla();}
+
+function actualizarResumen(){
+  const edad=getEdad(),semAct=getSemana(),mortTotal=getMortTotal(),avesVivas=getAvesVivas();
+  const pctMort=((mortTotal/config.avesInicial)*100).toFixed(2);
+  const aliTotal=getAliTotal();
+  document.getElementById('s-aves').textContent=avesVivas.toLocaleString();
+  document.getElementById('s-mort').textContent=mortTotal;
+  document.getElementById('s-semana').textContent='Sem '+semAct;
+  document.getElementById('s-edad').textContent=edad+' días';
+  document.getElementById('s-vendidas').textContent=getAvesVendidasAve();
+  document.getElementById('s-ingresos').textContent='$'+getTotalIngresosAve().toLocaleString();
+  document.getElementById('prog-sem').style.width=Math.min((semAct/17)*100,100)+'%';
+  document.getElementById('prog-sem-label').textContent=Math.min(semAct,17)+'/17';
+  document.getElementById('prog-mort').style.width=Math.min(parseFloat(pctMort)*25,100)+'%';
+  document.getElementById('prog-mort-label').textContent=pctMort+'%';
+  document.getElementById('prog-ali').style.width=Math.min((aliTotal/50000)*100,100)+'%';
+  document.getElementById('prog-ali-label').textContent=aliTotal.toLocaleString()+' kg';
+  const alerts=[];
+  if(parseFloat(pctMort)>4)alerts.push('<div class="alert alert-danger">⚠️ Mortalidad alta: '+pctMort+'%</div>');
+  else if(parseFloat(pctMort)>2)alerts.push('<div class="alert alert-warn">⚠️ Mortalidad: '+pctMort+'%</div>');
+  else if(semanas.length>0)alerts.push('<div class="alert alert-ok">✅ Mortalidad normal: '+pctMort+'%</div>');
+  document.getElementById('alerts-container').innerHTML=alerts.join('');
+  const ultima=semanas[semanas.length-1];
+  if(ultima){document.getElementById('ultima-semana-info').innerHTML='<div class="week-stats"><div class="week-stat">Semana <span>'+ultima.num+'</span></div><div class="week-stat">Alimento <span>'+ultima.aliTotal+' kg</span></div><div class="week-stat">Muertes <span style="color:var(--red)">'+ultima.mort+'</span></div><div class="week-stat">Saldo <span>'+ultima.saldo.toLocaleString()+'</span></div>'+(ultima.peso?'<div class="week-stat">Peso <span>'+ultima.peso+'g</span></div>':'')+'</div>';}
+  const nac=new Date(config.fecha);
+  const sem17=new Date(nac);sem17.setDate(sem17.getDate()+17*7);
+  const sem18=new Date(nac);sem18.setDate(sem18.getDate()+18*7);
+  const fmt=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
+  document.getElementById('fechas-clave').innerHTML='<div class="inv-row"><div class="inv-label">🥚 Inicio postura</div><div class="inv-val accent" style="font-size:14px;">'+fmt(sem17)+'</div></div><div class="inv-row"><div class="inv-label">📅 Semana 18</div><div class="inv-val" style="font-size:14px;">'+fmt(sem18)+'</div></div><div class="inv-row"><div class="inv-label">⏳ Días para postura</div><div class="inv-val green" style="font-size:14px;">'+Math.max(0,Math.ceil((sem17-new Date())/(1000*60*60*24)))+' días</div></div>';
 }
 
-async function registrarEntrada(){
-  const cant=parseInt(document.getElementById('ent-sacos').value);if(!cant){alert('Ingrese cantidad');return;}
-  const entrada={cant,proveedor:document.getElementById('ent-proveedor').value,fecha:new Date().toLocaleDateString('es-CO'),id:Date.now()};
-  bodega.entradas.push(entrada);
-  try{await fetch(SCRIPT_URL+'?action=saveBodega&data='+encodeURIComponent(JSON.stringify(bodega)));actualizarBodega();document.getElementById('ent-sacos').value='';document.getElementById('ent-proveedor').value='';alert('✅ '+cant+' bultos registrados');}
-  catch(e){alert('❌ Error');}
+function actualizarHistorial(){
+  const list=document.getElementById('historial-list');
+  const tbody=document.getElementById('tabla-body');
+  if(semanas.length===0){list.innerHTML='<div style="color:var(--muted);font-size:13px;">Sin registros</div>';tbody.innerHTML='<tr><td colspan="7" style="color:var(--muted);">Sin datos</td></tr>';return;}
+  list.innerHTML=semanas.map(s=>'<div class="week-item"><div class="week-item-header"><div class="week-num">Semana '+s.num+'</div><button class="btn btn-danger btn-sm" onclick="eliminarSemana('+s.num+')">🗑</button></div><div class="week-stats"><div class="week-stat">🌾 <span>'+s.aliTotal+' kg</span></div><div class="week-stat">💀 <span style="color:var(--red)">'+s.mort+'</span></div><div class="week-stat">🐔 <span>'+s.saldo.toLocaleString()+'</span></div><div class="week-stat">📊 <span>'+s.pctMort+'%</span></div>'+(s.peso?'<div class="week-stat">⚖️ <span>'+s.peso+'g</span></div>':'')+'</div></div>').join('');
+  tbody.innerHTML=semanas.map(s=>'<tr><td class="td-week">'+s.num+'</td><td>'+s.aliTotal+'</td><td style="color:var(--red)">'+s.mort+'</td><td>'+s.pctMort+'%</td><td>'+s.saldo.toLocaleString()+'</td><td>'+(s.peso||'—')+'</td><td><button class="btn btn-danger btn-sm" onclick="eliminarSemana('+s.num+')">🗑</button></td></tr>').join('');
+}
+
+function actualizarVentasUI(){
+  const precio=getPrecioAve();
+  document.getElementById('v-precio-hoy').textContent='$'+precio.toLocaleString();
+  document.getElementById('v-edad-hoy').textContent=getEdad()+' días';
+  document.getElementById('v-precio-input').value=precio;
+  const avesV=getAvesVendidasAve(),ingAvs=getTotalIngresosAve(),ingTotal=getTotalIngresos();
+  if(ventas.length>0)document.getElementById('ventas-resumen').innerHTML='<div class="inv-row"><div class="inv-label">Aves vendidas</div><div class="inv-val accent">'+avesV+'</div></div><div class="inv-row"><div class="inv-label">Ingresos aves</div><div class="inv-val green">$'+ingAvs.toLocaleString()+'</div></div><div class="inv-row"><div class="inv-label">Total ingresos</div><div class="inv-val green">$'+ingTotal.toLocaleString()+'</div></div>';
+  const list=document.getElementById('ventas-list');
+  if(ventas.length===0){list.innerHTML='<div style="color:var(--muted);font-size:13px;">Sin ventas aún</div>';return;}
+  list.innerHTML=[...ventas].reverse().map(v=>{
+    let color='green',icon='🐔',titulo=v.cant+' aves';
+    if(v.tipo==='bulto'){color='blue';icon='🌾';titulo=v.cant+' bultos';}
+    if(v.tipo==='gallinaza'){color='purple';icon='💩';titulo=v.cant+' '+(v.unidad||'');}
+    return '<div class="week-item '+color+'"><div class="week-item-header"><div class="week-num" style="color:var(--'+color+');">'+icon+' '+titulo+'</div><div style="display:flex;align-items:center;gap:6px;"><span style="font-size:10px;color:var(--muted);">'+v.fecha+'</span><button class="btn btn-danger btn-sm" onclick="eliminarVenta('+v.id+')">🗑</button></div></div><div class="week-stats"><div class="week-stat">💰 <span style="color:var(--green);">$'+v.total.toLocaleString()+'</span></div><div class="week-stat">💵 <span>$'+v.precio.toLocaleString()+'</span></div>'+(v.comprador?'<div class="week-stat">👤 <span>'+v.comprador+'</span></div>':'')+'</div></div>';
+  }).join('');
+}
+
+function actualizarInversion(){
+  const aliInicio=semanas.filter(s=>s.num<=6).reduce((a,s)=>a+s.aliTotal,0);
+  const aliCrec=semanas.filter(s=>s.num>6).reduce((a,s)=>a+s.aliTotal,0);
+  const bultosInicio=Math.ceil(aliInicio/40);
+  const bultosCrec=Math.ceil(aliCrec/40);
+  const valorInicio=bultosInicio*(config.sacoInicio||83500);
+  const valorCrec=bultosCrec*(config.sacoCrec||77420);
+  const totalAlimento=valorInicio+valorCrec;
+  const costoTotal=config.costoTotal||42981000;
+  const totalInversion=costoTotal+totalAlimento;
+  const totalIngresos=getTotalIngresos();
+  const balance=totalIngresos-totalInversion;
+
+  document.getElementById('alimento-detalle').innerHTML=
+    '<div class="inv-row"><div class="inv-label">🌱 Alimento inicio kg (Sem 1-6)</div><div class="inv-val">'+aliInicio.toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Bultos inicio (×$'+(config.sacoInicio||83500).toLocaleString()+')</div><div class="inv-val">'+bultosInicio+' bultos</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Valor alimento inicio</div><div class="inv-val red">$'+valorInicio.toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">🌾 Alimento crecimiento kg (Sem 7+)</div><div class="inv-val">'+aliCrec.toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Bultos crecimiento (×$'+(config.sacoCrec||77420).toLocaleString()+')</div><div class="inv-val">'+bultosCrec+' bultos</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Valor alimento crecimiento</div><div class="inv-val red">$'+valorCrec.toLocaleString()+'</div></div>'+
+    '<div class="inv-row" style="border-top:2px solid var(--accent);padding-top:8px;"><div class="inv-label" style="font-weight:700;color:var(--text);">TOTAL ALIMENTO</div><div class="inv-val accent">$'+totalAlimento.toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Total bultos consumidos</div><div class="inv-val">'+(bultosInicio+bultosCrec)+' bultos</div></div>';
+
+  document.getElementById('inversion-content').innerHTML=
+    '<div class="inv-row"><div class="inv-label">🐣 Compra '+config.avesInicial.toLocaleString()+' pollitas</div><div class="inv-val red">$'+costoTotal.toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">🌾 Total alimento</div><div class="inv-val red">$'+totalAlimento.toLocaleString()+'</div></div>'+
+    '<div class="inv-row" style="border-top:2px solid var(--accent);padding-top:8px;"><div class="inv-label" style="font-weight:700;color:var(--text);">TOTAL INVERTIDO</div><div class="inv-val accent">$'+totalInversion.toLocaleString()+'</div></div>';
+
+  document.getElementById('balance-content').innerHTML=
+    '<div class="inv-row"><div class="inv-label">💰 Ingresos ventas aves</div><div class="inv-val green">$'+getTotalIngresosAve().toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">💰 Otros ingresos</div><div class="inv-val green">$'+(totalIngresos-getTotalIngresosAve()).toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">💰 Total ingresos</div><div class="inv-val green">$'+totalIngresos.toLocaleString()+'</div></div>'+
+    '<div class="inv-row"><div class="inv-label">💸 Total invertido</div><div class="inv-val red">$'+totalInversion.toLocaleString()+'</div></div>'+
+    '<div class="inv-row" style="border-top:2px solid var(--accent);padding-top:8px;"><div class="inv-label" style="font-weight:700;color:var(--text);">BALANCE</div><div class="inv-val '+(balance>=0?'green':'red')+'">$'+balance.toLocaleString()+'</div></div>';
+}
+
+function actualizarAnalisis(){
+  if(semanas.length===0){document.getElementById('analisis-body').innerHTML='<tr><td colspan="6" style="color:var(--muted);">Sin datos</td></tr>';return;}
+  let totalRealKg=0,totalRefKg=0,totalDifG=0;
+  const rows=semanas.map(s=>{
+    const ref=REF_DATA.find(r=>r.sem===s.num);
+    if(!ref)return '';
+    const saldoSem=s.saldo||config.avesInicial;
+    const promG=Math.round((ref.aliMin+ref.aliMax)/2);
+    const refKg=Math.round((promG*saldoSem/1000)*7);
+    const difKg=s.aliTotal-refKg;
+    const difGAve=saldoSem>0?Math.round((difKg*1000)/saldoSem/7):0;
+    // Peso estimado = peso ref + acumulado de diferencia
+    const pesoRef=Math.round((ref.pesoMin+ref.pesoMax)/2);
+    const pesoEst=pesoRef+difGAve;
+    totalRealKg+=s.aliTotal;totalRefKg+=refKg;totalDifG+=difGAve;
+    const color=difKg>0?'var(--red)':'var(--green)';
+    const signo=difKg>=0?'+':'';
+    return '<tr><td class="td-week">'+s.num+'</td><td>'+saldoSem.toLocaleString()+'</td><td>'+s.aliTotal+'</td><td>'+refKg+'</td><td style="color:'+color+'">'+signo+difGAve+'g</td><td style="color:'+color+'">~'+pesoEst+'g</td></tr>';
+  });
+  document.getElementById('analisis-body').innerHTML=rows.join('');
+  const difTotal=totalRealKg-Math.round(totalRefKg);
+  const estado=difTotal>0?'⚠️ Consumió '+difTotal+' kg MÁS de lo esperado':'✅ Consumió '+Math.abs(difTotal)+' kg MENOS de lo esperado';
+  const cls=difTotal>100?'alert-warn':'alert-ok';
+  document.getElementById('analisis-resumen').innerHTML=
+    '<div class="alert '+cls+'">'+estado+'</div>'+
+    '<div class="inv-row"><div class="inv-label">Total real</div><div class="inv-val">'+totalRealKg.toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Total referencia</div><div class="inv-val">'+Math.round(totalRefKg).toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Diferencia</div><div class="inv-val '+(difTotal>0?'red':'green')+'">'+( difTotal>0?'+':'')+difTotal.toLocaleString()+' kg</div></div>'+
+    '<div class="inv-row"><div class="inv-label">Bultos diferencia</div><div class="inv-val '+(difTotal>0?'red':'green')+'">'+( difTotal>0?'+':'')+Math.round(difTotal/40)+' bultos</div></div>';
+}
+
+function actualizarRefTabla(){
+  const avesVivas=getAvesVivas();
+  document.getElementById('ref-body').innerHTML=REF_DATA.map(r=>{
+    const prom=Math.round((r.aliMin+r.aliMax)/2);
+    const kgDia=((prom*avesVivas)/1000).toFixed(0);
+    return '<tr><td class="td-week">'+r.sem+'</td><td>'+r.pesoMin+'-'+r.pesoMax+'</td><td>'+r.aliMin+'-'+r.aliMax+'</td><td><strong>'+kgDia+' kg</strong></td></tr>';
+  }).join('');
 }
 
 function showPage(id,btn){
@@ -554,6 +569,7 @@ function showPage(id,btn){
   btn.classList.add('active');
 }
 
+cargarConfigUI();
 actualizarTodo();
 sincronizar();
 </script>

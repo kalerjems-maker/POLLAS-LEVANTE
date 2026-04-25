@@ -714,25 +714,29 @@ function showPage(id,btn){
 let iaHistorial=[];
 
 function getContextoGranja(){
-  const edad=getEdad();
-  const semAct=getSemana();
-  const avesVivas=getAvesVivas();
-  const mortTotal=getMortTotal();
-  const pctMort=((mortTotal/config.avesInicial)*100).toFixed(2);
-  const aliTotal=getAliTotal();
-  const bultosConsumidos=Math.ceil(aliTotal/40);
-  const avesVendidas=getAvesVendidasAve();
-  const ingresos=getTotalIngresosAve();
-  const totalGastos=getTotalGastos();
-  const aliInicio=semanas.filter(s=>s.num<=6).reduce((a,s)=>a+s.aliTotal,0);
-  const aliCrec=semanas.filter(s=>s.num>6).reduce((a,s)=>a+s.aliTotal,0);
-  const costoAlimento=(Math.ceil(aliInicio/40)(config.sacoInicio||83500))+(Math.ceil(aliCrec/40)(config.sacoCrec||77420));
-  const totalInversion=(config.costoTotal||42981000)+costoAlimento+totalGastos;
-  const precio=getPrecioAve();
-  const nac=new Date(config.fecha.substring(0,10)+'T00:00:00');
-  const sem17=new Date(nac.getTime()+17*7*24*60*60*1000);
-  const diasPostura=Math.max(0,Math.ceil((sem17-new Date())/(1000*60*60*24)));
-  return 'Eres un asistente experto en avicultura para la Granja Avícola Kaler en Pueblo Nuevo, Córdoba, Colombia. Responde siempre en español, de forma clara y concisa.\n\nDATOS ACTUALES:\n- Raza: Hy Line Brown (levante)\n- Fecha nacimiento: 27/02/2026\n- Edad: '+edad+' días (Semana '+semAct+')\n- Aves iniciales: '+config.avesInicial+'\n- Aves vivas: '+avesVivas+'\n- Muertes: '+mortTotal+' ('+pctMort+'%)\n- Aves vendidas: '+avesVendidas+'\n- Alimento consumido: '+aliTotal+' kg = '+bultosConsumidos+' bultos\n- Precio actual/ave: $'+precio+'\n- Ingresos: $'+ingresos+'\n- Total invertido: $'+totalInversion+'\n- Días para postura: '+diasPostura;
+  try{
+    const edad=getEdad()||0;
+    const semAct=getSemana()||1;
+    const avesVivas=getAvesVivas()||config.avesInicial;
+    const mortTotal=getMortTotal()||0;
+    const pctMort=((mortTotal/config.avesInicial)*100).toFixed(2);
+    const aliTotal=parseFloat(getAliTotal())||0;
+    const bultosConsumidos=aliTotal>0?Math.ceil(aliTotal/40):0;
+    const avesVendidas=getAvesVendidasAve()||0;
+    const ingresos=getTotalIngresosAve()||0;
+    const totalGastos=getTotalGastos()||0;
+    const aliInicio=semanas.filter(s=>s.num<=6).reduce((a,s)=>a+(parseFloat(s.aliTotal)||0),0);
+    const aliCrec=semanas.filter(s=>s.num>6).reduce((a,s)=>a+(parseFloat(s.aliTotal)||0),0);
+    const costoAlimento=(aliInicio>0?Math.ceil(aliInicio/40):0)(config.sacoInicio||83500)+(aliCrec>0?Math.ceil(aliCrec/40):0)(config.sacoCrec||77420);
+    const totalInversion=(config.costoTotal||42981000)+costoAlimento+totalGastos;
+    const precio=getPrecioAve()||0;
+    const nac=new Date(config.fecha.substring(0,10)+'T00:00:00');
+    const sem17=new Date(nac.getTime()+17*7*24*60*60*1000);
+    const diasPostura=Math.max(0,Math.ceil((sem17-new Date())/(1000*60*60*24)));
+    return 'Eres un asistente experto en avicultura para la Granja Avícola Kaler en Pueblo Nuevo, Córdoba, Colombia. Responde siempre en español.\n\nDATOS:\n- Edad: '+edad+' días (Sem '+semAct+')\n- Aves vivas: '+avesVivas+'\n- Muertes: '+mortTotal+' ('+pctMort+'%)\n- Vendidas: '+avesVendidas+'\n- Alimento: '+aliTotal+' kg = '+bultosConsumidos+' bultos\n- Precio/ave: $'+precio+'\n- Ingresos: $'+ingresos+'\n- Invertido: $'+totalInversion+'\n- Días para postura: '+diasPostura;
+  }catch(err){
+    return 'Eres un asistente experto en avicultura para la Granja Kaler en Colombia. Responde en español.';
+  }
 }
 
 async function enviarIA(){
